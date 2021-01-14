@@ -1,7 +1,7 @@
 {
-  "name": "1-Passport-Example",
+  "name": "1-passport-example",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
   "main": "server.js",
   "scripts": {
     "test": "npm run lint",
@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "2.4.3",
-    "express": "^4.17.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "express-session": "^1.16.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
@@ -31,5 +32,13 @@
     "eslint-plugin-prettier": "^2.6.2",
     "mocha": "^5.2.0",
     "prettier": "^1.13.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madehopemorr/game-keeper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/madehopemorr/game-keeper/issues"
+  },
+  "homepage": "https://github.com/madehopemorr/game-keeper#readme"
 }
