@@ -25,5 +25,16 @@ function runSearchBar(searchWord){
   })
     .then(function(response) {
         console.log(response)
+        var game = $(`
+        <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${response.games[0].name}</h5>
+    <p class="card-text">${response.games[0].description_preview}
+      Players:${response.games[0].min_players}-${response.games[0].max_players}
+    </p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>`)
+        $(".list-group").append(game)
       })
     }
