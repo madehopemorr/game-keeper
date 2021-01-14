@@ -5,8 +5,6 @@
 ==================
 * [Description](#Description) 
 * [User Stories](#UserStories)
-* [Installation](#Installation)
-* [Usage](#Usage) 
 * [license](#license) 
 * [Questions](#Questions)
 
@@ -18,7 +16,7 @@ A web application for Searching and keeping track of Board Games.
 ## Technologies
 * typeahead.js for live searching
 * choreographer.js to add graphics
-* Node,
+* Node to download packages
 * Handlesbars for templating
 * Passport to handle login
 * Express for server
