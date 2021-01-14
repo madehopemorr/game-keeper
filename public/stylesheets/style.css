@@ -1,4 +1,16 @@
+body {
+  background-color: black;
+  color: greenyellow;
+}
 form.signup,
 form.login {
   margin-top: 50px;
+}
+.card-title {
+text-align: center;
+
+}
+.card-body {
+  background-color: black;
+  border-style: ridge;
 }
