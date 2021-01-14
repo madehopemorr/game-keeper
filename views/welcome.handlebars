@@ -1,0 +1,22 @@
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<h1>Welcome to Game Keeper. Search for games below:</h1>
+<form class="create-form">
+    <label for="Input">Search Board Games:</label>
+  	<input id="search-word" type="text"  name="search-word">
+  	<button type="submit" id="searchBtn">Submit</button>
+  </form>
+
+  <div class="container">
+  <div class="row">
+    <div class="col">
+        <h2>Games</h2>
+        <ol class="list-group list-group-flush">
+            
+        {{#each game}}
+                {{> partials/card}}
+        {{/each}}
+        </ol>
+    </div>
+    <script type="text/javascript" src="js/welcome.js"></script>
+    
+    
