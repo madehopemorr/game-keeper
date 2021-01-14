@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Platypus3!",
-    "database": "passport_demo",
+    "password": "password",
+    "database": "game_keeper",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
