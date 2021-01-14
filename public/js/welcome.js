@@ -16,6 +16,7 @@ $('#search-word').keypress(function(event){
   }
 });
 function runSearchBar(searchWord){
+    $(".list-group").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
   searchWord + "&client_id=3KZbL84alX";
@@ -25,16 +26,19 @@ function runSearchBar(searchWord){
   })
     .then(function(response) {
         console.log(response)
-        var game = $(`
-        <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${response.games[0].name}</h5>
-    <p class="card-text">${response.games[0].description_preview}
-      Players:${response.games[0].min_players}-${response.games[0].max_players}
-    </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>`)
-        $(".list-group").append(game)
-      })
+        response.games.forEach(function(game){
+            var gameItem = $(`
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${game.name}</h5>
+            <img src = "${game.images.small}"></img>
+            <p class="card-text">${game.description}
+                Players:${game.min_players}-${game.max_players}
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>`)
+            $(".list-group").append(gameItem)
+          })
+        })
     }
