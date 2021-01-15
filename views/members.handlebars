@@ -1,68 +1,100 @@
 {{!-- <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/logout">
-                Logout
-            </a>
-        </div>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/logout">
+        Logout
+      </a>
     </div>
+  </div>
 </nav> --}}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" href="#">GameKeeper</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link" href="/logout">
-                Logout
-            </a>
-        </div>
+      <div class="navbar-nav">
+        <a class="nav-link" href="/logout">
+          Logout
+        </a>
+      </div>
     </div>
-</div>
+    <div class="member-name"></div>
+  </div>
 </nav>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">Game Keeper</h1>
     <p class="lead">roll the dice and get board.</p>
     <form class="create-form">
-    <label for="Input">Search Board Games:</label>
-  	<input id="search-word" type="text"  name="search-word">
-  	<button type="submit" id="searchBtn">Submit</button>
-  </form>
+      <label for="Input">Search Board Games:</label>
+      <input id="search-word" type="text" name="search-word" placeholder="Search...">
+      <button type="submit" id="searchBtn">Submit</button>
+    </form>
   </div>
 </div>
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-sm">
-        <ol class="list-group list-group-flush">
-            <!--searched games go here-->
-        </ol>
-    </div>
-    <div class="col-sm">
-      <h3>Wishlist</h3>
-      <ul >
+
+    <div class="col-3">
+
+      <div class="row filter-by">
+        <h3>Browse by category</h3>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by:
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Rating</a></li>
+            <li><a class="dropdown-item" href="#">Play time</a></li>
+            <li><a class="dropdown-item" href="#">Age</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row wish-list">
+        <h3>Wishlist</h3>
+        <ul>
           <li>Test:wishlists cards will go here</li>
-        {{#each game}}
-           {{#unless own }}
-                {{> partials/card owned=false}}
-            {{/unless}}
-        {{/each}}
-      </ul>
-    </div>
-    <div class="col-sm">
-      <h3>My Games</h3>
-      <ul>
+          {{#each game}}
+          {{#unless own }}
+          {{> partials/card owned=false}}
+          {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
+      <div class="row own">
+        <h3>My Games</h3>
+        <ul>
           <li>Test: Games owned cards go here</li>
-        {{#each game}}
-            {{#if own}}
-                {{> partials/card owned=true}}
-            {{/if}}
-        {{/each}}
-      </ul>
+          {{#each game}}
+          {{#if own}}
+          {{> partials/card owned=true}}
+          {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+
     </div>
+
+    <div class="list-group list-group-flush col-9 d-flex flex-wrap justify-content-center">
+      <!--searched games go here-->
+      {{#each game}}
+      {{> partials/card}}
+      {{/each}}
+    </div>
+
   </div>
 </div>
 
+
+
+
+
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script type="text/javascript" src="js/welcome.js"></script>
+<script type="text/javascript" src="js/welcome.js"></script>
 <script type="text/javascript" src="js/members.js"></script>

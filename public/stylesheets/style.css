@@ -14,9 +14,26 @@ form.login {
   border-bottom-style: ridge;
   border-bottom-width: 1rem;
 }
+.member-name {
+  color: black;
+}
+.wish-list, 
+.own, 
+.filter-by {
+  position: relative;
+  float: left;
+  padding: 10px;
+}
+.list-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.card {
+  margin: 10px;
+}
 .card-title {
 text-align: center;
-
 }
 .card-body {
   background-color: black;

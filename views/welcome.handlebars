@@ -4,33 +4,34 @@
         <h1 class="navbar-brand" href="#">GameKeeper</h1>
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="/members">Home</a>
-            <a class="nav-link" href="/login">Log In</a>
-            <a class="nav-link" href="/signup">Sign Up</a>
-        </div>
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/members">Home</a>
+                <a class="nav-link" href="/login">Log In</a>
+                <a class="nav-link" href="/signup">Sign Up</a>
+            </div>
         </div>
     </div>
-</nav>  
+</nav>
 
 <h1>Welcome to Game Keeper. Search for games below:</h1>
 <form class="create-form">
     <label for="Input">Search Board Games:</label>
-  	<input id="search-word" type="text"  name="search-word">
-  	<button type="submit" id="searchBtn">Submit</button>
-  </form>
+    <input id="search-word" type="text" name="search-word">
+    <button type="submit" id="searchBtn">Submit</button>
+</form>
 
-  <div class="container">
-  <div class="row">
-    <div class="col">
-        <h2>Games</h2>
-        <ol class="list-group list-group-flush">
-            
-        {{#each game}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h2>Games</h2>
+            <ul class="list-group list-group-flush">
+
+                {{#each game}}
                 {{> partials/card}}
-        {{/each}}
-        </ol>
+                {{/each}}
+            </ul>
+        </div>
     </div>
-    <script type="text/javascript" src="js/welcome.js"></script>
-    
-    
+</div>
+
+<script type="text/javascript" src="js/welcome.js"></script>
