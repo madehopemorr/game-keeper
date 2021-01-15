@@ -13,6 +13,8 @@ if (config.use_env_variable) {
 } else {
   var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+// Thought I needed to add these(below) to line 14 but it throws errors.  Leaving it here to revisit later if needed.
+// config.firstName, config.lastName,
 
 fs
   .readdirSync(__dirname)
