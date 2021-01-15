@@ -6,6 +6,14 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+.jumbotron{
+  background-image: url("../img/dicebackground2.jpg");
+  text-align: center;
+  padding-bottom: 5rem;
+  padding-top: 2rem;
+  border-bottom-style: ridge;
+  border-bottom-width: 1rem;
+}
 .card-title {
 text-align: center;
 
@@ -13,4 +21,17 @@ text-align: center;
 .card-body {
   background-color: black;
   border-style: ridge;
+}
+a{
+  color: greenyellow;
+}
+.btn{
+  color:black;
+  background-color: greenyellow;
+}
+.col-sm{
+  padding-top:2rem ;
+}
+ul{
+  list-style-type: none;
 }
