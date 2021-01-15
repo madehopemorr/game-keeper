@@ -29,14 +29,14 @@ function runSearchBar(searchWord){
         response.games.forEach(function(game){
     //template to automatically generate card styling for each game in search
             var gameCard = $(`
-    <div class="card" style="width: 30rem;">
+    <div class="card" style="width: 24rem;">
         <div class="card-body">
             <h4 class="card-title">${game.name}</h5>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-4">
                     <img src = "${game.images.small}"></img>
                 </div>
-                <div class="col-sm">
+                <div class="col">
                     <ul class="card-text">
                         <li><i class="fas fa-star"></i> Avg User Rating:${(game.average_user_rating).toFixed(2)}
                         <li><i class="fas fa-users"></i> Players:${game.min_players}-${game.max_players}</li>
