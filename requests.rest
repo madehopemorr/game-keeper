@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/user_data
+Authorization: Bearer
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7fSwiaWF0IjoxNjEwNjk2NTkyLCJleHAiOjE2MTA3MDAxOTIsInN1YiI6InVuZGVmaW5lZCJ9.4f84UXc2mFoOgWAYIXAXq03nUGaIQWFoAumS3D20xXE
+
+### 
+
+POST http://localhost:8080/api/login
+content-type: application/json
+
+{
+    "email": "test@yahoo.com",
+    "password": "ztest"
+}

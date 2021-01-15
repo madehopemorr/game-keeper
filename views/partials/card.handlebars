@@ -1,24 +1,26 @@
- <div class="card" style="width: 30rem;">
-        <div class="card-body">
-            <h4 class="card-title">{{title}}</h5>
-            <div class="row">
-                <div class="col-sm">
-                    <img src = "${game.images.small}"></img>
-                </div>
-                <div class="col-sm">
-                    <ul class="card-text">
-                      <!--need logic if game title is stored in database do ajax call to pull rest of info into cards-->
-                
-                        <li><i class="fas fa-star"></i> Avg User Rating:${(game.average_user_rating).toFixed(2)}
-                        <li><i class="fas fa-users"></i> Players:${game.min_players}-${game.max_players}</li>
-                        <li><i class="fas fa-hourglass-start"></i> Game Time: ${game.min_playtime}-${game.max_playtime}</li>
-                        <li><i class="fas fa-child"></i> Age: ${game.min_age} + </li>
-                        <li><i class="fas fa-dice-d20"></i> <a href=${game.rules_url}>Rules</a></li>
-                        <!--logic to take out price info and rating to games in owned list-->
-                        <li><i class="fas fa-tag"></i>Price: ${game.price}</li>
-                        <!--need to change button to move from wishlist to own and none or something else for owned games-->
-                    <a href="#" class="btn btn-primary"><i class="far fa-heart"></i></a>
-                </div>
+<div class="card" style="width: 30rem;">
+    <div class="card-body">
+        <h4 class="card-title">{{title}}</h4>
+        <div class="row">
+            <div class="col-sm">
+                <img src="${game.images.small}"></img>
             </div>
-        </div
-    </div>`
+            <div class="col-sm">
+                <ul class="card-text">
+                    <!--need logic if game title is stored in database do ajax call to pull rest of info into cards-->
+
+                    <li><i class="fas fa-star"></i> Avg User Rating:${(game.average_user_rating).toFixed(2)}
+                    <li><i class="fas fa-users"></i> Players:${game.min_players}-${game.max_players}</li>
+                    <li><i class="fas fa-hourglass-start"></i> Game Time: ${game.min_playtime}-${game.max_playtime}
+                    </li>
+                    <li><i class="fas fa-child"></i> Age: ${game.min_age} + </li>
+                    <li><i class="fas fa-dice-d20"></i> <a href=${game.rules_url}>Rules</a></li>
+                    <!--logic to take out price info and rating to games in owned list-->
+                    <li><i class="fas fa-tag"></i>Price: ${game.price}</li>
+                    <!--need to change button to move from wishlist to own and none or something else for owned games-->
+                    <a href="#" class="btn btn-primary"><i class="far fa-heart"></i></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
