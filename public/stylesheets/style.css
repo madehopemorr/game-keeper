@@ -52,3 +52,14 @@ a{
 ul{
   list-style-type: none;
 }
+.suggestions-drop {
+  height: 100px;
+  overflow: auto;
+  overflow-y: scroll;
+  white-space: nowrap;
+  display: inline-block; 
+}
+.highlight {
+  background-color: greenyellow;
+  color: black;
+}

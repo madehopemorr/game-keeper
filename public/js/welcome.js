@@ -1,3 +1,6 @@
+// function init(searchWord) {
+//   autocomplete(searchWord);
+// };
 
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
@@ -5,6 +8,7 @@ $("#searchBtn").on("click", function (event) {
   console.log(searchWord)
   runSearchBar(searchWord);
 
+  autocomplete(searchWord);
 })
 //runs search when user presses enter
 $('#search-word').keypress(function (event) {
@@ -13,8 +17,11 @@ $('#search-word').keypress(function (event) {
     event.preventDefault();
     var searchWord = $("#search-word").val().trim()
     runSearchBar(searchWord);
+
+    autocomplete(searchWord);
   }
 });
+
 function runSearchBar(searchWord) {
   $(".list-group").empty();
   //search for game from board game geeks API.
@@ -52,4 +59,62 @@ function runSearchBar(searchWord) {
         $(".list-group").append(gameCard)
       })
     })
-}
+};
+
+// Function for autocomplete search
+function autocomplete(searchWord) {
+
+  var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
+    searchWord + "&client_id=3KZbL84alX";
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response);
+
+    // Response is an object
+    // We need to convert it into an array
+    var responseArr = response.games;
+    console.log(responseArr);
+
+    function findMatches(wordToMatch, responseArr) {
+      return responseArr.filter(games => {
+        // In "gi", g means glocal (looking through the entire string), and i means insensitive
+        const regex = new RegExp(wordToMatch, "gi");
+        return games.name.match(regex);
+      });
+    }
+
+    function displayMatches() {
+      console.log(this.value);
+      var matchArr = findMatches(this.value, responseArr);
+      console.log(matchArr);
+
+      var liEl = matchArr.map(games => {
+        // The RegExp object is used for matching text with a pattern
+        // Replace the matching parts of the search results with highlighted parts
+        const regex = new RegExp(this.value, "gi");
+        // The highlighted const will replace ${games.name} in the span
+        const highlighted = games.name.replace(regex, `<span class="highlight">${this.value}</span>`);
+
+        return `
+        <li>
+          <span class="name">${highlighted}</span>
+        </li>
+        `;
+      }).join("");
+
+      var suggestions = document.querySelector(".suggestions");
+
+      // Only show suggestions list when the search box is not empty
+      if (!this.value) {
+        $(".suggestions").empty();
+      } else {
+        suggestions.innerHTML = liEl;
+      }
+    };
+
+    $("#search-word").on("keyup", displayMatches);
+    $("#search-word").on("change", displayMatches);
+  });
+};
