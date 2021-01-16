@@ -52,4 +52,64 @@ module.exports = function(app) {
       });
     }
   });
+  //CRUD Routes
+  app.post("/api/new-game", (req, res) => {
+    db.Games.create({
+      title: res.games.title,
+      own: false
+
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.get("/api/wishlist", (req, res) => {
+    db.Games.findAll({
+      where: {
+        own: false
+      }
+      
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.get("/api/owned", (req, res) => {
+    db.Games.findAll({
+      where: {
+        own: true
+      }
+      
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.put("/api/wishlist", (req, res) => {
+    db.Games.update({
+      where: {
+        id: req.body.id
+      }
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  //create app.delete to delete games
 };
