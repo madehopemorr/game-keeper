@@ -12,26 +12,56 @@
         </div>
     </div>
 </nav>
-
-<h1>Welcome to Game Keeper. Search for games below:</h1>
-<form class="create-form">
-    <label for="Input">Search Board Games:</label>
-    <input id="search-word" type="text" name="search-word">
-    <button type="submit" id="searchBtn">Submit</button>
-</form>
+<div class="jumbotron">
+  <h1>Welcome to Game Keeper. Search for games below:</h1>
+  <form class="create-form">
+      <label for="Input">Search Board Games:</label>
+      <input id="search-word" type="text" name="search-word">
+      <button type="submit" id="searchBtn">Submit</button>
+  </form>
+</div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h2>Games</h2>
-            <ul class="list-group list-group-flush">
-
-                {{#each game}}
-                {{> partials/card}}
-                {{/each}}
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col-3">
+      <h2>Sign Up</h2>
+        <form class="signup">
+            <div class="form-group">
+                <label for="exampleInputFirstName">First Name</label>
+                <input type="firstName" class="form-control" id="firstName-input" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputLastName">Last Name</label>
+                <input type="lastName" class="form-control" id="lastName-input" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="email-input" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="password-input" placeholder="Password">
+            </div>
+            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Sign Up</button>
+        </form>
+        <br />
+        <p>Or log in <a href="/login">here</a></p>
     </div>
+    
+    <div class="col-9">
+      <h2>Games</h2>
+      <ul class="list-group d-flex flex-wrap justify-content-center">
+
+          {{#each game}}
+          {{> partials/card}}
+          {{/each}}
+      </ul>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript" src="js/welcome.js"></script>
