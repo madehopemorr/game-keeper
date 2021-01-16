@@ -24,7 +24,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-3">
-      <h2>Sign Up</h2>
+      <h2 class="welcomeTitles">Sign Up</h2>
         <form class="signup">
             <div class="form-group">
                 <label for="exampleInputFirstName">First Name</label>
@@ -52,11 +52,21 @@
         <p>Or log in <a href="/login">here</a></p>
     </div>
     
-    <div class="col-9">
-      <h2>Games</h2>
+    <div class="col-9 searchGame">
+      <h2 class="welcomeTitles">Games</h2>
       <ul class="list-group d-flex flex-wrap justify-content-center">
 
           {{#each game}}
+          {{> partials/card}}
+          {{/each}}
+      </ul>
+    </div>
+
+    <div class="col-9 popularGame">
+      <h2 class="welcomeTitles">Popular Games</h2>
+      <ul class="list-group d-flex flex-wrap justify-content-center">
+
+          {{#each popGame}}
           {{> partials/card}}
           {{/each}}
       </ul>
@@ -65,3 +75,4 @@
 </div>
 
 <script type="text/javascript" src="js/welcome.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
