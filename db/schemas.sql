@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS game_keeper;
+CREATE DATABASE game_keeper;
