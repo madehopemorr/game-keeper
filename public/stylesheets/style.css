@@ -63,3 +63,13 @@ ul{
   background-color: greenyellow;
   color: black;
 }
+
+/* headers on welcome page */
+.welcomeTitles {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.hide {
+  display: none;
+}
