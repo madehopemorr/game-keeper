@@ -7,23 +7,9 @@ module.exports = (sequelize, DataTypes) => {
                 len: [1]
             }
         },
-        avgUserRating: {
-            type: DataTypes.INTEGER
-        },
-        players: {
-            type: DataTypes.INTEGER
-        },
-        gameTime: {
-            type: DataTypes.INTEGER
-        },
-        age: {
-            type: DataTypes.INTEGER
-        },
-        rules: {
-            type: DataTypes.STRING
-        },
-        price: {
-            type: DataTypes.INTEGER
+        own: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
 
     })
