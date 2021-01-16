@@ -95,7 +95,7 @@ function popularGame() {
                         <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>
                         <li><i class="fas fa-dice-d20"></i> <a href=${popGame.rules_url}>Rules</a></li>
                         <li><i class="fas fa-tag"></i>Price: ${popGame.price}</li>
-                    <a href="#" class="btn btn-primary"><i class="far fa-heart"></i></a>
+                    <a href="#" class="heartBtn btn btn-primary"><i class="far fa-heart"></i></a>
                 </div>
             </div>
         </div
