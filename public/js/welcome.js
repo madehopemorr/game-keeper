@@ -1,8 +1,7 @@
-// function init(searchWord) {
-//   autocomplete(searchWord);
-// };
-
 popularGame()
+
+// This boolean var is used to control the appearance of suggestions dropdown list
+var hasBeenClicked = false;
 
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
@@ -10,7 +9,8 @@ $("#searchBtn").on("click", function (event) {
   console.log(searchWord)
   runSearchBar(searchWord);
 
-  autocomplete(searchWord);
+  // autocomplete(searchWord);
+  hasBeenClicked = true;
 })
 //runs search when user presses enter
 $('#search-word').keypress(function (event) {
@@ -20,7 +20,8 @@ $('#search-word').keypress(function (event) {
     var searchWord = $("#search-word").val().trim()
     runSearchBar(searchWord);
 
-    autocomplete(searchWord);
+    // autocomplete(searchWord);
+    hasBeenClicked = true;
   }
 });
 
@@ -109,10 +110,13 @@ function popularGame() {
 };
 
 // Function for autocomplete search
-function autocomplete(searchWord) {
+function autocomplete() {
 
-  var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
-    searchWord + "&client_id=3KZbL84alX";
+  // var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
+  //   searchWord + "&client_id=3KZbL84alX";
+  var queryURL = "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
+  "fuzzy_match=true" + "&client_id=3KZbL84alX";
+  
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -130,7 +134,7 @@ function autocomplete(searchWord) {
         const regex = new RegExp(wordToMatch, "gi");
         return games.name.match(regex);
       });
-    }
+    };
 
     function displayMatches() {
       console.log(this.value);
@@ -152,16 +156,17 @@ function autocomplete(searchWord) {
       }).join("");
 
       var suggestions = document.querySelector(".suggestions");
-
+      suggestions.innerHTML = liEl;
       // Only show suggestions list when the search box is not empty
-      if (!this.value) {
+      if (!this.value || hasBeenClicked) {
         $(".suggestions").empty();
-      } else {
-        suggestions.innerHTML = liEl;
-      }
+        hasBeenClicked = false;
+      } 
     };
 
     $("#search-word").on("keyup", displayMatches);
     $("#search-word").on("change", displayMatches);
   });
 };
+
+autocomplete();

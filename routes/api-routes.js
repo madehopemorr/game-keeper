@@ -52,6 +52,7 @@ module.exports = function(app) {
       });
     }
   });
+// becca's new code
     //CRUD Routes for wishlist and owned lists
     app.post("/api/games", (req, res) => {
       db.Games.create(req.body)
@@ -102,3 +103,68 @@ module.exports = function(app) {
       })
     })
   }
+
+//   there was a conflict when merging here so I just left it and we can delete later
+  //CRUD Routes
+  /*
+  app.post("/api/new-game", (req, res) => {
+    db.Games.create({
+      title: res.games.title,
+      own: false
+
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.get("/api/wishlist", (req, res) => {
+    db.Games.findAll({
+      where: {
+        own: false
+      }
+      
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.get("/api/owned", (req, res) => {
+    db.Games.findAll({
+      where: {
+        own: true
+      }
+      
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+
+  app.put("/api/wishlist", (req, res) => {
+    db.Games.update({
+      where: {
+        id: req.body.id
+      }
+    })
+      .then(() => {
+        res.render("/members");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
+  */
+  //create app.delete to delete games
+};
+
