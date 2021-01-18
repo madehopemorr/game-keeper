@@ -5,21 +5,31 @@ $(document).ready(() => {
     $(".member-name").text("Welcome " + data.firstName);
   });
 });
+$(function(){
+$("#heartBtn").on("click", function(event) {
+  event.preventDefault();
 
-$(".heartBtn").on("click", function(event) {
-  var id = $(this).data("id");
-  var savedGame = $(this).data("savedgame");
   var newGame = {
     title: req.body.name,
   }
-  // Send the PUT request.
-  $.ajax("/api/wishlist" + id, {
+  console.log(newGame)
+  //Send the POST request.
+  $.ajax("/api/games", {
     type: "POST",
     data: newGame
   }).then(
     function() {
+      console.log(newGame)
       // Reload the page to get the updated list
       location.reload();
     }
   );
 });
+});
+
+$.get("/api/games", function(data){
+  console.log("games", data);
+  games = data;
+  
+
+})

@@ -61,9 +61,9 @@
         <h3>Wishlist</h3>
         <ul>
           <li>Test:wishlists cards will go here</li>
-          {{#each game}}
+          {{#each games}}
           {{#unless own }}
-          {{> partials/card owned=false}}
+          {{> games/card owned=false}}
           {{/unless}}
           {{/each}}
         </ul>
@@ -72,9 +72,9 @@
         <h3>My Games</h3>
         <ul>
           <li>Test: Games owned cards go here</li>
-          {{#each game}}
+          {{#each games}}
           {{#if own}}
-          {{> partials/card owned=true}}
+          {{> games/card owned=true}}
           {{/if}}
           {{/each}}
         </ul>
@@ -84,9 +84,7 @@
 
     <div class="list-group list-group-flush col-9 d-flex flex-wrap justify-content-center">
       <!--searched games go here-->
-      {{#each game}}
-      {{> partials/card}}
-      {{/each}}
+
     </div>
 
   </div>
