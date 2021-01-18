@@ -52,59 +52,60 @@ module.exports = function(app) {
       });
     }
   });
-// becca's new code
-    //CRUD Routes for wishlist and owned lists
-    app.post("/api/games", (req, res) => {
-      db.Games.create(req.body)
-        .then((saveGame) => {
-          res.json(saveGame)
-        })
-        .catch(err => {
-          res.status(401).json(err);
-        });
-    });
-
-    app.get("/", (req, res)=>{
-      db.Games.findAll({})
-      .then((saveGame)=>{
-        var gameObj = {
-          games: saveGame
-        };
-        console.log(gameObj)
-        res.render("members", gameObj)
-      })
-    })
-  
-    app.get("/api/games/", (req, res) => {
-      db.Games.findAll({})
-        .then((saveGame) => {
-          res.json(saveGame);
-        })
-    });
-  
-    app.put("/api/games/", (req, res) => {
-      db.Games.update({own: true},{
-        where: {
-          id: req.body.id
-        }
-      })
-        .then((saveGame) => {
-          res.json(saveGame)
-        })
-    });
-    app.delete("/api/games/:id", (req, res)=>{
-      db.Games.destroy({
-        where: {
-          id: req.params.id
-        }
-      })
-      .then((saveGame)=>{
+  // becca's new code
+  //CRUD Routes for wishlist and owned lists
+  app.post("/api/games", (req, res) => {
+    db.Games.create(req.body)
+      .then((saveGame) => {
         res.json(saveGame)
       })
-    })
-  }
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
 
-//   there was a conflict when merging here so I just left it and we can delete later
+  app.get("/", (req, res)=>{
+    db.Games.findAll({})
+    .then((saveGame)=>{
+      var gameObj = {
+        games: saveGame
+      };
+      console.log(gameObj)
+      res.render("members", gameObj)
+    })
+  })
+  
+  app.get("/api/games/", (req, res) => {
+    db.Games.findAll({})
+      .then((saveGame) => {
+        res.json(saveGame);
+      })
+  });
+  
+  app.put("/api/games/", (req, res) => {
+    db.Games.update({own: true},{
+      where: {
+        id: req.body.id
+      }
+    })
+      .then((saveGame) => {
+        res.json(saveGame)
+      })
+  });
+
+  app.delete("/api/games/:id", (req, res)=>{
+    db.Games.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then((saveGame)=>{
+      res.json(saveGame)
+    })
+  })
+  
+
+  //   there was a conflict when merging here so I just left it and we can delete later
   //CRUD Routes
   /*
   app.post("/api/new-game", (req, res) => {
