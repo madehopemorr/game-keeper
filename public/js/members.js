@@ -1,6 +1,6 @@
 $(document).ready(() => {
   // Create an obj to store game name data every time each button is clicked
-  var gameNames = {};
+  var gameInfo = {};
 
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
@@ -48,7 +48,7 @@ $(document).ready(() => {
     })
       .then(function (response) {
         console.log(response)
-        
+
         for (var i = 0; i < response.games.length; i++) {
           var gameCard = $(`    
           <div class="card" style="width: 24rem;">
@@ -85,11 +85,11 @@ $(document).ready(() => {
           $(".list-group").append(heartButton);
 
           // Assign key values to each data retrieved from each buton clicked
-          gameNames[customID] = response.games[i].name;
+          gameInfo[customID] = response.games[i].id;
         };
         // This console shows how the line above looks like
-        // Console the values of the gameNames obj (for debugging purpose)
-        console.log("KeyValue: " + JSON.stringify(gameNames));
+        // Console the values of the gameInfo obj (for debugging purpose)
+        console.log("KeyValue: " + JSON.stringify(gameInfo));
 
         // As this point, this function shows in the console what button is clicked and the data value attached to it
         // Will be modified...
@@ -97,8 +97,8 @@ $(document).ready(() => {
           event.preventDefault();
 
           console.log("ButtonId is: " + this.id);
-          console.log("Game name is: " + gameNames[this.id]);
-          // var chosenName = gameNames[this.id];
+          console.log("Game ID is: " + gameInfo[this.id]);
+          // var chosenName = gameInfo[this.id];
         });
       })
   };
@@ -151,11 +151,11 @@ $(document).ready(() => {
           $(".list-group").append(heartButton);
 
           // Assign key values to each data retrieved from each buton clicked
-          gameNames[customID] = response.games[i].name;
+          gameInfo[customID] = response.games[i].id;
         };
         // This console shows how the line above looks like
-        // Console the values of the gameNames obj (for debugging purpose)
-        console.log("KeyValue: " + JSON.stringify(gameNames));
+        // Console the values of the gameInfo obj (for debugging purpose)
+        console.log("KeyValue: " + JSON.stringify(gameInfo));
 
         // As this point, this function shows in the console what button is clicked and the data value attached to it
         // Will be modified...
@@ -163,8 +163,30 @@ $(document).ready(() => {
           event.preventDefault();
 
           console.log("ButtonId is: " + this.id);
-          console.log("Game name is: " + gameNames[this.id]);
-          // var chosenName = gameNames[this.id];
+          console.log("Game ID is: " + gameInfo[this.id]);
+          // var chosenName = gameInfo[this.id];
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          // Testing code, please don't mind this - Uyen
+          /*
+          // Make a newGame object
+          var newGame = {
+            title: chosenName,
+            own: false
+            // created_at: new Date(),
+          };
+
+          console.log("Front end: " + newGame);
+
+          saveGameToDB(newGame.title, newGame.own);
+
+          function saveGameToDB(title, own) {
+            $.post("/api/wishlist", {
+              title: title,
+              own: false
+            })
+          }
+          */
+
         });
       });
   };

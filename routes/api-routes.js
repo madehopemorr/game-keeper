@@ -59,12 +59,10 @@ module.exports = function (app) {
 
   // Testing routes - Uyen
   // Route for wishlist
-  app.post("api/wishlist", (req, res) => {
-    db.Games.create({
-      title: req.body.title,
-      own: req.body.own
-    }).then((dbGames) => {
-      res.json(dbGames);
+  app.post("/api/wishlist", (req, res) => {
+    db.Games.create(req.body)
+    .catch(err => {
+      res.status(401).json(err);
     });
   });
 
