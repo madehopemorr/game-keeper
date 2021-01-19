@@ -59,6 +59,7 @@ module.exports = function (app) {
 
   // Testing routes - Uyen
   // Route for wishlist
+
   // post doesnt work yet :( -rachel
   app.post("api/wishlist", (req, res) => {
     db.Games.create({
@@ -67,8 +68,20 @@ module.exports = function (app) {
       UserId: req.user.id
     }).then((dbGames) => {
       res.json(dbGames);
+    }).catch(err => {
+      res.status(401).json(err);
+    });
+  })  
+
+/*
+  app.post("/api/wishlist", (req, res) => {
+    db.Games.create(req.body)
+    .catch(err => {
+      res.status(401).json(err);
+
     });
   });
+*/  
 
   // GET route for getting all of the games for wishlist
   app.get("/api/wishlist", function (req, res) {

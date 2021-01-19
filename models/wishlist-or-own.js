@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Games = sequelize.define('Games', {
-        title: {
+        game_ID: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
