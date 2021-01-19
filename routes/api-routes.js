@@ -48,9 +48,9 @@ module.exports = function (app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         firstName: req.user.firstName,
-        id: req.user.id
+        id: req.user.id,
       });
-    }
+    } 
   });
 
 
@@ -59,25 +59,57 @@ module.exports = function (app) {
 
   // Testing routes - Uyen
   // Route for wishlist
+
+  // post doesnt work yet :( -rachel
+  app.post("api/wishlist", (req, res) => {
+    db.Games.create({
+      title: req.body.title,
+      // own: req.body.own,
+      UserId: req.user.id
+    }).then((dbGames) => {
+      res.json(dbGames);
+    }).catch(err => {
+      res.status(401).json(err);
+    });
+  })  
+
+/*
   app.post("/api/wishlist", (req, res) => {
     db.Games.create(req.body)
     .catch(err => {
       res.status(401).json(err);
+
     });
   });
+*/  
 
   // GET route for getting all of the games for wishlist
   app.get("/api/wishlist", function (req, res) {
-    // var query = {};
-    // if (req.query.user_id) {
-    //   query.UserId = req.query.user_id;
-    // }
-
+    // this works but make sure you are logged in before going to http://localhost:8080/api/wishlist
     db.Games.findAll({
-     
-      }).then(function (dbGames) {
-        res.json(dbGames);
-      });
+      where: {
+        own: false,
+        UserId: req.user.id
+      }
+    }).then(function (dbGames) {
+      res.json(dbGames);
+    }).catch(err => {
+      res.status(401).json(err);
+    });
+  });
+
+  app.get("/api/owned", function (req, res) {
+    // this works but make sure you are logged in before going to http://localhost:8080/api/owned
+    db.Games.findAll({
+      where: {
+        own: true,
+        UserId: req.user.id
+      } 
+    }).then(function (dbGames) {
+      res.json(dbGames);
+    }).catch(err => {
+      res.status(401).json(err);
+    });
   });
   
 
