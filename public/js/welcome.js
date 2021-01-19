@@ -43,7 +43,7 @@ function runSearchBar(searchWord) {
         var gameCard = $(`    
     <div class="card" style="width: 24rem;">
         <div class="card-body">
-            <h4 class="card-title">${game.name}</h5>
+            <h4 class="card-title">${game.name}</h4>
             <div class="row">
                 <div class="col-4">
                     <img src = "${game.images.small}"></img>
@@ -83,14 +83,14 @@ function popularGame() {
         var popularGameCard = $(`    
     <div class="card" style="width: 24rem;">
         <div class="card-body">
-            <h4 class="card-title">${popGame.name}</h5>
+            <h4 class="card-title">${popGame.name}</h4>
             <div class="row">
                 <div class="col-4">
                     <img src = "${popGame.images.small}"></img>
                 </div>
                 <div class="col">
                     <ul class="card-text">
-                        <li><i class="fas fa-star"></i> Avg User Rating:${(popGame.average_user_rating).toFixed(2)}
+                        <li><i class="fas fa-star"></i> Avg User Rating:${(popGame.average_user_rating).toFixed(2)}</li>
                         <li><i class="fas fa-users"></i> Players:${popGame.min_players}-${popGame.max_players}</li>
                         <li><i class="fas fa-hourglass-start"></i> Game Time: ${popGame.min_playtime}-${popGame.max_playtime}</li>
                         <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>

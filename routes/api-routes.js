@@ -57,6 +57,7 @@ module.exports = function (app) {
 
 
 
+  // Testing routes - Uyen
   // Route for wishlist
   app.post("api/wishlist", (req, res) => {
     db.Games.create({
@@ -82,7 +83,7 @@ module.exports = function (app) {
   });
   
 
-  
+  /*
   // becca's new code
   //CRUD Routes for wishlist and owned lists
   app.post("/api/games", (req, res) => {
@@ -134,7 +135,7 @@ module.exports = function (app) {
         res.json(saveGame)
       })
   })
-  
+  */
 
 
   //   there was a conflict when merging here so I just left it and we can delete later
