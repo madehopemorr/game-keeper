@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -52,6 +52,37 @@ module.exports = function(app) {
       });
     }
   });
+
+
+
+
+
+  // Route for wishlist
+  app.post("api/wishlist", (req, res) => {
+    db.Games.create({
+      title: req.body.title,
+      own: req.body.own
+    }).then((dbGames) => {
+      res.json(dbGames);
+    });
+  });
+
+  // GET route for getting all of the games for wishlist
+  app.get("/api/wishlist", function (req, res) {
+    // var query = {};
+    // if (req.query.user_id) {
+    //   query.UserId = req.query.user_id;
+    // }
+
+    db.Games.findAll({
+     
+      }).then(function (dbGames) {
+        res.json(dbGames);
+      });
+  });
+  
+
+  
   // becca's new code
   //CRUD Routes for wishlist and owned lists
   app.post("/api/games", (req, res) => {
@@ -64,26 +95,26 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/", (req, res)=>{
+  app.get("/", (req, res) => {
     db.Games.findAll({})
-    .then((saveGame)=>{
-      var gameObj = {
-        games: saveGame
-      };
-      console.log(gameObj)
-      res.render("members", gameObj)
-    })
+      .then((saveGame) => {
+        var gameObj = {
+          games: saveGame
+        };
+        console.log(gameObj)
+        res.render("members", gameObj)
+      })
   })
-  
+
   app.get("/api/games/", (req, res) => {
     db.Games.findAll({})
       .then((saveGame) => {
         res.json(saveGame);
       })
   });
-  
+
   app.put("/api/games/", (req, res) => {
-    db.Games.update({own: true},{
+    db.Games.update({ own: true }, {
       where: {
         id: req.body.id
       }
@@ -93,17 +124,18 @@ module.exports = function(app) {
       })
   });
 
-  app.delete("/api/games/:id", (req, res)=>{
+  app.delete("/api/games/:id", (req, res) => {
     db.Games.destroy({
       where: {
         id: req.params.id
       }
     })
-    .then((saveGame)=>{
-      res.json(saveGame)
-    })
+      .then((saveGame) => {
+        res.json(saveGame)
+      })
   })
   
+
 
   //   there was a conflict when merging here so I just left it and we can delete later
   //CRUD Routes
