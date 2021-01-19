@@ -38,4 +38,13 @@ module.exports = function(app) {
     // res.sendFile(path.join(__dirname, "../public/members.html"));
     res.render("members");
   });
+
+
+
+
+  // Wishlist route
+  app.get("/wishlist", (req, res) => {
+  
+    res.render("wishlist");
+  });
 };

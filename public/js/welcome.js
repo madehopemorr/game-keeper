@@ -56,7 +56,7 @@ function runSearchBar(searchWord) {
                         <li><i class="fas fa-child"></i> Age: ${game.min_age} + </li>
                         <li><i class="fas fa-dice-d20"></i> <a href=${game.rules_url}>Rules</a></li>
                         <li><i class="fas fa-tag"></i>Price: ${game.price}</li>
-                    <button id ="heartBtn" class = "btn btn-primary"><i class="far fa-heart"></i></button>
+                    
                 </div>
             </div>
         </div
@@ -96,17 +96,14 @@ function popularGame() {
                         <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>
                         <li><i class="fas fa-dice-d20"></i> <a href=${popGame.rules_url}>Rules</a></li>
                         <li><i class="fas fa-tag"></i>Price: ${popGame.price}</li>
-                    <button id ="heartBtn" class ="btn btn-primary"><i class="far fa-heart"></i></button>
+                    
                 </div>
             </div>
         </div
     </div>`)
         $(".list-group").append(popularGameCard)
       })
-    })
-  // if (runSearchBar() {
-  //   return 
-  // })  
+    }) 
 };
 
 // Function for autocomplete search
