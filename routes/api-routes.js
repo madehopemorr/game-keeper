@@ -59,6 +59,7 @@ module.exports = function (app) {
   });
 
 
+
   // Route for wishlist to be saved in database
 
   app.post("/api/members", (req, res) => {
@@ -101,13 +102,34 @@ module.exports = function (app) {
     });
   });
 
+  app.put("/api/wishlist/:id", (req, res) => {
+    db.Games.update({ own: true }, {
+      where: {
+        id: req.params.id
+      }
+    })
+      .then((saveGame) => {
+        res.json(saveGame)
+      })
+  });
+
   app.delete("/api/wishlist/:id", function (req, res) {
     db.Post.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function (dbPost) {
-      res.json(dbPost);
+    }).then(function (dbGame) {
+      res.json(dbGame);
+    });
+  });
+
+  app.delete("/api/owned/:id", function (req, res) {
+    db.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbGame) {
+      res.json(dbGame);
     });
   });
 

@@ -127,7 +127,7 @@ $(document).ready(() => {
   };
 
   function popularGame() {
-    $(".searchGame").addClass("hide")
+    $(".searchGames").addClass("hide")
     $(".popGames").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
@@ -225,6 +225,8 @@ $(document).ready(() => {
       })
   }
 
+
+
   
   var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
 
@@ -305,6 +307,7 @@ $(document).ready(() => {
 
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id]);
+          
           // var chosenName = gameInfo[this.id];
         });
       })
