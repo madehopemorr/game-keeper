@@ -69,7 +69,7 @@ $(document).ready(() => {
                               <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
                               <br>
 
-                          </ul>
+                              </ul>
                       </div>
                   </div>
               </div
@@ -134,7 +134,6 @@ $(document).ready(() => {
                               <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
                               <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
                               <br>
-
                           </ul>
                       </div>
                   </div>
@@ -175,11 +174,8 @@ $(document).ready(() => {
             own: false
             // created_at: new Date(),
           };
-
           console.log("Front end: " + newGame);
-
           saveGameToDB(newGame.title, newGame.own);
-
           function saveGameToDB(title, own) {
             $.post("/api/wishlist", {
               title: title,
@@ -193,6 +189,8 @@ $(document).ready(() => {
   };
 
   
+  var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
+
   
   
   var game_ID = [];
@@ -217,29 +215,34 @@ $(document).ready(() => {
         console.log(response)
 
         for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`    
-          <div class="card" style="width: 24rem;">
-              <div class="card-body">
-                  <h4 class="card-title">${response.games[i].name}</h4>
-                  <div class="row">
-                      <div class="col-4">
-                          <img src = "${response.games[i].images.small}"></img>
-                      </div>
-                      <div class="col">
-                          <ul class="card-text">
-                              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-                              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-                              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-                              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-                              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
-                              <br>
-
-                          </ul>
-                      </div>
-                  </div>
-              </div
-          </div>`)
+          var gameCard = $(`
+          <div class="accordion-item">
+    <h2 class="accordion-header" id="${response.games[i].name}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${response.games[i].id}" aria-expanded="true" aria-controls="${response.games[i].id}">
+      ${response.games[i].name}
+      </button>
+    </h2>
+    <div id="${response.games[i].id}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <div class="row">
+      <div class="col">
+          <img src = "${response.games[i].images.small}"></img>
+      </div>
+      <div class="col">
+          <ul class="card-text">
+              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
+              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+              <br>
+          </ul>
+      </div>
+  </div>
+      </div>
+    </div>
+  </div>`)
 
           // Dynamically create a card for each game
           $(".wishlist").append(gameCard);
@@ -293,36 +296,98 @@ $(document).ready(() => {
         console.log(response)
 
         for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`    
-          <div class="card" style="width: 24rem;">
-              <div class="card-body">
-                  <h4 class="card-title">${response.games[i].name}</h4>
-                  <div class="row">
-                      <div class="col-4">
-                          <img src = "${response.games[i].images.small}"></img>
-                      </div>
-                      <div class="col">
-                          <ul class="card-text">
-                              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-                              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-                              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-                              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-                              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
-                              <br>
+          var gameCard = $(`
+          <div class="accordion-item">
+    <h2 class="accordion-header" id="${response.games[i].name}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
+      <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
+      </button>
+    </h2>
+    <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <div class="row">
+      <div class="col">
+          <img src = "${response.games[i].images.small}"></img>
+      </div>
+      <div class="col">
+          <ul class="card-text">
+              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+              <br>
+          </ul>
+      </div>
+  </div>
+      </div>
+    </div>
+  </div>`)
 
-                          </ul>
-                      </div>
-                  </div>
-              </div
-          </div>`)
-
+  
           // Dynamically create a card for each game
           $(".ownlist").append(gameCard);
         }
       })
   };
 
+  /*$.get("/api/owned").then(data => {
+    for (var i = 0; i < data.length; i++)
+    game_ID.push(data[i].game_ID)
+    showOwnlist()
+  });
+  console.log(game_ID)
+  function showOwnlist() {
+    $(".searchGame").removeClass("hide")
+    // $(".popularGame").addClass("hide")
+    $(".ownlist").empty();
+    //search for game from board game geeks API.
+    var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
+      game_ID + "&client_id=3KZbL84alX";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      .then(function (response) {
+        console.log(response)
+
+        for (var i = 0; i < response.games.length; i++) {
+          var gameNav = $(`
+          <a class="list-group-item list-group-item-action" href="#${response.games[i].name}">${response.games[i].name}</a>
+          `)
+          $(".ownlist").append(gameNav);
+          var gameCard = $(`
+          <h4 id="${response.games[i].name}">${response.games[i].name}</h4>
+      <div class="col">
+      <p>
+          <ul class="card-text">
+              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+              <br>
+          </ul>
+      </p>
+      </div>
+  </div>
+      </div>
+    </div>
+  </div>`)
+
+  
+          // Dynamically create a card for each game
+          $(".ownBox").append(gameCard);
+        }
+      })
+  };
+  var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+    target: '#list-example'
+  })
+  var dataSpyList = [].slice.call(document.querySelectorAll('[data-bs-spy="scroll"]'))
+  dataSpyList.forEach(function (dataSpyEl) {
+    bootstrap.ScrollSpy.getInstance(dataSpyEl)
+      .refresh()
+  })
+*/
 
   // Function for autocomplete search
   function autocomplete() {
@@ -456,7 +521,6 @@ $(document).ready(() => {
             <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>
             <li><i class="fas fa-dice-d20"></i> <a href=${popGame.rules_url}>Rules</a></li>
             <li><i class="fas fa-tag"></i>Price: ${popGame.price}</li>
-
             </div>
           </div>
       </div>
