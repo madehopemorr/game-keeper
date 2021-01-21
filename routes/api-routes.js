@@ -58,9 +58,9 @@ module.exports = function (app) {
 
   });
 
-  // Testing routes - Uyen
+
   // Route for wishlist to be saved in database
-  // post doesnt work yet :( -rachel
+
   app.post("/api/members", (req, res) => {
     console.log(req.body)
     db.Games.create(req.body).then((dbGames) => {
