@@ -1,6 +1,12 @@
 $(document).ready(() => {
   // Create an obj to store game name data every time each button is clicked
-  var gameInfo = {};
+  var gameInfo = {}
+
+  var newGame = {}
+  console.log(newGame)
+
+  // This boolean var is used to control the appearance of suggestions dropdown list
+  var hasBeenClicked = false;
 
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
@@ -9,9 +15,6 @@ $(document).ready(() => {
   });
 
   popularGame()
-
-  // This boolean var is used to control the appearance of suggestions dropdown list
-  var hasBeenClicked = false;
 
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
@@ -79,7 +82,9 @@ $(document).ready(() => {
 
           // Dynamically asign an id for each heart button and add to each game card
           var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
+          // var heartButtonClicked = $('<button class = "heartBtnClicked btn btn-primary"><i class="fas fa-check"></i></button>');
+
+          heartButton.attr("data-games", response.games[i].id);
           var customID = "heartBtn-" + String(i);
           heartButton.attr("id", customID);
           $(".list-group").append(heartButton);
@@ -145,7 +150,9 @@ $(document).ready(() => {
 
           // Dynamically asign an id for each heart button and add to each game card
           var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
+          // var heartButtonClicked = $('<button class = "heartBtnClicked hide btn btn-primary"><i class="fas fa-check"></i></button>');
+
+          heartButton.attr("data-games", response.games[i].id);
           var customID = "heartBtn-" + String(i);
           heartButton.attr("id", customID);
           $(".list-group").append(heartButton);
@@ -164,38 +171,45 @@ $(document).ready(() => {
 
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id]);
-          // var chosenName = gameInfo[this.id];
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          var chosenID = gameInfo[this.id];
+
+          // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           // Testing code, please don't mind this - Uyen
-          /*
-          // Make a newGame object
-          var newGame = {
-            title: chosenName,
-            own: false
-            // created_at: new Date(),
-          };
 
-          console.log("Front end: " + newGame);
+          $.get("/api/user_data").then(data => {
+            var currentUserId = data.id;
+            console.log(currentUserId);
+            console.log(chosenID);
 
-          saveGameToDB(newGame.title, newGame.own);
+            // Make a newGame object
+            newGame = {
+              game_ID: chosenID,
+              own: false,
+              UserId: currentUserId
+            };
 
-          function saveGameToDB(title, own) {
-            $.post("/api/wishlist", {
-              title: title,
-              own: false
-            })
-          }
-          */
+            console.log(newGame)
 
+            saveGame(newGame.game_ID, newGame.own, newGame.UserId)
+          });
         });
       });
   };
 
+  function saveGame(game_ID, own, UserId) {
+    $.post("/api/members", {
+      game_ID: game_ID,
+      own: own,
+      UserId: UserId
+    })
+      .then(() => {
+        window.location.replace("/members");
+        // If there's an error, handle it by throwing up a bootstrap alert
+      })
+  }
+
   // Function for autocomplete search
   function autocomplete() {
-
-    // var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
-    //   searchWord + "&client_id=3KZbL84alX";
     var queryURL = "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
       "fuzzy_match=true" + "&client_id=3KZbL84alX";
 
@@ -252,79 +266,5 @@ $(document).ready(() => {
   };
 
   autocomplete();
-
-  // Testing code to pull data from clicking heart button to database - Uyen
-  // Save chosen game to wishlist after the heart button is clicked
-  // function saveGamesData() {
-  // $(".heartBtn").on("click", function (event) {
-  //   event.preventDefault();
-  //   console.log("clicked")
-  //   // Make a new Games object
-  //   var newGame = {
-  //     title: $(".card-title").text()
-  //   };
-  //   console.log(newGame);
-
-
-  // });
-  // };
-  // saveGamesData();
-
 });
 
-
-
-
-// $(function(){
-// $("#heartBtn").on("click", function(event) {
-//   event.preventDefault();
-
-//   var newGame = {
-//     title: req.body.name,
-//   }
-//   console.log(newGame)
-//   //Send the POST request.
-//   $.ajax("/api/games", {
-//     type: "POST",
-//     data: newGame
-//   }).then(
-//     function() {
-//       console.log(newGame)
-//       // Reload the page to get the updated list
-//       location.reload();
-//     }
-//   );
-// });
-// });
-
-// $.get("/api/games", function(data){
-//   console.log("games", data);
-//   games = data;
-
-
-// })
-
-
-
-/*
-<div class="card" style="width: 24rem;">
-  <div class="card-body">
-    <h4 class="card-title">${popGame.name}</h4>
-    <div class="row">
-      <div class="col-4">
-        <img src="${popGame.images.small}"></img>
-      </div>
-      <div class="col">
-        <ul class="card-text">
-          <li><i class="fas fa-star"></i> Avg User Rating:${(popGame.average_user_rating).toFixed(2)}
-            <li><i class="fas fa-users"></i> Players:${popGame.min_players}-${popGame.max_players}</li>
-            <li><i class="fas fa-hourglass-start"></i> Game Time: ${popGame.min_playtime}-${popGame.max_playtime}
-            </li>
-            <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>
-            <li><i class="fas fa-dice-d20"></i> <a href=${popGame.rules_url}>Rules</a></li>
-            <li><i class="fas fa-tag"></i>Price: ${popGame.price}</li>
-
-            </div>
-          </div>
-      </div>
-*/
