@@ -15,7 +15,6 @@ $(document).ready(() => {
   });
 
   popularGame()
-  // showWishlist()
 
   $("#searchBtn").on("click", function (event) {
     event.preventDefault();
@@ -79,7 +78,7 @@ $(document).ready(() => {
           </div>`)
 
           // Dynamically create a card for each game
-          $(".searchGame").append(gameCard);
+          $(".searchGames").append(gameCard);
 
           // Dynamically asign an id for each heart button and add to each game card
           var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
@@ -88,7 +87,7 @@ $(document).ready(() => {
           heartButton.attr("data-games", response.games[i].id);
           var customID = "heartBtn-" + String(i);
           heartButton.attr("id", customID);
-          $(".searchGame").append(heartButton);
+          $(".searchGames").append(heartButton);
 
           // Assign key values to each data retrieved from each buton clicked
           gameInfo[customID] = response.games[i].id;
@@ -127,7 +126,7 @@ $(document).ready(() => {
   };
 
   function popularGame() {
-    $(".searchGames").addClass("hide")
+    $(".searchGame").addClass("hide")
     $(".popGames").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
@@ -226,7 +225,7 @@ $(document).ready(() => {
   }
 
 
-
+  /*
   
   var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
 
@@ -240,8 +239,6 @@ $(document).ready(() => {
   });
   console.log(wishlistId)
   function showWishlist() {
-    $(".searchGame").removeClass("hide")
-    // $(".popularGame").addClass("hide")
     $(".wishlist").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
@@ -258,7 +255,7 @@ $(document).ready(() => {
           <div class="accordion-item">
     <h2 class="accordion-header" id="${response.games[i].name}">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
-      ${response.games[i].name}
+        <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
       </button>
     </h2>
     <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
@@ -322,7 +319,7 @@ $(document).ready(() => {
   });
   console.log(ownListId)
   function showOwnlist() {
-    $(".searchGame").removeClass("hide")
+    // $(".searchGame").removeClass("hide")
     // $(".popularGame").addClass("hide")
     $(".ownlist").empty();
     //search for game from board game geeks API.
@@ -370,7 +367,7 @@ $(document).ready(() => {
       })
   };
 
- 
+  */
 
 
 
