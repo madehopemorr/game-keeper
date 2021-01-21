@@ -42,7 +42,7 @@ $(document).ready(() => {
   function runSearchBar(searchWord) {
     $(".searchGame").removeClass("hide")
     $(".popularGame").addClass("hide")
-    $(".searchGame").empty();
+    $(".searchGames").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
       searchWord + "&client_id=3KZbL84alX";
@@ -104,7 +104,24 @@ $(document).ready(() => {
 
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id]);
-          // var chosenName = gameInfo[this.id];
+          var chosenID = gameInfo[this.id];
+
+          $.get("/api/user_data").then(data => {
+            var currentUserId = data.id;
+            console.log(currentUserId);
+            console.log(chosenID);
+
+            // Make a newGame object
+            newGame = {
+              game_ID: chosenID,
+              own: false,
+              UserId: currentUserId
+            };
+
+            console.log(newGame)
+
+            saveGame(newGame.game_ID, newGame.own, newGame.UserId)
+          });
         });
       })
   };
