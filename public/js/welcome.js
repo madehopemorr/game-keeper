@@ -28,7 +28,7 @@ $('#search-word').keypress(function (event) {
 function runSearchBar(searchWord) {
   $(".searchGame").removeClass("hide")
   $(".popularGame").addClass("hide")
-  $(".list-group").empty();
+  $(".searchGames").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
     searchWord + "&client_id=3KZbL84alX";
@@ -61,14 +61,14 @@ function runSearchBar(searchWord) {
             </div>
         </div
     </div>`)
-        $(".list-group").append(gameCard)
+        $(".searchGames").append(gameCard)
       })
     })
 };
 
 function popularGame() {
   $(".searchGame").addClass("hide")
-  $(".list-group").empty();
+  $(".popGames").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
   $.ajax({
@@ -101,7 +101,7 @@ function popularGame() {
             </div>
         </div
     </div>`)
-        $(".list-group").append(popularGameCard)
+        $(".popGames").append(popularGameCard)
       })
     }) 
 };

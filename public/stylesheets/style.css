@@ -9,22 +9,22 @@ form.login {
 .jumbotron{
   background-image: url("../img/dicebackground2.jpg");
   text-align: center;
-  padding-bottom: 5rem;
+  padding-bottom: 3rem;
   padding-top: 2rem;
   border-bottom-style: ridge;
   border-bottom-width: 1rem;
 }
-.member-name {
-  color: black;
-}
-.wish-list, 
-.own, 
 .filter-by {
-  position: relative;
-  float: left;
+  text-align: center;
   padding: 10px;
+  background-position: 0% 0%
 }
-.list-group {
+.dropdown-toggle{
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+.searchGames, .popGames {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,7 +63,18 @@ ul{
   background-color: greenyellow;
   color: black;
 }
+.ownlistbox{
+  position:relative;
+  height: 600px;
 
+}
+.accordion-button{
+  background-color: #3e4444;
+  color:greenyellow;
+  border-width: 5px;
+  border-color: greenyellow;
+  border: double;
+}
 /* headers on welcome page */
 .welcomeTitles {
   text-align: center;

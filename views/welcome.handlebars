@@ -1,17 +1,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <h1 class="navbar-brand" href="#">GameKeeper</h1>
-
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/members">Home</a>
-                <a class="nav-link" href="/login">Log In</a>
-                <a class="nav-link" href="/signup">Sign Up</a>
-            </div>
-        </div>
-    </div>
-</nav>
 <div class="jumbotron">
   <h1>Welcome to Game Keeper. Search for games below:</h1>
   <form class="create-form">
@@ -59,7 +46,7 @@
     
     <div class="col-9 searchGame">
       <h2 class="welcomeTitles">Games</h2>
-      <ul class="list-group d-flex flex-wrap justify-content-center">
+      <ul class="searchGames list-group d-flex flex-wrap justify-content-center">
 
           {{#each game}}
           {{> partials/card}}
@@ -69,7 +56,7 @@
 
     <div class="col-9 popularGame">
       <h2 class="welcomeTitles">Popular Games</h2>
-      <ul class="list-group d-flex flex-wrap justify-content-center">
+      <ul class="popGames list-group d-flex flex-wrap justify-content-center">
 
           {{#each popGame}}
           {{> partials/card}}
