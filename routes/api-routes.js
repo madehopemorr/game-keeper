@@ -58,9 +58,8 @@ module.exports = function (app) {
 
   });
 
-  // Testing routes - Uyen
   // Route for wishlist to be saved in database
-  // post doesnt work yet :( -rachel
+  
   app.post("/api/members", (req, res) => {
     console.log(req.body)
     db.Games.create(req.body).then((dbGames) => {
@@ -101,13 +100,34 @@ module.exports = function (app) {
     });
   });
 
+  app.put("/api/wishlist/:id", (req, res) => {
+    db.Games.update({ own: true }, {
+      where: {
+        id: req.params.id
+      }
+    })
+      .then((saveGame) => {
+        res.json(saveGame)
+      })
+  });
+
   app.delete("/api/wishlist/:id", function (req, res) {
     db.Post.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function (dbPost) {
-      res.json(dbPost);
+    }).then(function (dbGame) {
+      res.json(dbGame);
+    });
+  });
+
+  app.delete("/api/owned/:id", function (req, res) {
+    db.Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbGame) {
+      res.json(dbGame);
     });
   });
 
