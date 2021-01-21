@@ -13,32 +13,82 @@
   
   <script src="https://kit.fontawesome.com/863c23aca6.js" crossorigin="anonymous"></script>
   <link href="stylesheets/style.css" rel="stylesheet">
+  <link href="stylesheets/sidebar.css" rel="stylesheet">
 </head>
 
 <body>
   
+<body>
 
-  {{!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">GameKeeper</a>
+  <div class="d-flex" id="wrapper">
 
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="/members">Home</a>
-
-          <a class="nav-link" href="/login">Log In</a>
-
-          <a class="nav-link" href="/">Log Out</a>
-
-        </div>
+    <!-- Sidebar -->
+    <div class="bg-dark border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Game Keeper</div>
+      <div class="list-group list-group-flush">
+        <a href="/" class="list-group-item list-group-item-action bg-dark">Home</a>
+        <a href="/wishlist" class="list-group-item list-group-item-action bg-dark">My Wishlist</a>
+        <a href="/mygames" class="list-group-item list-group-item-action bg-dark">My Games</a>
+        <a href="/login" class="list-group-item list-group-item-action bg-dark">Login</a>
       </div>
     </div>
-  </nav> --}}
+    <!-- /#sidebar-wrapper -->
 
-    
-    {{{ body }}}
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
 
- 
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">
+          Logout
+        </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+          <div class="member-name"></div>
+      </nav>
+
+          {{{ body }}}
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
 </body>
-
 </html>
