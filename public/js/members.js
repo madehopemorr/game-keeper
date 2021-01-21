@@ -218,11 +218,11 @@ $(document).ready(() => {
           var gameCard = $(`
           <div class="accordion-item">
     <h2 class="accordion-header" id="${response.games[i].name}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${response.games[i].id}" aria-expanded="true" aria-controls="${response.games[i].id}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
       ${response.games[i].name}
       </button>
     </h2>
-    <div id="${response.games[i].id}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+    <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
       <div class="accordion-body">
       <div class="row">
       <div class="col">
@@ -248,11 +248,11 @@ $(document).ready(() => {
           $(".wishlist").append(gameCard);
 
           // Dynamically asign an id for each heart button and add to each game card
-          var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
-          var customID = "heartBtn-" + String(i);
-          heartButton.attr("id", customID);
-          $(".wishlist").append(heartButton);
+          var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
+          ownButton.attr("data-games", response.games[i].name);
+          var customID = "ownBtn-" + String(i);
+          ownButton.attr("id", customID);
+          $(".wishlist").append(ownButton);
 
           // Assign key values to each data retrieved from each buton clicked
           gameInfo[customID] = response.games[i].id;
@@ -263,7 +263,7 @@ $(document).ready(() => {
 
         // As this point, this function shows in the console what button is clicked and the data value attached to it
         // Will be modified...
-        $(".heartBtn").on("click", function (event) {
+        $(".ownBtn").on("click", function (event) {
           event.preventDefault();
 
           console.log("ButtonId is: " + this.id);
