@@ -193,20 +193,20 @@ $(document).ready(() => {
 
   
   
-  var game_ID = [];
+  var wishlistId = [];
   $.get("/api/wishlist").then(data => {
     for (var i = 0; i < data.length; i++)
-    game_ID.push(data[i].game_ID)
+    wishlistId.push(data[i].game_ID)
     showWishlist()
   });
-  console.log(game_ID)
+  console.log(wishlistId)
   function showWishlist() {
     $(".searchGame").removeClass("hide")
     // $(".popularGame").addClass("hide")
     $(".wishlist").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-      game_ID + "&client_id=3KZbL84alX";
+      wishlistId + "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -274,20 +274,20 @@ $(document).ready(() => {
   };
   
   
-  var game_ID = [];
+  var ownListId = [];
   $.get("/api/owned").then(data => {
     for (var i = 0; i < data.length; i++)
-    game_ID.push(data[i].game_ID)
+    ownListId.push(data[i].game_ID)
     showOwnlist()
   });
-  console.log(game_ID)
+  console.log(ownListId)
   function showOwnlist() {
     $(".searchGame").removeClass("hide")
     // $(".popularGame").addClass("hide")
     $(".ownlist").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-      game_ID + "&client_id=3KZbL84alX";
+      ownListId + "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
