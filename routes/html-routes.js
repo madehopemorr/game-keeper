@@ -38,19 +38,12 @@ module.exports = function(app) {
     // res.sendFile(path.join(__dirname, "../public/members.html"));
     res.render("members");
   });
-  app.get("/mywishlist", isAuthenticated, (req, res) => {
+  app.get("/wishlist", isAuthenticated, (req, res) => {
     // res.sendFile(path.join(__dirname, "../public/members.html"));
     res.render("wishlist");
   });
   app.get("/mygames", isAuthenticated, (req, res) => {
     // res.sendFile(path.join(__dirname, "../public/members.html"));
     res.render("mygames");
-  });
-
-
-  // Wishlist route
-  app.get("/wishlist", (req, res) => {
-  
-    res.render("wishlist");
   });
 };
