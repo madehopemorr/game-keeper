@@ -47,10 +47,8 @@ module.exports = function(app) {
     res.render("mygames");
   });
 
-
   // Wishlist route
   app.get("/wishlist", (req, res) => {
-  
     res.render("wishlist");
   });
 };

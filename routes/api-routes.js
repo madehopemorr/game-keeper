@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -48,14 +48,10 @@ module.exports = function (app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         firstName: req.user.firstName,
-        id: req.user.id,
+        id: req.user.id
       });
-    } 
+    }
   });
-
-
-
-
 
   // Testing routes - Uyen
   // Route for wishlist
@@ -66,14 +62,16 @@ module.exports = function (app) {
       title: req.body.title,
       // own: req.body.own,
       UserId: req.user.id
-    }).then((dbGames) => {
-      res.json(dbGames);
-    }).catch(err => {
-      res.status(401).json(err);
-    });
-  })  
+    })
+      .then(dbGames => {
+        res.json(dbGames);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  });
 
-/*
+  /*
   app.post("/api/wishlist", (req, res) => {
     db.Games.create(req.body)
     .catch(err => {
@@ -81,37 +79,40 @@ module.exports = function (app) {
 
     });
   });
-*/  
+*/
 
   // GET route for getting all of the games for wishlist
-  app.get("/api/wishlist", function (req, res) {
+  app.get("/api/wishlist", (req, res) => {
     // this works but make sure you are logged in before going to http://localhost:8080/api/wishlist
     db.Games.findAll({
       where: {
         own: false,
         UserId: req.user.id
       }
-    }).then(function (dbGames) {
-      res.json(dbGames);
-    }).catch(err => {
-      res.status(401).json(err);
-    });
+    })
+      .then(dbGames => {
+        res.json(dbGames);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
   });
 
-  app.get("/api/owned", function (req, res) {
+  app.get("/api/owned", (req, res) => {
     // this works but make sure you are logged in before going to http://localhost:8080/api/owned
     db.Games.findAll({
       where: {
         own: true,
         UserId: req.user.id
-      } 
-    }).then(function (dbGames) {
-      res.json(dbGames);
-    }).catch(err => {
-      res.status(401).json(err);
-    });
+      }
+    })
+      .then(dbGames => {
+        res.json(dbGames);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
   });
-  
 
   /*
   // becca's new code
@@ -166,7 +167,6 @@ module.exports = function (app) {
       })
   })
   */
-
 
   //   there was a conflict when merging here so I just left it and we can delete later
   //CRUD Routes
@@ -231,4 +231,3 @@ module.exports = function (app) {
   */
   //create app.delete to delete games
 };
-

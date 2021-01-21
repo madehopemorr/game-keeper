@@ -1,6 +1,6 @@
 $(document).ready(() => {
   // Create an obj to store game name data every time each button is clicked
-  var gameInfo = {};
+  const gameInfo = {};
 
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
@@ -8,27 +8,31 @@ $(document).ready(() => {
     $(".member-name").text("Welcome " + data.firstName);
   });
 
-  popularGame()
+  popularGame();
   // showWishlist()
 
   // This boolean var is used to control the appearance of suggestions dropdown list
-  var hasBeenClicked = false;
+  let hasBeenClicked = false;
 
-  $("#searchBtn").on("click", function (event) {
+  $("#searchBtn").on("click", event => {
     event.preventDefault();
-    var searchWord = $("#search-word").val().trim()
-    console.log(searchWord)
+    const searchWord = $("#search-word")
+      .val()
+      .trim();
+    console.log(searchWord);
     runSearchBar(searchWord);
 
     // autocomplete(searchWord);
     hasBeenClicked = true;
-  })
+  });
   //runs search when user presses enter
-  $('#search-word').keypress(function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
+  $("#search-word").keypress(event => {
+    const keycode = event.keyCode ? event.keyCode : event.which;
+    if (keycode === "13") {
       event.preventDefault();
-      var searchWord = $("#search-word").val().trim()
+      const searchWord = $("#search-word")
+        .val()
+        .trim();
       runSearchBar(searchWord);
 
       // autocomplete(searchWord);
@@ -37,87 +41,92 @@ $(document).ready(() => {
   });
 
   function runSearchBar(searchWord) {
-    $(".searchGame").removeClass("hide")
-    $(".popularGame").addClass("hide")
+    $(".searchGame").removeClass("hide");
+    $(".popularGame").addClass("hide");
     $(".searchGame").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
-      searchWord + "&client_id=3KZbL84alX";
+    const queryURL =
+      "https://api.boardgameatlas.com/api/search?name=" +
+      searchWord +
+      "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
-    })
-      .then(function (response) {
-        console.log(response)
+    }).then(response => {
+      console.log(response);
 
-        for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`    
-          <div class="card" style="width: 24rem;">
-              <div class="card-body">
-                  <h4 class="card-title">${response.games[i].name}</h4>
-                  <div class="row">
-                      <div class="col-4">
-                          <img src = "${response.games[i].images.small}"></img>
-                      </div>
-                      <div class="col">
-                          <ul class="card-text">
-                              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-                              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-                              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-                              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-                              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
-                              <br>
+      for (let i = 0; i < response.games.length; i++) {
+        const gameCard = $(`    
+<div class="card" style="width: 24rem;">
+  <div class="card-body">
+    <h4 class="card-title">${response.games[i].name}</h4>
+      <div class="row">
+        <div class="col-4">
+          <img src = "${response.games[i].images.small}"></img>
+        </div>
+        <div class="col">
+          <ul class="card-text">
+            <li><i class="fas fa-star"></i> Avg User Rating:${response.games[i].average_user_rating.toFixed(2)}</li>
+            <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-
+            ${response.games[i].max_players}</li>
+            <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+            <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+            <li><i class="fas fa-dice-d20"></i> 
+            <a href=${response.games[i].rules_url}>Rules</a></li>
+            <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+              <br>
 
-                              </ul>
-                      </div>
-                  </div>
-              </div
-          </div>`)
+          </ul>
+        </div>
+      </div>
+    </div
+  </div>`);
 
-          // Dynamically create a card for each game
-          $(".searchGame").append(gameCard);
+        // Dynamically create a card for each game
+        $(".searchGame").append(gameCard);
 
-          // Dynamically asign an id for each heart button and add to each game card
-          var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
-          var customID = "heartBtn-" + String(i);
-          heartButton.attr("id", customID);
-          $(".searchGame").append(heartButton);
+        // Dynamically asign an id for each heart button and add to each game card
+        const heartButton = $(
+          '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
+        );
+        heartButton.attr("data-games", response.games[i].name);
+        const customID = "heartBtn-" + String(i);
+        heartButton.attr("id", customID);
+        $(".searchGame").append(heartButton);
 
-          // Assign key values to each data retrieved from each buton clicked
-          gameInfo[customID] = response.games[i].id;
-        };
-        // This console shows how the line above looks like
-        // Console the values of the gameInfo obj (for debugging purpose)
-        console.log("KeyValue: " + JSON.stringify(gameInfo));
+        // Assign key values to each data retrieved from each buton clicked
+        gameInfo[customID] = response.games[i].id;
+      }
+      // This console shows how the line above looks like
+      // Console the values of the gameInfo obj (for debugging purpose)
+      console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-        // As this point, this function shows in the console what button is clicked and the data value attached to it
-        // Will be modified...
-        $(".heartBtn").on("click", function (event) {
-          event.preventDefault();
+      // As this point, this function shows in the console what button is clicked and the data value attached to it
+      // Will be modified...
+      $(".heartBtn").on("click", function(event) {
+        event.preventDefault();
 
-          console.log("ButtonId is: " + this.id);
-          console.log("Game ID is: " + gameInfo[this.id]);
-          // var chosenName = gameInfo[this.id];
-        });
-      })
-  };
+        console.log("ButtonId is: " + this.id);
+        console.log("Game ID is: " + gameInfo[this.id]);
+        // var chosenName = gameInfo[this.id];
+      });
+    });
+  }
 
   function popularGame() {
-    $(".searchGame").addClass("hide")
+    $(".searchGame").addClass("hide");
     $(".popGames").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
+    const queryURL =
+      "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
-    })
-      .then(function (response) {
-        console.log(response);
+    }).then(response => {
+      console.log(response);
 
-        for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`    
+      for (let i = 0; i < response.games.length; i++) {
+        const gameCard = $(`    
           <div class="card" style="width: 24rem;">
               <div class="card-body">
                   <h4 class="card-title">${response.games[i].name}</h4>
@@ -127,47 +136,61 @@ $(document).ready(() => {
                       </div>
                       <div class="col">
                           <ul class="card-text">
-                              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-                              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-                              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-                              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-                              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+                              <li><i class="fas fa-star"></i> Avg User Rating:${response.games[
+                                i
+                              ].average_user_rating.toFixed(2)}</li>
+                              <li><i class="fas fa-users"></i> Players:${
+                                response.games[i].min_players
+                              }-${response.games[i].max_players}</li>
+                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${
+                                response.games[i].min_playtime
+                              }-${response.games[i].max_playtime}</li>
+                              <li><i class="fas fa-child"></i> Age: ${
+                                response.games[i].min_age
+                              } + </li>
+                              <li><i class="fas fa-dice-d20"></i> <a href=${
+                                response.games[i].rules_url
+                              }>Rules</a></li>
+                              <li><i class="fas fa-tag"></i>Price: ${
+                                response.games[i].price
+                              }</li>
                               <br>
                           </ul>
                       </div>
                   </div>
               </div
-          </div>`)
+          </div>`);
 
-          // Dynamically create a card for each game
-          $(".popGames").append(gameCard);
+        // Dynamically create a card for each game
+        $(".popGames").append(gameCard);
 
-          // Dynamically asign an id for each heart button and add to each game card
-          var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
-          var customID = "heartBtn-" + String(i);
-          heartButton.attr("id", customID);
-          $(".popGames").append(heartButton);
+        // Dynamically asign an id for each heart button and add to each game card
+        const heartButton = $(
+          `<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>`
+        );
+        heartButton.attr("data-games", response.games[i].name);
+        const customID = "heartBtn-" + String(i);
+        heartButton.attr("id", customID);
+        $(".popGames").append(heartButton);
 
-          // Assign key values to each data retrieved from each buton clicked
-          gameInfo[customID] = response.games[i].id;
-        };
-        // This console shows how the line above looks like
-        // Console the values of the gameInfo obj (for debugging purpose)
-        console.log("KeyValue: " + JSON.stringify(gameInfo));
+        // Assign key values to each data retrieved from each buton clicked
+        gameInfo[customID] = response.games[i].id;
+      }
+      // This console shows how the line above looks like
+      // Console the values of the gameInfo obj (for debugging purpose)
+      console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-        // As this point, this function shows in the console what button is clicked and the data value attached to it
-        // Will be modified...
-        $(".heartBtn").on("click", function (event) {
-          event.preventDefault();
+      // As this point, this function shows in the console what button is clicked and the data value attached to it
+      // Will be modified...
+      $(".heartBtn").on("click", function(event) {
+        event.preventDefault();
 
-          console.log("ButtonId is: " + this.id);
-          console.log("Game ID is: " + gameInfo[this.id]);
-          // var chosenName = gameInfo[this.id];
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          // Testing code, please don't mind this - Uyen
-          /*
+        console.log("ButtonId is: " + this.id);
+        console.log("Game ID is: " + gameInfo[this.id]);
+        // var chosenName = gameInfo[this.id];
+        // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // Testing code, please don't mind this - Uyen
+        /*
           // Make a newGame object
           var newGame = {
             title: chosenName,
@@ -183,46 +206,71 @@ $(document).ready(() => {
             })
           }
           */
-
-        });
       });
-  };
+    });
+  }
 
-  
-  var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
+  const accordianArr = [
+    "collapseOne",
+    "collapseTwo",
+    "collapseThree",
+    "collapseFour",
+    "collapseFive",
+    "collapseSix",
+    "collapseSeven",
+    "collapseEight",
+    "collapseNine",
+    "collapseTen",
+    "collapseEleven",
+    "collapseTwelve",
+    "collapseThirteen",
+    "collapseFourteen",
+    "collapseFifteen",
+    "collapseSixteen",
+    "collapseSeventeen",
+    "collapseEightteen",
+    "collapseNineteen",
+    "collapseTwenty"
+  ];
 
-  
-  
-  var wishlistId = [];
+  const wishlistId = [];
   $.get("/api/wishlist").then(data => {
-    for (var i = 0; i < data.length; i++)
-    wishlistId.push(data[i].game_ID)
-    showWishlist()
+    for (let i = 0; i < data.length; i++) {
+      wishlistId.push(data[i].game_ID);
+    }
+    showWishlist();
   });
-  console.log(wishlistId)
+  console.log(wishlistId);
   function showWishlist() {
-    $(".searchGame").removeClass("hide")
+    $(".searchGame").removeClass("hide");
     // $(".popularGame").addClass("hide")
     $(".wishlist").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-      wishlistId + "&client_id=3KZbL84alX";
+    const queryURL =
+      "https://api.boardgameatlas.com/api/search?ids=" +
+      wishlistId +
+      "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
-    })
-      .then(function (response) {
-        console.log(response)
+    }).then(response => {
+      console.log(response);
 
-        for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`
+      for (let i = 0; i < response.games.length; i++) {
+        const gameCard = $(`
           <div class="accordion-item">
     <h2 class="accordion-header" id="${response.games[i].name}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${response.games[i].id}" aria-expanded="true" aria-controls="${response.games[i].id}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${
+        response.games[i].id
+      }" aria-expanded="true" aria-controls="${response.games[i].id}">
       ${response.games[i].name}
       </button>
     </h2>
-    <div id="${response.games[i].id}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+    <div id="${
+      response.games[i].id
+    }" class="accordion-collapse collapse" aria-labelledby="${
+          response.games[i].name
+        }" data-bs-parent="#accordionExample">
       <div class="accordion-body">
       <div class="row">
       <div class="col">
@@ -230,73 +278,88 @@ $(document).ready(() => {
       </div>
       <div class="col">
           <ul class="card-text">
-              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+              <li><i class="fas fa-star"></i> Avg User Rating:${response.games[
+                i
+              ].average_user_rating.toFixed(2)}</li>
+              <li><i class="fas fa-users"></i> Players:${
+                response.games[i].min_players
+              }-${response.games[i].max_players}</li>
+              <li><i class="fas fa-hourglass-start"></i> Game Time: ${
+                response.games[i].min_playtime
+              }-${response.games[i].max_playtime}</li>
+              <li><i class="fas fa-child"></i> Age: ${
+                response.games[i].min_age
+              } + </li>
+              <li><i class="fas fa-dice-d20"></i> <a href=${
+                response.games[i].rules_url
+              }>Rules</a></li>
+              <li><i class="fas fa-tag"></i>Price: ${
+                response.games[i].price
+              }</li>
               <br>
           </ul>
       </div>
   </div>
       </div>
     </div>
-  </div>`)
+  </div>`);
 
-          // Dynamically create a card for each game
-          $(".wishlist").append(gameCard);
+        // Dynamically create a card for each game
+        $(".wishlist").append(gameCard);
 
-          // Dynamically asign an id for each heart button and add to each game card
-          var heartButton = $('<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>');
-          heartButton.attr("data-games", response.games[i].name);
-          var customID = "heartBtn-" + String(i);
-          heartButton.attr("id", customID);
-          $(".wishlist").append(heartButton);
+        // Dynamically asign an id for each heart button and add to each game card
+        const heartButton = $(
+          '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
+        );
+        heartButton.attr("data-games", response.games[i].name);
+        const customID = "heartBtn-" + String(i);
+        heartButton.attr("id", customID);
+        $(".wishlist").append(heartButton);
 
-          // Assign key values to each data retrieved from each buton clicked
-          gameInfo[customID] = response.games[i].id;
-        };
-        // This console shows how the line above looks like
-        // Console the values of the gameInfo obj (for debugging purpose)
-        console.log("KeyValue: " + JSON.stringify(gameInfo));
+        // Assign key values to each data retrieved from each buton clicked
+        gameInfo[customID] = response.games[i].id;
+      }
+      // This console shows how the line above looks like
+      // Console the values of the gameInfo obj (for debugging purpose)
+      console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-        // As this point, this function shows in the console what button is clicked and the data value attached to it
-        // Will be modified...
-        $(".heartBtn").on("click", function (event) {
-          event.preventDefault();
+      // As this point, this function shows in the console what button is clicked and the data value attached to it
+      // Will be modified...
+      $(".heartBtn").on("click", function(event) {
+        event.preventDefault();
 
-          console.log("ButtonId is: " + this.id);
-          console.log("Game ID is: " + gameInfo[this.id]);
-          // var chosenName = gameInfo[this.id];
-        });
-      })
-  };
-  
-  
-  var ownListId = [];
+        console.log("ButtonId is: " + this.id);
+        console.log("Game ID is: " + gameInfo[this.id]);
+        // var chosenName = gameInfo[this.id];
+      });
+    });
+  }
+
+  const ownListId = [];
   $.get("/api/owned").then(data => {
-    for (var i = 0; i < data.length; i++)
-    ownListId.push(data[i].game_ID)
-    showOwnlist()
+    for (let i = 0; i < data.length; i++) {
+      ownListId.push(data[i].game_ID);
+    }
+    showOwnlist();
   });
-  console.log(ownListId)
+  console.log(ownListId);
   function showOwnlist() {
-    $(".searchGame").removeClass("hide")
+    $(".searchGame").removeClass("hide");
     // $(".popularGame").addClass("hide")
     $(".ownlist").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-      ownListId + "&client_id=3KZbL84alX";
+    const queryURL =
+      "https://api.boardgameatlas.com/api/search?ids=" +
+      ownListId +
+      "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
-    })
-      .then(function (response) {
-        console.log(response)
+    }).then(response => {
+      console.log(response);
 
-        for (var i = 0; i < response.games.length; i++) {
-          var gameCard = $(`
+      for (let i = 0; i < response.games.length; i++) {
+        const gameCard = $(`
           <div class="accordion-item">
     <h2 class="accordion-header" id="${response.games[i].name}">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
@@ -321,14 +384,13 @@ $(document).ready(() => {
   </div>
       </div>
     </div>
-  </div>`)
+  </div>`);
 
-  
-          // Dynamically create a card for each game
-          $(".ownlist").append(gameCard);
-        }
-      })
-  };
+        // Dynamically create a card for each game
+        $(".ownlist").append(gameCard);
+      }
+    });
+  }
 
   /*$.get("/api/owned").then(data => {
     for (var i = 0; i < data.length; i++)
@@ -391,21 +453,22 @@ $(document).ready(() => {
 
   // Function for autocomplete search
   function autocomplete() {
-
     // var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
     //   searchWord + "&client_id=3KZbL84alX";
-    var queryURL = "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
-      "fuzzy_match=true" + "&client_id=3KZbL84alX";
+    const queryURL =
+      "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
+      "fuzzy_match=true" +
+      "&client_id=3KZbL84alX";
 
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function (response) {
+    }).then(response => {
       console.log(response);
 
       // Response is an object
       // We need to convert it into an array
-      var responseArr = response.games;
+      const responseArr = response.games;
       console.log(responseArr);
 
       function findMatches(wordToMatch, responseArr) {
@@ -414,40 +477,45 @@ $(document).ready(() => {
           const regex = new RegExp(wordToMatch, "gi");
           return games.name.match(regex);
         });
-      };
+      }
 
       function displayMatches() {
         console.log(this.value);
-        var matchArr = findMatches(this.value, responseArr);
+        const matchArr = findMatches(this.value, responseArr);
         console.log(matchArr);
 
-        var liEl = matchArr.map(games => {
-          // The RegExp object is used for matching text with a pattern
-          // Replace the matching parts of the search results with highlighted parts
-          const regex = new RegExp(this.value, "gi");
-          // The highlighted const will replace ${games.name} in the span
-          const highlighted = games.name.replace(regex, `<span class="highlight">${this.value}</span>`);
+        const liEl = matchArr
+          .map(games => {
+            // The RegExp object is used for matching text with a pattern
+            // Replace the matching parts of the search results with highlighted parts
+            const regex = new RegExp(this.value, "gi");
+            // The highlighted const will replace ${games.name} in the span
+            const highlighted = games.name.replace(
+              regex,
+              `<span class="highlight">${this.value}</span>`
+            );
 
-          return `
+            return `
         <li>
           <span class="name">${highlighted}</span>
         </li>
         `;
-        }).join("");
+          })
+          .join("");
 
-        var suggestions = document.querySelector(".suggestions");
+        const suggestions = document.querySelector(".suggestions");
         suggestions.innerHTML = liEl;
         // Only show suggestions list when the search box is not empty
         if (!this.value || hasBeenClicked) {
           $(".suggestions").empty();
           hasBeenClicked = false;
         }
-      };
+      }
 
       $("#search-word").on("keyup", displayMatches);
       $("#search-word").on("change", displayMatches);
     });
-  };
+  }
 
   autocomplete();
 
@@ -463,15 +531,10 @@ $(document).ready(() => {
   //   };
   //   console.log(newGame);
 
-
   // });
   // };
   // saveGamesData();
-
 });
-
-
-
 
 // $(function(){
 // $("#heartBtn").on("click", function(event) {
@@ -499,10 +562,7 @@ $(document).ready(() => {
 //   console.log("games", data);
 //   games = data;
 
-
 // })
-
-
 
 /*
 <div class="card" style="width: 24rem;">
