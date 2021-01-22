@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         game_ID: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate: {
                 len: [1]
             }
