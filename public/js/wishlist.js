@@ -21,7 +21,7 @@ function showWishlist() {
   $(".wishlist").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-    wishlistId + "&client_id=3KZbL84alX";
+    wishlistId + "&client_id=P8IGQ6iTCi";
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -103,7 +103,7 @@ function showOwnlist() {
   $(".ownlist").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
-    ownListId + "&client_id=3KZbL84alX";
+    ownListId + "&client_id=P8IGQ6iTCi";
   $.ajax({
     url: queryURL,
     method: "GET"

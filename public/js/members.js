@@ -129,7 +129,7 @@ $(document).ready(() => {
     $(".searchGame").addClass("hide")
     $(".popGames").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://api.boardgameatlas.com/api/search?order_by=reddit_day_count&limit=10&client_id=3KZbL84alX";
+    var queryURL = "https://www.boardgameatlas.com/api/search?order_by=popularity&ascending=false&pretty=true&client_id=JLBr5npPhV";
     $.ajax({
       url: queryURL,
       method: "GET"
