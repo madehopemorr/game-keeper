@@ -70,7 +70,6 @@ $(document).ready(() => {
                               <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
                               <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
                               <br>
-
                               </ul>
                       </div>
                   </div>
@@ -129,7 +128,7 @@ $(document).ready(() => {
     $(".searchGame").addClass("hide")
     $(".popGames").empty();
     //search for game from board game geeks API.
-    var queryURL = "https://www.boardgameatlas.com/api/search?order_by=popularity&ascending=false&pretty=true&client_id=JLBr5npPhV";
+    var queryURL = "https://www.boardgameatlas.com/api/search?order_by=popularity&ascending=false&limit=10&pretty=true&client_id=JLBr5npPhV";
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -228,7 +227,6 @@ $(document).ready(() => {
   /*
   
   var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
-
   
   
   var wishlistId = [];
@@ -249,7 +247,6 @@ $(document).ready(() => {
     })
       .then(function (response) {
         console.log(response)
-
         for (var i = 0; i < response.games.length; i++) {
           var gameCard = $(`
           <div class="accordion-item">
@@ -279,29 +276,24 @@ $(document).ready(() => {
       </div>
     </div>
   </div>`)
-
           // Dynamically create a card for each game
           $(".wishlist").append(gameCard);
-
           // Dynamically asign an id for each heart button and add to each game card
           var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
           ownButton.attr("data-games", response.games[i].name);
           var customID = "ownBtn-" + String(i);
           ownButton.attr("id", customID);
           $(".wishlist").append(ownButton);
-
           // Assign key values to each data retrieved from each buton clicked
           gameInfo[customID] = response.games[i].id;
         };
         // This console shows how the line above looks like
         // Console the values of the gameInfo obj (for debugging purpose)
         console.log("KeyValue: " + JSON.stringify(gameInfo));
-
         // As this point, this function shows in the console what button is clicked and the data value attached to it
         // Will be modified...
         $(".ownBtn").on("click", function (event) {
           event.preventDefault();
-
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id]);
           
@@ -331,7 +323,6 @@ $(document).ready(() => {
     })
       .then(function (response) {
         console.log(response)
-
         for (var i = 0; i < response.games.length; i++) {
           var gameCard = $(`
           <div class="accordion-item">
@@ -359,14 +350,12 @@ $(document).ready(() => {
       </div>
     </div>
   </div>`)
-
   
           // Dynamically create a card for each game
           $(".ownlist").append(gameCard);
         }
       })
   };
-
   */
 
 
@@ -432,4 +421,3 @@ $(document).ready(() => {
 
   autocomplete();
 });
-

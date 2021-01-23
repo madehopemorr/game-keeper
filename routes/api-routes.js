@@ -102,10 +102,10 @@ module.exports = function (app) {
     });
   });
 
-  app.put("/api/wishlist", (req, res) => {
+  app.put("/api/mygames/:id", (req, res) => {
     db.Games.update({ own: true }, {
       where: {
-        id: req.body.id
+        game_ID: req.params.id
       }
     })
       .then((saveGame) => {

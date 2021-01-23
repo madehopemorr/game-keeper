@@ -9,7 +9,6 @@ $.get("/api/user_data").then(data => {
 var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
 
   
-  
 var wishlistId = [];
 $.get("/api/wishlist").then(data => {
   for (var i = 0; i < data.length; i++)
@@ -28,16 +27,16 @@ function showWishlist() {
   })
     .then(function (response) {
       console.log(response)
-
+      var collapseVar = "collapse" + String(i); 
       for (var i = 0; i < response.games.length; i++) {
         var gameCard = $(`
         <div class="accordion-item">
   <h2 class="accordion-header" id="${response.games[i].name}">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseVar}" aria-expanded="true" aria-controls="${collapseVar}">
       <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
   </h2>
-  <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+  <div id="${collapseVar}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
     <div class="accordion-body">
     <div class="row">
     <div class="col">
@@ -64,7 +63,7 @@ function showWishlist() {
 
         // Dynamically asign an id for each heart button and add to each game card
         var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
-        ownButton.attr("data-games", response.games[i].name);
+        ownButton.attr("data-id", response.games[i].game_id);
         var customID = "ownBtn-" + String(i);
         ownButton.attr("id", customID);
         $(".wishlist").append(ownButton);
@@ -74,7 +73,7 @@ function showWishlist() {
       };
       // This console shows how the line above looks like
       // Console the values of the gameInfo obj (for debugging purpose)
-      console.log("KeyValue: " + JSON.stringify(gameInfo));
+      //console.log("KeyValue: " + JSON.stringify(gameInfo));
 
       // As this point, this function shows in the console what button is clicked and the data value attached to it
       // Will be modified...
@@ -82,13 +81,27 @@ function showWishlist() {
         event.preventDefault();
 
         console.log("ButtonId is: " + this.id);
-        console.log("Game ID is: " + gameInfo[this.id]);
-        
+        console.log("Game ID is: " + gameInfo[this.id])
+        var chosenID = gameInfo[this.id];
+        var own = {own: true }
+        var id = $(this).data("id")
+        console.log(chosenID)
+        updateGame(chosenID, own)
+;
+  
         // var chosenName = gameInfo[this.id];
       });
     })
 };
-
+function updateGame(id, own){
+  $.ajax("/api/mygames/" + id, {
+    method: "PUT",
+    data: own,
+}).then(() => {
+  window.location.replace("/wishlist");
+  // If there's an error, handle it by throwing up a bootstrap alert
+  })
+}
 
 var ownListId = [];
 $.get("/api/owned").then(data => {

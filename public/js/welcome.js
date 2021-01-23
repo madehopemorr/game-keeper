@@ -70,13 +70,13 @@ function popularGame() {
   $(".searchGame").addClass("hide")
   $(".popGames").empty();
   //search for game from board game geeks API.
-  var queryURL = "https://www.boardgameatlas.com/api/search?order_by=popularity&ascending=false&pretty=true&client_id=JLBr5npPhV";
+  var queryURL = "https://www.boardgameatlas.com/api/search?order_by=popularity&ascending=false&limit=10&pretty=true&client_id=JLBr5npPhV";
   $.ajax({
     url: queryURL,
     method: "GET"
   })
     .then(function (response) {
-      console.log(response)
+      //console.log(response)
       const popGames = response.games
       popGames.forEach(function (popGame) {
         //template to automatically generate card styling for each game in search
