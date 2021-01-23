@@ -1,16 +1,61 @@
 var gameInfo = {}
 
-$.get("/api/user_data").then(data => {
+$.ajax({
+  url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+  type: "GET",
+  // headers: {
+  //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
+  // },
+  error: function (err) {
+    switch (err.status) {
+      case "400":
+        // bad request
+        break;
+      case "401":
+        // unauthorized
+        break;
+      case "403":
+        // forbidden
+        break;
+      default:
+        //Something bad happened
+        break;
+    }
+  }
+}).then(data => {
     $(".member-name").text("Welcome " + data.firstName);
 });
 
 var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
 
 var ownListId = [];
-$.get("/api/owned").then(data => {
-  for (var i = 0; i < data.length; i++)
+$.ajax({
+  url: `http://localhost:8080/api/mygames?secret_token=${sessionStorage.getItem("myToken")}`,
+  type: "GET",
+  // headers: {
+  //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
+  // },
+  error: function (err) {
+    switch (err.status) {
+      case "400":
+        // bad request
+        break;
+      case "401":
+        // unauthorized
+        break;
+      case "403":
+        // forbidden
+        break;
+      default:
+        //Something bad happened
+        break;
+    }
+  }
+}).then(data => {
+  for (var i = 0; i < data.length; i++) 
   ownListId.push(data[i].game_ID)
   showOwnlist()
+  
 });
 console.log(ownListId)
 function showOwnlist() {
@@ -82,11 +127,30 @@ function showOwnlist() {
 };
 
 function deleteGame(id){
-    $.ajax("/api/mygames/" + id, {
-      method: "DELETE"
-    }).then(() => {
+  $.ajax({
+    url: `http://localhost:8080/api/wishlist/${id}?secret_token=${sessionStorage.getItem("myToken")}`,
+    type: "DELETE",
+
+    error: function (err) {
+      switch (err.status) {
+        case "400":
+          // bad request
+          break;
+        case "401":
+          // unauthorized
+          break;
+        case "403":
+          // forbidden
+          break;
+        default:
+          //Something bad happened
+          break;
+      }
+    }
+  })
+  .then(() => {
       window.location.replace("/mygames");
       // If there's an error, handle it by throwing up a bootstrap alert
-      })
+  })
   }
 
