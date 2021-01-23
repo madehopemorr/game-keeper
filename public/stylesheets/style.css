@@ -85,3 +85,8 @@ ul{
 .hide {
   display: none;
 }
+
+/* font color on sidebar links */
+.sidebarText {
+  color: #999
+}
