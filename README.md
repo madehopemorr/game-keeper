@@ -1,5 +1,7 @@
-#Game Keeper
+# Game Keeper
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Contributions by Madeline Morris, Rachel Kroetch, Rebecca Blanton, and Uyen Nguyen.
     
 ## Table of Contents
 ==================

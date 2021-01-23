@@ -90,7 +90,15 @@ $(document).ready(() => {
 
           // Assign key values to each data retrieved from each buton clicked
           gameInfo[customID] = response.games[i].id;
-        };
+
+          // Dynamically asign an id for each own button and add to each game card
+          var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
+          ownButton.attr("data-id", response.games[i].game_id);
+          var customID2 = "ownBtn-" + String(i);
+          ownButton.attr("id", customID2);
+          $(".searchGames").append(ownButton);
+          gameInfo[customID2] = response.games[i].id;
+          };
         // This console shows how the line above looks like
         // Console the values of the gameInfo obj (for debugging purpose)
         console.log("KeyValue: " + JSON.stringify(gameInfo));
@@ -121,6 +129,33 @@ $(document).ready(() => {
             saveGame(newGame.game_ID, newGame.own, newGame.UserId)
           });
         });
+
+        $(".ownBtn").on("click", function (event) {
+          event.preventDefault();
+  
+          console.log("ButtonId is: " + this.id);
+          console.log("Game ID is: " + gameInfo[this.id])
+          var chosenID2 = gameInfo[this.id];
+          // var own = {own: true }
+          console.log(chosenID2)
+
+          $.get("/api/user_data").then(data => {
+            var currentUserId = data.id;
+            console.log(currentUserId);
+            console.log(chosenID2);
+
+            // Make a newGame object
+            newGame = {
+              game_ID: chosenID2,
+              own: true,
+              UserId: currentUserId
+            };
+
+            console.log(newGame)
+
+            saveGame(newGame.game_ID, newGame.own, newGame.UserId)
+          });
+        })
       })
   };
 
@@ -174,6 +209,15 @@ $(document).ready(() => {
 
           // Assign key values to each data retrieved from each buton clicked
           gameInfo[customID] = response.games[i].id;
+
+          // Dynamically asign an id for each own button and add to each game card
+          var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
+          ownButton.attr("data-id", response.games[i].game_id);
+          var customID2 = "ownBtn-" + String(i);
+          ownButton.attr("id", customID2);
+          $(".popGames").append(ownButton);
+          gameInfo[customID2] = response.games[i].id;
+          
         };
         // This console shows how the line above looks like
         // Console the values of the gameInfo obj (for debugging purpose)
@@ -207,6 +251,33 @@ $(document).ready(() => {
             saveGame(newGame.game_ID, newGame.own, newGame.UserId)
           });
         });
+
+        $(".ownBtn").on("click", function (event) {
+          event.preventDefault();
+  
+          console.log("ButtonId is: " + this.id);
+          console.log("Game ID is: " + gameInfo[this.id])
+          var chosenID2 = gameInfo[this.id];
+          // var own = {own: true }
+          console.log(chosenID2)
+
+          $.get("/api/user_data").then(data => {
+            var currentUserId = data.id;
+            console.log(currentUserId);
+            console.log(chosenID2);
+
+            // Make a newGame object
+            newGame = {
+              game_ID: chosenID2,
+              own: true,
+              UserId: currentUserId
+            };
+
+            console.log(newGame)
+
+            saveGame(newGame.game_ID, newGame.own, newGame.UserId)
+          });
+        })
       });
   };
 
