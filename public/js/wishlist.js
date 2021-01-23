@@ -32,11 +32,11 @@ function showWishlist() {
         var gameCard = $(`
         <div class="accordion-item">
   <h2 class="accordion-header" id="${response.games[i].name}">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseVar}" aria-expanded="true" aria-controls="${collapseVar}">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
       <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
   </h2>
-  <div id="${collapseVar}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
+  <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
     <div class="accordion-body">
     <div class="row">
     <div class="col">

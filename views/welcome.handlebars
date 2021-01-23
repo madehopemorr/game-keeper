@@ -1,11 +1,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <div class="jumbotron">
-  <h1>Welcome to Game Keeper. Search for games below:</h1>
-  <form class="create-form">
-      <label for="Input">Search Board Games:</label>
-      <input id="search-word" type="text" name="search-word">
-      <button type="submit" id="searchBtn">Submit</button>
-       <br>
+  <h1>Welcome to Game Keeper.</h1>
+       <div class="input-group mb-3">
+  <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="submit" id="searchBtn button-addon2">Submit</button>
+</div>
       <div class="suggestions-drop">
         <ul class="suggestions">
         </ul>
@@ -16,7 +15,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-3">
-      <h2 class="welcomeTitles">Sign Up</h2>
+      <h2 class="welcomeTitles">Sign up below to save your games!</h2>
         <form class="signup">
             <div class="form-group">
                 <label for="exampleInputFirstName">First Name</label>
@@ -46,21 +45,13 @@
     
     <div class="col-9 searchGame">
       <h2 class="welcomeTitles">Games</h2>
-      <ul class="searchGames list-group d-flex flex-wrap justify-content-center">
-
-          {{#each game}}
-          {{> partials/card}}
-          {{/each}}
+      <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
       </ul>
     </div>
 
     <div class="col-9 popularGame">
       <h2 class="welcomeTitles">Popular Games</h2>
-      <ul class="popGames list-group d-flex flex-wrap justify-content-center">
-
-          {{#each popGame}}
-          {{> partials/card}}
-          {{/each}}
+      <ul class="popGames list-group d-flex flex-wrap justify-content-center overflow-auto">
       </ul>
     </div>
   </div>
