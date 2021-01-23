@@ -61,7 +61,7 @@ function showWishlist() {
         // Dynamically create a card for each game
         $(".wishlist").append(gameCard);
 
-        // Dynamically asign an id for each heart button and add to each game card
+        // Dynamically asign an id for each own button and add to each game card
         var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
         ownButton.attr("data-id", response.games[i].game_id);
         var customID = "ownBtn-" + String(i);
@@ -70,6 +70,15 @@ function showWishlist() {
 
         // Assign key values to each data retrieved from each buton clicked
         gameInfo[customID] = response.games[i].id;
+
+        //creates a delete button to remove from list and take out of database
+        var deleteButton = $('<button class = "deleteBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
+        deleteButton.attr("data-id", response.games[i].game_id);
+        var customID2 = "deleteBtn-" + String(i);
+        deleteButton.attr("id", customID2);
+        $(".wishlist").append(deleteButton);
+        gameInfo[customID2] = response.games[i].id;
+
       };
       // This console shows how the line above looks like
       // Console the values of the gameInfo obj (for debugging purpose)
@@ -84,15 +93,24 @@ function showWishlist() {
         console.log("Game ID is: " + gameInfo[this.id])
         var chosenID = gameInfo[this.id];
         var own = {own: true }
-        var id = $(this).data("id")
         console.log(chosenID)
         updateGame(chosenID, own)
+      })
+        $(".deleteBtn").on("click", function (event) {
+          event.preventDefault();
+  
+          console.log("ButtonId is: " + this.id);
+          console.log("Game ID is: " + gameInfo[this.id])
+          var chosenID2 = gameInfo[this.id];
+          console.log(chosenID2)
+          deleteGame(chosenID2)
 ;
   
         // var chosenName = gameInfo[this.id];
-      });
-    })
+       });
+      })
 };
+
 function updateGame(id, own){
   $.ajax("/api/mygames/" + id, {
     method: "PUT",
@@ -103,7 +121,16 @@ function updateGame(id, own){
   })
 }
 
-var ownListId = [];
+function deleteGame(id){
+  $.ajax("/api/wishlist/" + id, {
+    method: "DELETE"
+  }).then(() => {
+    window.location.replace("/wishlist");
+    // If there's an error, handle it by throwing up a bootstrap alert
+    })
+}
+
+/*var ownListId = [];
 $.get("/api/owned").then(data => {
   for (var i = 0; i < data.length; i++)
   ownListId.push(data[i].game_ID)
@@ -155,7 +182,26 @@ function showOwnlist() {
 
         // Dynamically create a card for each game
         $(".ownlist").append(gameCard);
+
+          //creates a delete button to remove from list and take out of database
+          var deleteButton = $('<button class = "deleteBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
+          deleteButton.attr("data-id", response.games[i].game_id);
+          var customID2 = "deleteBtn-" + String(i);
+          deleteButton.attr("id", customID2);
+          $(".wishlist").append(deleteButton);
+          gameInfo[customID2] = response.games[i].id;
       }
+  
+
+      $(".deleteBtn").on("click", function (event) {
+        event.preventDefault();
+
+        console.log("ButtonId is: " + this.id);
+        console.log("Game ID is: " + gameInfo[this.id])
+        var chosenID2 = gameInfo[this.id];
+        console.log(chosenID2)
+        deleteGame(chosenID2)
+      });
     })
-};
+};*/
 

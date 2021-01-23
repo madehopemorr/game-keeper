@@ -114,19 +114,19 @@ module.exports = function (app) {
   });
 
   app.delete("/api/wishlist/:id", function (req, res) {
-    db.Post.destroy({
+    db.Games.destroy({
       where: {
-        id: req.params.id
+        game_ID: req.params.id
       }
     }).then(function (dbGame) {
       res.json(dbGame);
     });
   });
 
-  app.delete("/api/owned/:id", function (req, res) {
-    db.Post.destroy({
+  app.delete("/api/mygames/:id", function (req, res) {
+    db.Games.destroy({
       where: {
-        id: req.params.id
+        game_ID: req.params.id
       }
     }).then(function (dbGame) {
       res.json(dbGame);
