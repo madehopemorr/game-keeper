@@ -1,51 +1,84 @@
 const passport = require("passport");
+// var LocalStrategy = require('passport-local').Strategy;
+// var JwtStrategy = require('passport-jwt').Strategy;
+// var ExtractJwt = require('passport-jwt').ExtractJwt;
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 
 const db = require("../models");
 
-// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
+// var options = {};
+// options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+// options.secretOrKey = "TOP_SECRET";
+
+// Tell passport we want to use a Local Strategy (login with a username/email and password)
 passport.use(
-  new LocalStrategy(
-    // Our user will sign in using an email, rather than a "username"
-    {
-      usernameField: "email"
-    },
-    (email, password, done) => {
-      // When a user tries to sign in this code runs
-      db.User.findOne({
-        where: {
-          email: email
+    "local",
+    new LocalStrategy(
+        // User will sign in with email instead of username
+        {
+            usernameField: "email"
+        },
+        (email, password, done) => {
+            // This code runs when a user tries to sign in
+            db.User.findOne({
+                where: {
+                    email: email
+                }
+            }).then(dbUser => {
+                // If there's no user with the given email
+                if (!dbUser) {
+                    return done(null, false, {
+                        message: "Incorrect email."
+                    });
+                }
+                // If there's a user with the given email, but the password the user enters in not correct
+                else if (!dbUser.validPassword(password)) {
+                    return done(null, false, {
+                        message: "Incorrect password."
+                    });
+                }
+                // If none of the above, return the user
+                return done(null, dbUser);
+            });
         }
-      }).then(dbUser => {
-        // If there's no user with the given email
-        if (!dbUser) {
-          return done(null, false, {
-            message: "Incorrect email."
-          });
-        }
-        // If there is a user with the given email, but the password the user gives us is incorrect
-        else if (!dbUser.validPassword(password)) {
-          return done(null, false, {
-            message: "Incorrect password."
-          });
-        }
-        // If none of the above, return the user
-        return done(null, dbUser);
-      });
-    }
-  )
+    )
 );
 
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
-// Just consider this part boilerplate needed to make it all work
 passport.serializeUser((user, cb) => {
-  cb(null, user);
+    cb(null, user);
 });
 
 passport.deserializeUser((obj, cb) => {
-  cb(null, obj);
+    cb(null, obj);
 });
 
-// Exporting our configured passport
+// passport.use(
+//     new JwtStrategy(options, async (token, done) => {
+//         try {
+//           return done(null, token.user);
+//         } catch (error) {
+//           done(error);
+//         }
+//       })
+// );
+passport.use(
+    new JWTstrategy(
+      {
+        secretOrKey: 'TOP_SECRET',
+        jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token')
+      },
+      async (token, done) => {
+        try {
+          return done(null, token.user);
+        } catch (error) {
+          done(error);
+        }
+      }
+    )
+  );
+
 module.exports = passport;
