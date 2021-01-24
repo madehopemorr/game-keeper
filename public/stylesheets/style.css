@@ -1,6 +1,7 @@
 body {
   background-color: black;
   color: greenyellow;
+  font-family: monospace;
 }
 form.signup,
 form.login {
@@ -77,6 +78,7 @@ ul{
   border-color: greenyellow;
   border: double;
 }
+
 /* headers on welcome page */
 .welcomeTitles {
   text-align: center;
@@ -102,9 +104,14 @@ ul{
   outline: none;
   transition: 0.4s;
 }
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.wishlistItem.active{
+  background-color: black;
+  border-style:dotted;
+}
+/* Add a background color to the button if it is clicked on */
 .active, .wishlistItem:hover {
-  background-color: #ccc;
+  background-color:rgba(183, 249, 86, 0.845);
+  color: black;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -113,4 +120,7 @@ ul{
   display: none;
   overflow: hidden;
   border-style: ridge;
+}
+.deleteBtn, .ownBtn, .heartBtn{
+width: -webkit-fill-available;
 }

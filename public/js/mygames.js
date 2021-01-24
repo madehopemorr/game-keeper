@@ -85,6 +85,10 @@ function showOwnlist() {
       <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
     <div class="panel">
+    <div class="row">
+    <div class="col">
+    <h3>${response.games[i].name}</h3>
+    </div></div>
   <div class="row">
     <div class="col">
         <img src = "${response.games[i].images.small}"></img>
