@@ -317,7 +317,7 @@ $(document).ready(() => {
                   break;
                 default:
                   //Something bad happened
-                  break;
+                  break;ƒown
               }
             }
           }).then(data => {

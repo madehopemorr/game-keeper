@@ -30,6 +30,7 @@ function runSearchBar(searchWord) {
   $(".popularGame").addClass("hide")
   $(".searchGames").empty();
   //search for game from board game geeks API.
+  
   var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
     searchWord + "&client_id=3KZbL84alX";
   $.ajax({

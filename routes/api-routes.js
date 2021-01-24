@@ -134,7 +134,8 @@ module.exports = function (app) {
     app.get("/api/mygames", passport.authenticate('jwt', { session: true }), (req, res) => {
         db.Games.findAll({
             where: {
-                own: true
+                own: true,
+                UserId: req.user.id 
             }
         }).then(function (dbGames) {
             res.json(dbGames);
