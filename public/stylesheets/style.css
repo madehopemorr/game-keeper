@@ -86,6 +86,7 @@ ul{
   display: none;
 }
 
+
 /*accordian buttons*/
 .wishlistItem {
   background-color: #3e4444;
@@ -109,4 +110,9 @@ ul{
   display: none;
   overflow: hidden;
   border-style: ridge;
+
+/* font color on sidebar links */
+.sidebarText {
+  color: #999
+
 }

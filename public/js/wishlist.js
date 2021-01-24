@@ -1,16 +1,55 @@
-// Test wishlist logics here - Uyen
 // Create an obj to store game name data every time each button is clicked
 var gameInfo = {}
-
-$.get("/api/user_data").then(data => {
-    $(".member-name").text("Welcome " + data.firstName);
+console.log(sessionStorage.getItem("myToken"))
+$.ajax({
+  url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+  type: "GET",
+  error: function (err) {
+    switch (err.status) {
+      case "400":
+        // bad request
+        break;
+      case "401":
+        // unauthorized
+        break;
+      case "403":
+        // forbidden
+        break;
+      default:
+        //Something bad happened
+        break;
+    }
+  }
+}).then(data => {
+  $(".member-name").text("Welcome " + data.firstName);
 });
-  
+
 var wishlistId = [];
-$.get("/api/wishlist").then(data => {
+$.ajax({
+  url: `http://localhost:8080/api/wishlist?secret_token=${sessionStorage.getItem("myToken")}`,
+  type: "GET",
+  error: function (err) {
+    switch (err.status) {
+      case "400":
+        // bad request
+        break;
+      case "401":
+        // unauthorized
+        break;
+      case "403":
+        // forbidden
+        break;
+      default:
+        //Something bad happened
+        break;
+    }
+  }
+}).then(data => {
+  console.log(data)
   for (var i = 0; i < data.length; i++)
-  wishlistId.push(data[i].game_ID)
+    wishlistId.push(data[i].game_ID)
   showWishlist()
+
 });
 console.log(wishlistId)
 function showWishlist() {
@@ -24,6 +63,7 @@ function showWishlist() {
   })
     .then(function (response) {
       console.log(response)
+
       for (var i = 0; i < response.games.length; i++) {
         var gameCard = $(`  
     <button class="wishlistItem">
@@ -77,10 +117,11 @@ function showWishlist() {
         console.log("ButtonId is: " + this.id);
         console.log("Game ID is: " + gameInfo[this.id])
         var chosenID = gameInfo[this.id];
-        var own = {own: true }
+        var own = { own: true }
         console.log(chosenID)
         updateGame(chosenID, own)
       })
+
         $(".deleteBtn").on("click", function (event) {
           event.preventDefault();
   
@@ -127,3 +168,56 @@ function deleteGame(id){
 }
 
 
+function updateGame(id, own) {
+  $.ajax({
+    url: `http://localhost:8080/api/wishlist/${id}?secret_token=${sessionStorage.getItem("myToken")}`,
+    type: "PUT",
+    data: own,
+    error: function (err) {
+      switch (err.status) {
+        case "400":
+          // bad request
+          break;
+        case "401":
+          // unauthorized
+          break;
+        case "403":
+          // forbidden
+          break;
+        default:
+          //Something bad happened
+          break;
+      }
+    }
+  }).then(() => {
+    window.location.replace("/wishlist");
+    // If there's an error, handle it by throwing up a bootstrap alert
+  })
+}
+
+function deleteGame(id) {
+  $.ajax({
+    url: `http://localhost:8080/api/wishlist/${id}?secret_token=${sessionStorage.getItem("myToken")}`,
+    type: "DELETE",
+
+    error: function (err) {
+      switch (err.status) {
+        case "400":
+          // bad request
+          break;
+        case "401":
+          // unauthorized
+          break;
+        case "403":
+          // forbidden
+          break;
+        default:
+          //Something bad happened
+          break;
+      }
+    }
+  }).then(() => {
+    window.location.replace("/wishlist");
+    // If there's an error, handle it by throwing up a bootstrap alert
+  })
+}

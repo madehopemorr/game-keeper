@@ -8,11 +8,37 @@ $(document).ready(() => {
   // This boolean var is used to control the appearance of suggestions dropdown list
   var hasBeenClicked = false;
 
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
-  $.get("/api/user_data").then(data => {
+  // $.get("/api/user_data").then(data => {
+  //   $(".member-name").text("Welcome " + data.firstName);
+  // });
+  $.ajax({
+    url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+    type: "GET",
+    error: function (err) {
+      switch (err.status) {
+        case "400":
+          // bad request
+          break;
+        case "401":
+          // unauthorized
+          break;
+        case "403":
+          // forbidden
+          break;
+        default:
+          //Something bad happened
+          break;
+      }
+    }
+  }).then(data => {
     $(".member-name").text("Welcome " + data.firstName);
+    console.log("Success");
+    console.log(data.id);
   });
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   popularGame()
 
@@ -112,7 +138,26 @@ $(document).ready(() => {
           console.log("Game ID is: " + gameInfo[this.id]);
           var chosenID = gameInfo[this.id];
 
-          $.get("/api/user_data").then(data => {
+          $.ajax({
+            url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+            type: "GET",
+            error: function (err) {
+              switch (err.status) {
+                case "400":
+                  // bad request
+                  break;
+                case "401":
+                  // unauthorized
+                  break;
+                case "403":
+                  // forbidden
+                  break;
+                default:
+                  //Something bad happened
+                  break;
+              }
+            }
+          }).then(data => {
             var currentUserId = data.id;
             console.log(currentUserId);
             console.log(chosenID);
@@ -232,9 +277,32 @@ $(document).ready(() => {
           console.log("Game ID is: " + gameInfo[this.id]);
           var chosenID = gameInfo[this.id];
 
- 
 
-          $.get("/api/user_data").then(data => {
+
+          $.ajax({
+            url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+            type: "GET",
+            // headers: {
+            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
+            // },
+            error: function (err) {
+              switch (err.status) {
+                case "400":
+                  // bad request
+                  break;
+                case "401":
+                  // unauthorized
+                  break;
+                case "403":
+                  // forbidden
+                  break;
+                default:
+                  //Something bad happened
+                  break;
+              }
+            }
+          }).then(data => {
+            console.log(data)
             var currentUserId = data.id;
             console.log(currentUserId);
             console.log(chosenID);
@@ -283,10 +351,31 @@ $(document).ready(() => {
 
 
   function saveGame(game_ID, own, UserId) {
-    $.post("/api/members", {
+    $.ajax({
+      url: `http://localhost:8080/api/members?secret_token=${sessionStorage.getItem("myToken")}`,
+      type: "POST",
+      data: {
       game_ID: game_ID,
       own: own,
-      UserId: UserId
+      UserId: UserId,
+      },
+      error: function (err) {
+        switch (err.status) {
+          case "400":
+            // bad request
+            break;
+          case "401":
+            // unauthorized
+            break;
+          case "403":
+            // forbidden
+            break;
+          default:
+            //Something bad happened
+            break;
+        }
+      }
+      
     })
       .then(() => {
         window.location.replace("/members");
