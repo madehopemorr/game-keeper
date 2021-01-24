@@ -129,9 +129,9 @@ ul{
   border-style: ridge;
 }
 
-.deleteBtn, .ownBtn, .heartBtn{
+.wishlistBtn{
 width: -webkit-fill-available;
-
+}
 
 /* filter input boxes */
 #maxPlayerInput, #minPlayerInput, #timeInput, #ageInput {

@@ -104,7 +104,7 @@ function showWishlist() {
         $(".wishlist").append(gameCard);
 
         // Dynamically asign an id for each own button and add to each game card
-        var ownButton = $('<button class = "ownBtn btn btn-primary">Own</button>');
+        var ownButton = $('<button class = "ownBtn wishlistBtn btn btn-primary">Own</button>');
         ownButton.attr("data-id", response.games[i].game_id);
         var customID = "ownBtn-" + String(i);
         ownButton.attr("id", customID);
@@ -114,7 +114,7 @@ function showWishlist() {
         gameInfo[customID] = response.games[i].id;
 
         //creates a delete button to remove from list and take out of database
-        var deleteButton = $('<button class = "deleteBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
+        var deleteButton = $('<button class = "deleteBtn wishlistBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
         deleteButton.attr("data-id", response.games[i].game_id);
         var customID2 = "deleteBtn-" + String(i);
         deleteButton.attr("id", customID2);
