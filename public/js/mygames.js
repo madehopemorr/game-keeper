@@ -14,8 +14,6 @@ $.get("/api/owned").then(data => {
 });
 console.log(ownListId)
 function showOwnlist() {
-  // $(".searchGame").removeClass("hide")
-  // $(".popularGame").addClass("hide")
   $(".ownlist").empty();
   //search for game from board game geeks API.
   var queryURL = "https://api.boardgameatlas.com/api/search?ids=" +
@@ -29,31 +27,27 @@ function showOwnlist() {
 
       for (var i = 0; i < response.games.length; i++) {
         var gameCard = $(`
-        <div class="accordion-item">
-  <h2 class="accordion-header" id="${response.games[i].name}">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
-    <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
+        <button class="wishlistItem">
+      <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
-  </h2>
-  <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
-    <div class="accordion-body">
-    <div class="row">
+    <div class="panel">
+  <div class="row">
     <div class="col">
         <img src = "${response.games[i].images.small}"></img>
     </div>
     <div class="col">
         <ul class="card-text">
+            <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
             <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
             <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
             <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
             <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+            <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
             <br>
         </ul>
     </div>
 </div>
-    </div>
-  </div>
-</div>`)
+ `)
 
 
         // Dynamically create a card for each game
@@ -78,6 +72,18 @@ function showOwnlist() {
         console.log(chosenID2)
         deleteGame(chosenID2)
       });
+      var acc = document.getElementsByClassName("wishlistItem")
+        $(acc).on("click", function() {
+          console.log(this)
+          console.log("clicked")
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
     })
 };
 
