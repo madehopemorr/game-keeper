@@ -28,6 +28,7 @@ var accordianArr = ["collapseOne", "collapseTwo", "collapseThree", "collapseFour
 
 
 var wishlistId = [];
+
 $.ajax({
   url: `http://localhost:8080/api/wishlist?secret_token=${sessionStorage.getItem("myToken")}`,
   type: "GET",

@@ -29,6 +29,7 @@ $.ajax({
 var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","collapseFive","collapseSix","collapseSeven","collapseEight","collapseNine","collapseTen","collapseEleven","collapseTwelve","collapseThirteen","collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
 
 var ownListId = [];
+
 $.ajax({
   url: `http://localhost:8080/api/mygames?secret_token=${sessionStorage.getItem("myToken")}`,
   type: "GET",
