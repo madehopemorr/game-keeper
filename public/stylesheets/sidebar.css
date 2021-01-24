@@ -42,3 +42,8 @@
     margin-left: -15rem;
   }
 }
+/* font color on sidebar links */
+.sidebarText {
+  color: #999;
+
+}

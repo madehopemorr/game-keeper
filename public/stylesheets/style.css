@@ -6,6 +6,7 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
 .jumbotron{
   background-image: url("../img/dicebackground2.jpg");
   text-align: center;
@@ -112,9 +113,4 @@ ul{
   display: none;
   overflow: hidden;
   border-style: ridge;
-}
-/* font color on sidebar links */
-.sidebarText {
-  color: #999;
-
 }
