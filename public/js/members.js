@@ -320,7 +320,7 @@ $(document).ready(() => {
                   break;
                 default:
                   //Something bad happened
-                  break;ƒown
+                  break;
               }
             }
           }).then(data => {
