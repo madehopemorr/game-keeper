@@ -1,3 +1,13 @@
+// Prevent menu button change to blue after toggle
+var menuBtn = document.querySelector("#menu-toggle");
+menuBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  menuBtn.style.background = "rgb(173,255,47)";
+  menuBtn.style.color = "rgb(0,0,0)";
+  // menuBtn.style.border = "rgba(255, 255, 255, .5)";
+});
+
 popularGame()
 
 // This boolean var is used to control the appearance of suggestions dropdown list

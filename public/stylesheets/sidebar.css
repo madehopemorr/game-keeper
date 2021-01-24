@@ -28,6 +28,16 @@
   margin-left: 0;
 }
 
+#menu-toggle {
+  border: transparent;
+}
+
+#menu-toggle:hover {
+  border: transparent;
+  background-color: greenyellow;
+  color: grey;
+}
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;

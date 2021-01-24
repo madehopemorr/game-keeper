@@ -91,6 +91,13 @@ ul{
 #topHomeBtn {
   background-color: transparent;
 }
+#searchBtn {
+  border: transparent;
+}
+#searchBtn:hover {
+  background-color: greenyellow;
+  color: grey;
+}
 
 /*accordian buttons*/
 .wishlistItem {
