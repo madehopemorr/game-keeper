@@ -55,7 +55,15 @@ $.ajax({
 }).then(data => {
   for (var i = 0; i < data.length; i++) 
   ownListId.push(data[i].game_ID)
-  showOwnlist()
+  if(ownListId.length === 0){
+    var nolist = $(`
+    <h2>Uh Oh!<br> No games saved to your games.</h2>
+    <p>go back <a href="/members">Here</a> to save games</p>`)
+    $(".ownlist").append(nolist);
+    }else{
+        showOwnlist()
+    }
+  
   
 });
 console.log(ownListId)

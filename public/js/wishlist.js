@@ -49,10 +49,17 @@ $.ajax({
   console.log(data)
   for (var i = 0; i < data.length; i++)
     wishlistId.push(data[i].game_ID)
+    if(wishlistId.length === 0){
+      var noWishlist = $(`
+      <h2>Uh Oh!<br> No games saved to your wishlists.</h2>
+      <p>go back <a href="/members">Here</a> to save games</p>`)
+      $(".wishlist").append(noWishlist);
+      }else{
   showWishlist()
-
+      }
 });
 console.log(wishlistId)
+
 function showWishlist() {
   $(".wishlist").empty();
   //search for game from board game geeks API.
@@ -148,6 +155,7 @@ function showWishlist() {
 
       })
 };
+
 
 // function updateGame(id, own){
 //   $.ajax("/api/mygames/" + id, {
