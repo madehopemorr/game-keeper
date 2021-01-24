@@ -1,4 +1,14 @@
 $(document).ready(() => {
+  // Prevent menu button change to blue after toggle
+  var menuBtn = document.querySelector("#menu-toggle");
+  menuBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    menuBtn.style.background = "rgb(173,255,47)";
+    menuBtn.style.color = "rgb(0,0,0)";
+    // menuBtn.style.border = "rgba(255, 255, 255, .5)";
+  });
+
   // Create an obj to store game name data every time each button is clicked
   var gameInfo = {}
 
@@ -124,7 +134,7 @@ $(document).ready(() => {
           ownButton.attr("id", customID2);
           $(".searchGames").append(ownButton);
           gameInfo[customID2] = response.games[i].id;
-          };
+        };
         // This console shows how the line above looks like
         // Console the values of the gameInfo obj (for debugging purpose)
         console.log("KeyValue: " + JSON.stringify(gameInfo));
@@ -177,7 +187,7 @@ $(document).ready(() => {
 
         $(".ownBtn").on("click", function (event) {
           event.preventDefault();
-  
+
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id])
           var chosenID2 = gameInfo[this.id];
@@ -284,7 +294,7 @@ $(document).ready(() => {
           ownButton.attr("id", customID2);
           $(".popGames").append(ownButton);
           gameInfo[customID2] = response.games[i].id;
-          
+
         };
         // This console shows how the line above looks like
         // Console the values of the gameInfo obj (for debugging purpose)
@@ -298,8 +308,6 @@ $(document).ready(() => {
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id]);
           var chosenID = gameInfo[this.id];
-
-
 
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
@@ -344,7 +352,7 @@ $(document).ready(() => {
 
         $(".ownBtn").on("click", function (event) {
           event.preventDefault();
-  
+
           console.log("ButtonId is: " + this.id);
           console.log("Game ID is: " + gameInfo[this.id])
           var chosenID2 = gameInfo[this.id];
@@ -399,9 +407,9 @@ $(document).ready(() => {
       url: `http://localhost:8080/api/members?secret_token=${sessionStorage.getItem("myToken")}`,
       type: "POST",
       data: {
-      game_ID: game_ID,
-      own: own,
-      UserId: UserId,
+        game_ID: game_ID,
+        own: own,
+        UserId: UserId,
       },
       error: function (err) {
         switch (err.status) {
@@ -419,7 +427,7 @@ $(document).ready(() => {
             break;
         }
       }
-      
+
     })
       .then(() => {
         window.location.replace("/members");
