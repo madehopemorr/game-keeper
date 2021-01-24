@@ -8,87 +8,101 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+
   <script src="https://kit.fontawesome.com/863c23aca6.js" crossorigin="anonymous"></script>
   <link href="stylesheets/style.css" rel="stylesheet">
   <link href="stylesheets/sidebar.css" rel="stylesheet">
 </head>
 
 <body>
-  
-<body>
 
-  <div class="d-flex" id="wrapper">
+  <body>
 
-    <!-- Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Game Keeper</div>
-      <div class="list-group list-group-flush">
-        <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText">Home</a>
-        <a href="/wishlist" class="list-group-item list-group-item-action bg-dark sidebarText">My Wishlist</a>
-        <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
-        <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a>
-      </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
+    <div class="d-flex" id="wrapper">
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Menu</button>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item login">
-              <a class="nav-link" href="/logout">Logout</a>
-            </li>
-          </ul>
+      <!-- Sidebar -->
+      <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Game Keeper</div>
+        <div class="list-group list-group-flush">
+          <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText">Home</a>
+          <a href="/wishlist" class="list-group-item list-group-item-action bg-dark sidebarText">My Wishlist</a>
+          <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
+          <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a>
         </div>
-          <div class="member-name"></div>
-      </nav>
+      </div>
+      <!-- /#sidebar-wrapper -->
 
-          {{{ body }}}
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+          <button class="btn btn-primary" id="menu-toggle">Menu</button>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item login">
+                {{!-- <button id="log-out-btn"><a class="nav-link" href="/logout">Logout</a></button> --}}
+                <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
+                <script>
+                  function removeTokenFromSessionStorage() {
+                    sessionStorage.removeItem("myToken");
+                  };
+                </script>
+              </li>
+            </ul>
+          </div>
+          <div class="member-name"></div>
+        </nav>
+
+        {{{ body }}}
+
+      </div>
+      <!-- /#page-content-wrapper -->
 
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
 
-  </div>
-  <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"></script>
 
-  <!-- Bootstrap core JavaScript -->
-  <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
 
 
     // to fill in login or logout link in nav bar
     // doesn't work
-    /*
-    if (req.user) {
-      const logout = `<a class="nav-link" href="/logout">Logout</a>`
-      $(".login").append(logout)
-    } else {
-      const login = `<a href="/login" class="nav-link">Login</a>`
-      $(".login").append(login)
-    }
-    */
-  </script>
+      /*
+      if (req.user) {
+        const logout = `<a class="nav-link" href="/logout">Logout</a>`
+        $(".login").append(logout)
+      } else {
+        const login = `<a href="/login" class="nav-link">Login</a>`
+        $(".login").append(login)
+      }
+      */
+    </script>
 
-</body>
+  </body>
+
 </html>

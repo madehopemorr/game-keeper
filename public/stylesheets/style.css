@@ -14,6 +14,11 @@ form.login {
   border-bottom-style: ridge;
   border-bottom-width: 1rem;
 }
+#log-out-btn {
+  border-color: transparent;
+  background-color: transparent;
+  color: white;
+}
 .filter-by {
   text-align: center;
   padding: 10px;

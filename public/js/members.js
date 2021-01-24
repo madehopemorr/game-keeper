@@ -184,7 +184,26 @@ $(document).ready(() => {
           // var own = {own: true }
           console.log(chosenID2)
 
-          $.get("/api/user_data").then(data => {
+          $.ajax({
+            url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+            type: "GET",
+            error: function (err) {
+              switch (err.status) {
+                case "400":
+                  // bad request
+                  break;
+                case "401":
+                  // unauthorized
+                  break;
+                case "403":
+                  // forbidden
+                  break;
+                default:
+                  //Something bad happened
+                  break;
+              }
+            }
+          }).then(data => {
             var currentUserId = data.id;
             console.log(currentUserId);
             console.log(chosenID2);
@@ -329,7 +348,26 @@ $(document).ready(() => {
           // var own = {own: true }
           console.log(chosenID2)
 
-          $.get("/api/user_data").then(data => {
+          $.ajax({
+            url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
+            type: "GET",
+            error: function (err) {
+              switch (err.status) {
+                case "400":
+                  // bad request
+                  break;
+                case "401":
+                  // unauthorized
+                  break;
+                case "403":
+                  // forbidden
+                  break;
+                default:
+                  //Something bad happened
+                  break;
+              }
+            }
+          }).then(data => {
             var currentUserId = data.id;
             console.log(currentUserId);
             console.log(chosenID2);
