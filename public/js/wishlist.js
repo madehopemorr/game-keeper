@@ -24,9 +24,6 @@ $.ajax({
   $(".member-name").text("Welcome " + data.firstName);
 });
 
-var accordianArr = ["collapseOne", "collapseTwo", "collapseThree", "collapseFour", "collapseFive", "collapseSix", "collapseSeven", "collapseEight", "collapseNine", "collapseTen", "collapseEleven", "collapseTwelve", "collapseThirteen", "collapseFourteen", "collapseFifteen", "collapseSixteen", "collapseSeventeen", "collapseEightteen", "collapseNineteen", "collapseTwenty"];
-
-
 var wishlistId = [];
 
 $.ajax({
@@ -67,17 +64,13 @@ function showWishlist() {
   })
     .then(function (response) {
       console.log(response)
-      var collapseVar = "collapse" + String(i);
+
       for (var i = 0; i < response.games.length; i++) {
-        var gameCard = $(`
-        <div class="accordion-item">
-  <h2 class="accordion-header" id="${response.games[i].name}">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordianArr[i]}" aria-expanded="true" aria-controls="${accordianArr[i]}">
+        var gameCard = $(`  
+    <button class="wishlistItem">
       <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
-  </h2>
-  <div id="${accordianArr[i]}" class="accordion-collapse collapse" aria-labelledby="${response.games[i].name}" data-bs-parent="#accordionExample">
-    <div class="accordion-body">
+    <div class="panel">
     <div class="row">
     <div class="col">
         <img src = "${response.games[i].images.small}"></img>
@@ -94,9 +87,7 @@ function showWishlist() {
         </ul>
     </div>
 </div>
-    </div>
-  </div>
-</div>`)
+ `)
 
         // Dynamically create a card for each game
         $(".wishlist").append(gameCard);
@@ -120,12 +111,7 @@ function showWishlist() {
         gameInfo[customID2] = response.games[i].id;
 
       };
-      // This console shows how the line above looks like
-      // Console the values of the gameInfo obj (for debugging purpose)
-      //console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-      // As this point, this function shows in the console what button is clicked and the data value attached to it
-      // Will be modified...
       $(".ownBtn").on("click", function (event) {
         event.preventDefault();
 
@@ -136,20 +122,52 @@ function showWishlist() {
         console.log(chosenID)
         updateGame(chosenID, own)
       })
-      $(".deleteBtn").on("click", function (event) {
-        event.preventDefault();
 
-        console.log("ButtonId is: " + this.id);
-        console.log("Game ID is: " + gameInfo[this.id])
-        var chosenID2 = gameInfo[this.id];
-        console.log(chosenID2)
-        deleteGame(chosenID2)
-          ;
+        $(".deleteBtn").on("click", function (event) {
+          event.preventDefault();
+  
+          console.log("ButtonId is: " + this.id);
+          console.log("Game ID is: " + gameInfo[this.id])
+          var chosenID2 = gameInfo[this.id];
+          console.log(chosenID2)
+          deleteGame(chosenID2)
+       });
 
-        // var chosenName = gameInfo[this.id];
-      });
-    })
+       var acc = document.getElementsByClassName("wishlistItem")
+         $(acc).on("click", function() {
+           console.log(this)
+           console.log("clicked")
+           this.classList.toggle("active");
+           var panel = this.nextElementSibling;
+           if (panel.style.display === "block") {
+             panel.style.display = "none";
+           } else {
+             panel.style.display = "block";
+           }
+         });
+
+      })
 };
+
+function updateGame(id, own){
+  $.ajax("/api/mygames/" + id, {
+    method: "PUT",
+    data: own,
+}).then(() => {
+  window.location.replace("/wishlist");
+  // If there's an error, handle it by throwing up a bootstrap alert
+  })
+}
+
+function deleteGame(id){
+  $.ajax("/api/wishlist/" + id, {
+    method: "DELETE"
+  }).then(() => {
+    window.location.replace("/wishlist");
+    // If there's an error, handle it by throwing up a bootstrap alert
+    })
+}
+
 
 function updateGame(id, own) {
   $.ajax({
