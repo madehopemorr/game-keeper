@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "game_keeper3",
+    "database": "game_keeper",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
