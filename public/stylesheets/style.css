@@ -85,7 +85,9 @@ ul{
 .hide {
   display: none;
 }
-
+#topHomeBtn {
+  background-color: transparent;
+}
 
 /*accordian buttons*/
 .wishlistItem {
