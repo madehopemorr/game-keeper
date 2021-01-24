@@ -1,17 +1,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+  <button class="btn btn-primary" id="menu-toggle">Menu</button>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      {{!-- <li class="nav-item active" id="topHomeBtn">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li> --}}
+
+    </ul>
+  </div>
+  <div class="member-name"></div>
+</nav>
+
 <div class="jumbotron">
   <h1>Welcome to Game Keeper.</h1>
-   <p class="lead">roll the dice and get board.</p>
-   <div class="col-4 align-self-center">
-       <div class="input-group mb-3">
-  <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
-  <button class="btn btn-outline-secondary" type="submit" id="searchBtn button-addon2">Submit</button>
-</div>
-</div>
-      <div class="suggestions-drop">
-        <ul class="suggestions">
-        </ul>
-      </div>
+  <p class="lead">roll the dice and get board.</p>
+  <div class="col-4 align-self-center">
+    <div class="input-group mb-3">
+      <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games"
+        aria-describedby="button-addon2">
+      <button class="btn btn-outline-secondary" type="submit" id="searchBtn button-addon2">Submit</button>
+    </div>
+  </div>
+  <div class="suggestions-drop">
+    <ul class="suggestions">
+    </ul>
+  </div>
   </form>
 </div>
 
@@ -19,33 +40,33 @@
   <div class="row">
     <div class="col-3">
       <h2 class="welcomeTitles">Sign up below to save your games!</h2>
-        <form class="signup">
-            <div class="form-group">
-                <label for="exampleInputFirstName">First Name</label>
-                <input type="firstName" class="form-control" id="firstName-input" placeholder="First Name">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputLastName">Last Name</label>
-                <input type="lastName" class="form-control" id="lastName-input" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="email-input" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="password-input" placeholder="Password">
-            </div>
-            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                <span class="sr-only">Error:</span> <span class="msg"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Sign Up</button>
-        </form>
-        <br />
-        <p>Or log in <a href="/login">here</a></p>
+      <form class="signup">
+        <div class="form-group">
+          <label for="exampleInputFirstName">First Name</label>
+          <input type="firstName" class="form-control" id="firstName-input" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputLastName">Last Name</label>
+          <input type="lastName" class="form-control" id="lastName-input" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="email-input" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="password-input" placeholder="Password">
+        </div>
+        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span> <span class="msg"></span>
+        </div>
+        <button type="submit" class="btn btn-default">Sign Up</button>
+      </form>
+      <br />
+      <p>Or log in <a href="/login">here</a></p>
     </div>
-    
+
     <div class="col-9 searchGame">
       <h2 class="welcomeTitles">Games</h2>
       <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
@@ -62,4 +83,3 @@
 
 <script type="text/javascript" src="js/welcome.js"></script>
 <script type="text/javascript" src="js/signup.js"></script>
-

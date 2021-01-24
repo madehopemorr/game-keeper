@@ -8,142 +8,145 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+
   <script src="https://kit.fontawesome.com/863c23aca6.js" crossorigin="anonymous"></script>
   <link href="stylesheets/style.css" rel="stylesheet">
   <link href="stylesheets/sidebar.css" rel="stylesheet">
 </head>
 
 <body>
-  
-<body>
 
-  <div class="d-flex" id="wrapper">
+  <body>
 
-    <!-- Sidebar -->
-    <div class="bg-dark border-right" id="sidebar-wrapper">
-      <div class="sidebar-heading">Game Keeper</div>
-      <div class="list-group list-group-flush">
-        <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText">Home</a>
-        <a href="/wishlist" class="list-group-item list-group-item-action bg-dark sidebarText">My Wishlist</a>
-        <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
-        <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a>
-        <br>
-        <div class="container"> Filter Search
-          <hr>
-          <div class="form-check form-switch">
-            <label for="playerRange" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput" value=""></span></label>
-            <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
-            <input type="range" class="form-range" min="1" max="20" step="1" id="playerRange" onchange="minPlayerInput(this.value)">
-          </div>
-          <div class="form-check form-switch">
-            <label for="playerRange" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput" value=""></span></label>
-            <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
-            <input type="range" class="form-range" min="1" max="20" step="1" id="playerRange" onchange="maxPlayerInput(this.value)">
-          </div>
-          <div class="form-check form-switch">
-            <label for="gameTime" class="form-label">Game Time (minutes) <span><input type="text" id="timeInput" value=""></span></label>
-            <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
-            <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime" onchange="updateTimeInput(this.value)">
-          </div>
-          <div class="form-check form-switch">
-            <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput" value=""></span></label>
-            <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
-            <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge" onchange="updateAgeInput(this.value)">
+    <div class="d-flex" id="wrapper">
+
+      <!-- Sidebar -->
+      <div class="bg-dark border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading">Game Keeper</div>
+        <div class="list-group list-group-flush">
+          <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText">Home</a>
+          <a href="/wishlist" class="list-group-item list-group-item-action bg-dark sidebarText">My Wishlist</a>
+          <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
+          <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a>
+          <br>
+          <div class="container"> Filter Search
+            <hr>
+            <div class="form-check form-switch">
+              <label for="playerRange" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
+                    value=""></span></label>
+              <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
+              <input type="range" class="form-range" min="1" max="20" step="1" id="playerRange"
+                onchange="minPlayerInput(this.value)">
+            </div>
+            <div class="form-check form-switch">
+              <label for="playerRange" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput"
+                    value=""></span></label>
+              <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
+              <input type="range" class="form-range" min="1" max="20" step="1" id="playerRange"
+                onchange="maxPlayerInput(this.value)">
+            </div>
+            <div class="form-check form-switch">
+              <label for="gameTime" class="form-label">Game Time (minutes) <span><input type="text" id="timeInput"
+                    value=""></span></label>
+              <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
+              <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime"
+                onchange="updateTimeInput(this.value)">
+            </div>
+            <div class="form-check form-switch">
+              <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput"
+                    value=""></span></label>
+              <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
+              <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
+                onchange="updateAgeInput(this.value)">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- /#sidebar-wrapper -->
+      <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Menu</button>
+        {{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+          <button class="btn btn-primary" id="menu-toggle">Menu</button>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item active" id="topHomeBtn">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item login">
-              <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
-              <script>
-                  function removeTokenFromSessionStorage() {
-                    sessionStorage.removeItem("myToken");
-                  };
-              </script>
-              {{!-- {{#unless req.user}}
-              <a href="/login" class="nav-link">Login</a>
-              {{/unless}}
-              {{#if req.user}}
-              <a class="nav-link" href="/logout">Logout</a>
-              {{/if}} --}}
-            </li>
-          </ul>
-        </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item active" id="topHomeBtn">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+
+            </ul>
+          </div>
           <div class="member-name"></div>
-      </nav>
+        </nav> --}}
 
-          {{{ body }}}
+        {{{ body }}}
+
+      </div>
+      <!-- /#page-content-wrapper -->
 
     </div>
-    <!-- /#page-content-wrapper -->
+    <!-- /#wrapper -->
 
-  </div>
-  <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"></script>
 
-  <!-- Bootstrap core JavaScript -->
-  <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
 
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-
-    //filter logic
-    function maxPlayerInput(val) {
-      document.getElementById('maxPlayerInput').value=val; 
-    }
-    function minPlayerInput(val) {
-      document.getElementById('minPlayerInput').value=val; 
-    }
-    function updateTimeInput(val) { 
-      document.getElementById('timeInput').value=val; 
-    }
-    function updateAgeInput(val) {
-      document.getElementById('ageInput').value=val; 
-    }
+      //filter logic
+      function maxPlayerInput(val) {
+        document.getElementById('maxPlayerInput').value = val;
+      }
+      function minPlayerInput(val) {
+        document.getElementById('minPlayerInput').value = val;
+      }
+      function updateTimeInput(val) {
+        document.getElementById('timeInput').value = val;
+      }
+      function updateAgeInput(val) {
+        document.getElementById('ageInput').value = val;
+      }
 /*
-    function filterSubmit() {
-      var filters = $(".filterForm").serializeArray()
-      console.log(filters)
-    } 
-*/    
+          function filterSubmit() {
+            var filters = $(".filterForm").serializeArray()
+            console.log(filters)
+          }
+      */
 
 
     // to fill in login or logout link in nav bar
     // doesn't work
-    /*
-    if (req.user) {
-      const logout = `<a class="nav-link" href="/logout">Logout</a>`
-      $(".login").append(logout)
-    } else {
-      const login = `<a href="/login" class="nav-link">Login</a>`
-      $(".login").append(login)
-    }
-    */
-  </script>
+      /*
+      if (req.user) {
+        const logout = `<a class="nav-link" href="/logout">Logout</a>`
+        $(".login").append(logout)
+      } else {
+        const login = `<a href="/login" class="nav-link">Login</a>`
+        $(".login").append(login)
+      }
+      */
+    </script>
 
-</body>
+  </body>
+
 </html>

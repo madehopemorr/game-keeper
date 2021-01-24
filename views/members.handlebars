@@ -1,58 +1,85 @@
- 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+  <button class="btn btn-primary" id="menu-toggle">Menu</button>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item active" id="topHomeBtn">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item login">
+        <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
+        <script>
+          function removeTokenFromSessionStorage() {
+            sessionStorage.removeItem("myToken");
+          };
+        </script>
+
+      </li>
+    </ul>
+  </div>
+  <div class="member-name"></div>
+</nav>
+
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-   <h1>Welcome to Game Keeper.</h1>
-   <p class="lead">roll the dice and get board.</p>
-   <div class="col-4 align-self-center">
-       <div class="input-group mb-3">
-  <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
-  <button class="btn btn-outline-secondary" type="submit" id="searchBtn button-addon2">Submit</button>
-</div>
-</div>
-      <div class="suggestions-drop">
-        <ul class="suggestions">
-        </ul>
+    <h1>Welcome to Game Keeper.</h1>
+    <p class="lead">roll the dice and get board.</p>
+    <div class="col-4 align-self-center">
+      <div class="input-group mb-3">
+        <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games"
+          aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="submit" id="searchBtn button-addon2">Submit</button>
       </div>
+    </div>
+    <div class="suggestions-drop">
+      <ul class="suggestions">
+      </ul>
+    </div>
     </form>
     <div class="row filter-by">
-        <div class="col align-self-start">
-            <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Filter by:
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Rating</a></li>
-                <li><a class="dropdown-item" href="#">Play time</a></li>
-                <li><a class="dropdown-item" href="#">Age</a></li>
-            </ul>
-            </div>
+      <div class="col align-self-start">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by:
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Rating</a></li>
+            <li><a class="dropdown-item" href="#">Play time</a></li>
+            <li><a class="dropdown-item" href="#">Age</a></li>
+          </ul>
         </div>
+      </div>
+    </div>
   </div>
-</div>
 </div>
 
 <div class="container-fluid">
-    <div class="row">
+  <div class="row">
 
-         <div class="col searchGame">
-            <h2 class="welcomeTitles">Games</h2>
-            <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
-            </ul>
-        </div>
-
-        <div class="col popularGame">
-            <h2 class="welcomeTitles">Popular Games</h2>
-            <ul class="popGames list-group d-flex flex-wrap justify-content-center overflow-auto">
-            </ul>
-        </div>
+    <div class="col searchGame">
+      <h2 class="welcomeTitles">Games</h2>
+      <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
+      </ul>
     </div>
+
+    <div class="col popularGame">
+      <h2 class="welcomeTitles">Popular Games</h2>
+      <ul class="popGames list-group d-flex flex-wrap justify-content-center overflow-auto">
+      </ul>
+    </div>
+  </div>
 </div>
 
-    {{!-- <div class="searchGames list-group-flush col-4 d-flex flex-wrap justify-content-center">
-      <!--searched games go here-->
+{{!-- <div class="searchGames list-group-flush col-4 d-flex flex-wrap justify-content-center">
+  <!--searched games go here-->
 
-    </div> --}}
+</div> --}}
 
 
-  <script type="text/javascript" src="js/members.js"></script>
+<script type="text/javascript" src="js/members.js"></script>
