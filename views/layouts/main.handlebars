@@ -74,7 +74,12 @@
               <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item login">
-              <a class="nav-link" href="/logout">Logout</a>
+              <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
+              <script>
+                  function removeTokenFromSessionStorage() {
+                    sessionStorage.removeItem("myToken");
+                  };
+              </script>
               {{!-- {{#unless req.user}}
               <a href="/login" class="nav-link">Login</a>
               {{/unless}}

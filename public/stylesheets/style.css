@@ -110,9 +110,9 @@ ul{
   display: none;
   overflow: hidden;
   border-style: ridge;
-
+}
 /* font color on sidebar links */
 .sidebarText {
-  color: #999
+  color: #999;
 
 }
