@@ -8,8 +8,9 @@ var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","
 
 var ownListId = [];
 $.get("/api/owned").then(data => {
-  for (var i = 0; i < data.length; i++)
-  ownListId.push(data[i].game_ID)
+  for (var i = 0; i < data.length; i++) {
+    ownListId.push(data[i].game_ID)
+  }
   showOwnlist()
 });
 console.log(ownListId)

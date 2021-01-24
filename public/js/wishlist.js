@@ -11,8 +11,9 @@ var accordianArr = ["collapseOne","collapseTwo","collapseThree","collapseFour","
   
 var wishlistId = [];
 $.get("/api/wishlist").then(data => {
-  for (var i = 0; i < data.length; i++)
-  wishlistId.push(data[i].game_ID)
+    for (var i = 0; i < data.length; i++) {
+        wishlistId.push(data[i].game_ID)
+    }
   showWishlist()
 });
 console.log(wishlistId)
