@@ -23,7 +23,7 @@ $.ajax({
 }).then(data => {
   $(".member-name").text("Welcome " + data.firstName);
 });
-
+//gets game IDs from data base for current user then makes ajax call to API to retrieve info on those games
 var wishlistId = [];
 
 $.ajax({
