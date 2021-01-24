@@ -149,24 +149,24 @@ function showWishlist() {
       })
 };
 
-function updateGame(id, own){
-  $.ajax("/api/mygames/" + id, {
-    method: "PUT",
-    data: own,
-}).then(() => {
-  window.location.replace("/wishlist");
-  // If there's an error, handle it by throwing up a bootstrap alert
-  })
-}
+// function updateGame(id, own){
+//   $.ajax("/api/mygames/" + id, {
+//     method: "PUT",
+//     data: own,
+// }).then(() => {
+//   window.location.replace("/wishlist");
+//   // If there's an error, handle it by throwing up a bootstrap alert
+//   })
+// }
 
-function deleteGame(id){
-  $.ajax("/api/wishlist/" + id, {
-    method: "DELETE"
-  }).then(() => {
-    window.location.replace("/wishlist");
-    // If there's an error, handle it by throwing up a bootstrap alert
-    })
-}
+// function deleteGame(id){
+//   $.ajax("/api/wishlist/" + id, {
+//     method: "DELETE"
+//   }).then(() => {
+//     window.location.replace("/wishlist");
+//     // If there's an error, handle it by throwing up a bootstrap alert
+//     })
+// }
 
 
 function updateGame(id, own) {

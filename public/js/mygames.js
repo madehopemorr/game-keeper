@@ -135,7 +135,7 @@ function showOwnlist() {
 
 function deleteGame(id){
   $.ajax({
-    url: `http://localhost:8080/api/wishlist/${id}?secret_token=${sessionStorage.getItem("myToken")}`,
+    url: `http://localhost:8080/api/mygames/${id}?secret_token=${sessionStorage.getItem("myToken")}`,
     type: "DELETE",
 
     error: function (err) {
