@@ -194,7 +194,7 @@ function autocomplete() {
         const highlighted = games.name.replace(regex, `<span class="highlight">${this.value}</span>`);
 
         return `
-        <li>
+        <li class="autocompleteLi">
           <div class="autocomplete">
             <span class="name">${highlighted}</span>
           </div>
