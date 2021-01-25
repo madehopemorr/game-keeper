@@ -1,6 +1,5 @@
 // Require necessary npm packages
 const express = require("express");
-// const passport = require("passport")
 const passport = require("./config/passport");
 const session = require("express-session");
 
@@ -20,12 +19,12 @@ const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 app.use(
+
   session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+
 );
 app.use(passport.initialize());
 app.use(passport.session());
-
-// passport.authenticate();
 
 // Require routes
 require("./routes/html-routes.js")(app);

@@ -1,14 +1,20 @@
 //animate the header on page load
+
 gsap.from(".welcome", {
   duration: 1.5,
   opacity: 0,
   scale: 0.3,
   ease: "bounce"
 });
-
+// This variable is for autocomplete function
+var suggestions = document.querySelector(".suggestions");
+// This boolean var is used to control the appearance of suggestions dropdown list
+var hasBeenClicked = false;
 // Prevent menu button change to blue after toggle
 const menuBtn = document.querySelector("#menu-toggle");
 menuBtn.addEventListener("click", event => {
+
+
   event.preventDefault();
 
   menuBtn.style.background = "rgb(173,255,47)";
@@ -16,6 +22,7 @@ menuBtn.addEventListener("click", event => {
 });
 
 popularGame();
+
 
 // This boolean var is used to control the appearance of suggestions dropdown list
 let hasBeenClicked = false;
@@ -25,6 +32,7 @@ $("#searchBtn").on("click", event => {
   const searchWord = $("#search-word")
     .val()
     .trim();
+
 
   if ($("#checkboxMinPlayers").is(":checked")) {
     var playerMin = $("#playerMin").val();
@@ -57,6 +65,7 @@ $("#searchBtn").on("click", event => {
   console.log(
     `pMin: ${playerMin} | pMax: ${playerMax} | time: ${gameTime} | age: ${playerAge}`
   );
+
   runSearchBar(searchWord);
   hasBeenClicked = true;
 });
@@ -80,6 +89,7 @@ function runSearchBar(searchWord) {
   $(".searchGames").empty();
   //search for game from board game geeks API.
 
+
   console.log("search word is a " + typeof searchWord);
 
   const queryURL =
@@ -94,6 +104,7 @@ function runSearchBar(searchWord) {
     "min_age=" +
     parseInt(playerAge.value) +
     "&client_id=3KZbL84alX";
+
   $.ajax({
     url: queryURL,
     method: "GET"
@@ -127,7 +138,7 @@ function runSearchBar(searchWord) {
   game.rules_url
 }>Rules</a></li>
                         <li><i class="fas fa-tag"></i>Price: ${game.price}</li>
-                    
+                    </ul>
                 </div>
             </div>
         </div
@@ -146,48 +157,37 @@ function popularGame() {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(response => {
-    //console.log(response)
-    const popGames = response.games;
-    popGames.forEach(popGame => {
-      //template to automatically generate card styling for each game in search
-      const popularGameCard = $(`    
-    <div class="card" style="width: 24rem;">
-        <div class="card-body">
-            <h4 class="card-title">${popGame.name}</h4>
-            <div class="row">
-                <div class="col-4">
-                    <img src = "${popGame.images.small}"></img>
-                </div>
-                <div class="col">
-                    <ul class="card-text">
-                        <li><i class="fas fa-star"></i> Avg User Rating:${popGame.average_user_rating.toFixed(
-    2
-  )}</li>
-                        <li><i class="fas fa-users"></i> Players:${
-  popGame.min_players
-}-${popGame.max_players}</li>
-                        <li><i class="fas fa-hourglass-start"></i> Game Time: ${
-  popGame.min_playtime
-}-${popGame.max_playtime}</li>
-                        <li><i class="fas fa-child"></i> Age: ${
-  popGame.min_age
-} + </li>
-                        <li><i class="fas fa-dice-d20"></i> <a href=${
-  popGame.rules_url
-}>Rules</a></li>
-                        <li><i class="fas fa-tag"></i>Price: ${
-  popGame.price
-}</li>
-                    
-                </div>
-            </div>
-        </div
-    </div>`);
-      $(".popGames").append(popularGameCard);
-    });
-  });
-}
+  })
+    .then(function (response) {
+      //console.log(response)
+      const popGames = response.games
+      popGames.forEach(function (popGame) {
+        //template to automatically generate card styling for each game in search
+        var popularGameCard = $(`    
+          <div class="card" style="width: 24rem;">
+              <div class="card-body">
+                  <h4 class="card-title">${popGame.name}</h4>
+                  <div class="row">
+                      <div class="col-4">
+                          <img src = "${popGame.images.small}"></img>
+                      </div>
+                      <div class="col">
+                          <ul class="card-text">
+                              <li><i class="fas fa-star"></i> Avg User Rating:${(popGame.average_user_rating).toFixed(2)}</li>
+                              <li><i class="fas fa-users"></i> Players:${popGame.min_players}-${popGame.max_players}</li>
+                              <li><i class="fas fa-hourglass-start"></i> Game Time: ${popGame.min_playtime}-${popGame.max_playtime}</li>
+                              <li><i class="fas fa-child"></i> Age: ${popGame.min_age} + </li>
+                              <li><i class="fas fa-dice-d20"></i> <a href=${popGame.rules_url}>Rules</a></li>
+                              <li><i class="fas fa-tag"></i>Price: ${popGame.price}</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div
+          </div>`)
+        $(".popGames").append(popularGameCard)
+      })
+    })
+};
 
 // Function for autocomplete search
 function autocomplete() {
@@ -195,6 +195,10 @@ function autocomplete() {
     "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
     "fuzzy_match=true" +
     "&client_id=3KZbL84alX";
+
+
+  var queryURL = "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
+    "fuzzy_match=true" + "&client_id=3KZbL84alX";
 
   $.ajax({
     url: queryURL,
@@ -231,22 +235,28 @@ function autocomplete() {
             `<span class="highlight">${this.value}</span>`
           );
 
-          return `
-        <li>
-          <span class="name">${highlighted}</span>
+
+        return `
+        <li class="autocompleteLi">
+          <div class="autocomplete">
+            <span class="name">${highlighted}</span>
+          </div>
         </li>
         `;
         })
         .join("");
 
       const suggestions = document.querySelector(".suggestions");
+
       suggestions.innerHTML = liEl;
       // Only show suggestions list when the search box is not empty
       if (!this.value || hasBeenClicked) {
         $(".suggestions").empty();
         hasBeenClicked = false;
       }
+
     }
+
 
     $("#search-word").on("keyup", displayMatches);
     $("#search-word").on("change", displayMatches);

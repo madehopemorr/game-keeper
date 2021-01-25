@@ -5,7 +5,9 @@ $.ajax({
     "myToken"
   )}`,
   type: "GET",
+  
   error: function(err) {
+
     switch (err.status) {
       case "400":
         // bad request
@@ -27,12 +29,15 @@ $.ajax({
 
 const ownListId = [];
 //checks the user then returns a list of their games they own by storing Game_IDs in our database then running an AJAX call to board game API, if they have no games stored, will load a message
+
 $.ajax({
   url: `http://localhost:8080/api/mygames?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
+
   error: function(err) {
+
     switch (err.status) {
       case "400":
         // bad request
@@ -49,17 +54,21 @@ $.ajax({
     }
   }
 }).then(data => {
+
   for (let i = 0; i < data.length; i++) {
     ownListId.push(data[i].game_ID);
   }
   if (ownListId.length === 0) {
     const nolist = $(`
+
     <h2>Uh Oh!<br> No games saved to your games.</h2>
     <p>go back <a href="/members">Here</a> to save games</p>`);
     $(".ownlist").append(nolist);
   } else {
+
     showOwnlist();
   }
+
 });
 console.log(ownListId);
 function showOwnlist() {
@@ -78,57 +87,48 @@ function showOwnlist() {
     for (let i = 0; i < response.games.length; i++) {
       const gameCard = $(`
         <button class="wishlistItem">
-      <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
-    </button>
-    <div class="panel">
-    <div class="row">
-    <div class="col">
-    <h3>${response.games[i].name}</h3>
-    </div></div>
-  <div class="row">
-    <div class="col">
-        <img src = "${response.games[i].images.small}"></img>
-    </div>
-    <div class="col">
-        <ul class="card-text">
-            <li><i class="fas fa-star"></i> Avg User Rating:${response.games[
-              i
-            ].average_user_rating.toFixed(2)}</li>
-            <li><i class="fas fa-users"></i> Players:${
-              response.games[i].min_players
-            }-${response.games[i].max_players}</li>
-            <li><i class="fas fa-hourglass-start"></i> Game Time: ${
-              response.games[i].min_playtime
-            }-${response.games[i].max_playtime}</li>
-            <li><i class="fas fa-child"></i> Age: ${
-              response.games[i].min_age
-            } + </li>
-            <li><i class="fas fa-dice-d20"></i> <a href=${
-              response.games[i].rules_url
-            }>Rules</a></li>
-            <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
-            <br>
-        </ul>
-    </div>
-</div>
- `);
 
-      // Dynamically create a card for each game
-      $(".ownlist").append(gameCard);
+          <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
+        </button>
+        <div class="panel">
+        <div class="row">
+          <div class="col">
+            <h3>${response.games[i].name}</h3>
+          </div></div>
+        <div class="row">
+          <div class="col">
+            <img src = "${response.games[i].images.small}"></img>
+          </div>
+          <div class="col">
+            <ul class="card-text">
+              <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
+              <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+              <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+              <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+              <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+              <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+              <br>
+            </ul>
+          </div>
+        </div>
+      `)
 
-      //creates a delete button to remove from list and take out of database
-      const deleteButton = $(
-        '<button class = "deleteBtn wishlistBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>'
-      );
-      deleteButton.attr("data-id", response.games[i].game_id);
-      const customID2 = "deleteBtn-" + String(i);
-      deleteButton.attr("id", customID2);
-      $(".ownlist").append(deleteButton);
-      gameInfo[customID2] = response.games[i].id;
-    }
+        // Dynamically create a card for each game
+        $(".ownlist").append(gameCard);
+
+        //creates a delete button to remove from list and take out of database
+        var deleteButton = $('<button class = "deleteBtn wishlistBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
+        deleteButton.attr("data-id", response.games[i].game_id);
+        var customID2 = "deleteBtn-" + String(i);
+        deleteButton.attr("id", customID2);
+        $(".ownlist").append(deleteButton);
+        gameInfo[customID2] = response.games[i].id;
+      }
+
 
     $(".deleteBtn").on("click", function(event) {
       event.preventDefault();
+
 
       console.log("ButtonId is: " + this.id);
       console.log("Game ID is: " + gameInfo[this.id]);
@@ -150,6 +150,7 @@ function showOwnlist() {
     });
   });
 }
+
 
 function deleteGame(id) {
   $.ajax({
@@ -174,8 +175,10 @@ function deleteGame(id) {
           break;
       }
     }
+
   }).then(() => {
     window.location.replace("/mygames");
     // If there's an error, handle it by throwing up a bootstrap alert
   });
+
 }

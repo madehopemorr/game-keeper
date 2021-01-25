@@ -50,6 +50,7 @@ $.ajax({
     }
   }
 }).then(data => {
+
   console.log(data);
   for (let i = 0; i < data.length; i++) {
     wishlistId.push(data[i].game_ID);
@@ -61,6 +62,7 @@ $.ajax({
     $(".wishlist").append(noWishlist);
   } else {
     showWishlist();
+
   }
 });
 console.log(wishlistId);

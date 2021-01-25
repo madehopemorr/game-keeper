@@ -1,11 +1,15 @@
+
 //button to show and hide side bar
-$("#menu-toggle").click(e => {
+
+$("#menu-toggle").click(function (e) {
+
   e.preventDefault();
   $("#wrapper").toggleClass("toggled");
 });
 
 //filter logic
 function maxPlayerInput(val) {
+
   document.getElementById("maxPlayerInput").value = val;
 }
 function minPlayerInput(val) {
@@ -24,3 +28,4 @@ gsap.to("#greendie", {
   y: 500,
   ease: "bounce"
 });
+

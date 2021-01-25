@@ -1,14 +1,7 @@
 $(document).ready(() => {
+
   //runs popular game function on page load
   popularGame();
-  // Prevent menu button change to blue after toggle
-  const menuBtn = document.querySelector("#menu-toggle");
-  menuBtn.addEventListener("click", event => {
-    event.preventDefault();
-
-    menuBtn.style.background = "rgb(173,255,47)";
-    menuBtn.style.color = "rgb(0,0,0)";
-  });
 
   // Create an obj to store game name data every time each button is clicked
   const gameInfo = {};
@@ -17,9 +10,25 @@ $(document).ready(() => {
   console.log(newGame);
 
   // This boolean var is used to control the appearance of suggestions dropdown list
-  let hasBeenClicked = false;
+  var hasBeenClicked = false;
 
-  //JWT collecting token then displaying users name in corner
+  // This variable is for autocomplete function
+  var suggestions = document.querySelector(".suggestions");
+
+  // Prevent menu button change to blue after toggle
+  var menuBtn = document.querySelector("#menu-toggle");
+  menuBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    menuBtn.style.background = "rgb(173,255,47)";
+    menuBtn.style.color = "rgb(0,0,0)";
+    // menuBtn.style.border = "rgba(255, 255, 255, .5)";
+  });
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  // This file just does a GET request to figure out which user is logged in
+  // and updates the HTML on the page
+
   $.ajax({
     url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem(
       "myToken"
@@ -87,6 +96,7 @@ $(document).ready(() => {
       `pMin: ${playerMin} | pMax: ${playerMax} | time: ${gameTime} | age: ${playerAge}`
     );
 
+
     runSearchBar(searchWord);
 
     hasBeenClicked = true;
@@ -111,6 +121,7 @@ $(document).ready(() => {
     $(".popularGame").addClass("hide");
     $(".searchGames").empty();
     //search for game from board game geeks API.
+
     const queryURL =
       "https://api.boardgameatlas.com/api/search?name=" +
       searchWord +
@@ -123,6 +134,7 @@ $(document).ready(() => {
       "min_age=" +
       parseInt(playerAge.value) +
       "&client_id=3KZbL84alX";
+
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -163,6 +175,7 @@ $(document).ready(() => {
                       </div>
                   </div>
               </div
+
           </div>`);
 
         // Dynamically create a card for each game
@@ -172,7 +185,6 @@ $(document).ready(() => {
         const heartButton = $(
           '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
         );
-        // var heartButtonClicked = $('<button class = "heartBtnClicked btn btn-primary"><i class="fas fa-check"></i></button>');
 
         heartButton.attr("data-games", response.games[i].id);
         const customID = "heartBtn-" + String(i);
@@ -224,6 +236,7 @@ $(document).ready(() => {
               default:
                 //Something bad happened
                 break;
+
             }
           }
         }).then(data => {
@@ -250,7 +263,7 @@ $(document).ready(() => {
         console.log("ButtonId is: " + this.id);
         console.log("Game ID is: " + gameInfo[this.id]);
         const chosenID2 = gameInfo[this.id];
-        // var own = {own: true }
+       
         console.log(chosenID2);
 
         $.ajax({
@@ -258,9 +271,7 @@ $(document).ready(() => {
             "myToken"
           )}`,
           type: "GET",
-          // headers: {
-          //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-          // },
+         
           error: function(err) {
             switch (err.status) {
               case "400":
@@ -353,7 +364,7 @@ $(document).ready(() => {
         const heartButton = $(
           '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
         );
-        // var heartButtonClicked = $('<button class = "heartBtnClicked hide btn btn-primary"><i class="fas fa-check"></i></button>');
+       
 
         heartButton.attr("data-games", response.games[i].id);
         const customID = "heartBtn-" + String(i);
@@ -391,9 +402,7 @@ $(document).ready(() => {
             "myToken"
           )}`,
           type: "GET",
-          // headers: {
-          //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-          // },
+          
           error: function(err) {
             switch (err.status) {
               case "400":
@@ -429,13 +438,13 @@ $(document).ready(() => {
         });
       });
 
+
       $(".ownBtn").on("click", function(event) {
         event.preventDefault();
 
         console.log("ButtonId is: " + this.id);
         console.log("Game ID is: " + gameInfo[this.id]);
         const chosenID2 = gameInfo[this.id];
-        // var own = {own: true }
         console.log(chosenID2);
 
         $.ajax({
@@ -443,9 +452,7 @@ $(document).ready(() => {
             "myToken"
           )}`,
           type: "GET",
-          // headers: {
-          //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-          // },
+          
           error: function(err) {
             switch (err.status) {
               case "400":
@@ -483,6 +490,7 @@ $(document).ready(() => {
   }
 
   //makes an object of the item next to each button to store in database
+
   function saveGame(game_ID, own, UserId) {
     $.ajax({
       url: `http://localhost:8080/api/members?secret_token=${sessionStorage.getItem(
@@ -546,6 +554,7 @@ $(document).ready(() => {
         const matchArr = findMatches(this.value, responseArr);
         console.log(matchArr);
 
+
         const liEl = matchArr
           .map(games => {
             // The RegExp object is used for matching text with a pattern
@@ -561,11 +570,12 @@ $(document).ready(() => {
         <li>
           <span class="name">${highlighted}</span>
         </li>
+
         `;
           })
           .join("");
 
-        const suggestions = document.querySelector(".suggestions");
+
         suggestions.innerHTML = liEl;
         // Only show suggestions list when the search box is not empty
         if (!this.value || hasBeenClicked) {

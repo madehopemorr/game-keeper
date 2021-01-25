@@ -7,6 +7,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="member-name"></div>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item login">
         <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
@@ -19,94 +20,112 @@
       </li>
     </ul>
   </div>
-  <div class="member-name"></div>
 </nav>
 
 <div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="welcome">Welcome to Game Keeper.</h1>
-        <p class="lead">roll the dice and get board.</p>
-        <div class="col-4 offset-4 align-self-center">
-            <div class="input-group mb-3">
-                <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="submit" id="searchBtn" id="button-addon2">Submit</button>
-            </div>
-            <div class="suggestions-drop">
-                <ul class="suggestions">
-                </ul>
-            </div>
-        </div>  
-        <div class="row container">
-    <h3>Filter Search</h3>
-    <hr>
-    <div class="col-3">
-      <div class="form-check form-switch">
-              <label for="playerMin" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
-              <input type="range" class="form-range" min="1" max="20" step="1" id="playerMin"
-                onchange="minPlayerInput(this.value)">
-            </div>
+  <div class="container">
+    <h1 class="welcome">Welcome to Game Keeper</h1>
+    <p class="lead">Roll the dice and get board</p>
+    <div class="col-4 offset-4 align-self-center">
+      <div class="input-group mb-3">
+        <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games"
+          aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="submit" id="searchBtn" id="button-addon2">Submit</button>
+      </div>
+      <div class="suggestions-container">
+        <div class="suggestions-drop">
+          <ul class="suggestions">
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="col-3">
-      <div class="form-check form-switch">
-              <label for="playerMax" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
-              <input type="range" class="form-range" min="1" max="20" step="1" id="playerMax"
-                onchange="maxPlayerInput(this.value)">
-            </div>
+    <div class="row container">
+      <h3>Filter Search</h3>
+      <hr>
+      <div class="col-3">
+        <div class="form-check form-switch">
+          <label for="playerMin" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
+                value=""></span></label>
+          <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
+          <input type="range" class="form-range" min="1" max="20" step="1" id="playerMin"
+            onchange="minPlayerInput(this.value)">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-check form-switch">
+          <label for="playerMax" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput"
+                value=""></span></label>
+          <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
+          <input type="range" class="form-range" min="1" max="20" step="1" id="playerMax"
+            onchange="maxPlayerInput(this.value)">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-check form-switch">
+          <label for="gameTime" class="form-label">Max Game Time (minutes) <span><input type="text" id="timeInput"
+                value=""></span></label>
+          <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
+          <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime"
+            onchange="updateTimeInput(this.value)">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-check form-switch">
+          <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput"
+                value=""></span></label>
+          <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
+          <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
+            onchange="updateAgeInput(this.value)">
+        </div>
+      </div>
     </div>
-    <div class="col-3">
-      <div class="form-check form-switch">
-              <label for="gameTime" class="form-label">Max Game Time (minutes) <span><input type="text" id="timeInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
-              <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime"
-                onchange="updateTimeInput(this.value)">
-            </div>
+  </div>
+</div>
+
+<div class="row filter-by">
+  <div class="col align-self-start">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Filter by:
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#">Rating</a></li>
+        <li><a class="dropdown-item" href="#">Play time</a></li>
+        <li><a class="dropdown-item" href="#">Age</a></li>
+      </ul>
     </div>
-    <div class="col-3">
-      <div class="form-check form-switch">
-              <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
-              <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
-                onchange="updateAgeInput(this.value)">
-            </div>
-    </div>
-  </div>  
-    </div>
-</div>    
+  </div>
+</div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col searchGame">
-            <h2 class="welcomeTitles">Games</h2>
-            <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
-            </ul>
-        </div>
-        <div class="col popularGame">
-            <h2 class="welcomeTitles">Popular Games</h2>
-            <ul class="popGames list-group d-flex flex-wrap justify-content-center overflow-auto">
-            </ul>
-        </div>
+  <div class="row">
+    <div class="col searchGame">
+      <h2 class="welcomeTitles">Games</h2>
+      <ul class="searchGames list-group d-flex flex-wrap justify-content-center overflow-auto">
+      </ul>
     </div>
+    <div class="col popularGame">
+      <h2 class="welcomeTitles">Popular Games</h2>
+      <ul class="popGames list-group d-flex flex-wrap justify-content-center overflow-auto">
+      </ul>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript" src="js/members.js"></script>
 <script>
-    //filter logic
-      function maxPlayerInput(val) {
-        document.getElementById('maxPlayerInput').value = val;
-      }
-      function minPlayerInput(val) {
-        document.getElementById('minPlayerInput').value = val;
-      }
-      function updateTimeInput(val) {
-        document.getElementById('timeInput').value = val;
-      }
-      function updateAgeInput(val) {
-        document.getElementById('ageInput').value = val;
-      }
+  //filter logic
+  function maxPlayerInput(val) {
+    document.getElementById('maxPlayerInput').value = val;
+  }
+  function minPlayerInput(val) {
+    document.getElementById('minPlayerInput').value = val;
+  }
+  function updateTimeInput(val) {
+    document.getElementById('timeInput').value = val;
+  }
+  function updateAgeInput(val) {
+    document.getElementById('ageInput').value = val;
+  }
 </script>
