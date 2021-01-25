@@ -49,14 +49,14 @@ $.ajax({
   console.log(data)
   for (var i = 0; i < data.length; i++)
     wishlistId.push(data[i].game_ID)
-    if(wishlistId.length === 0){
-      var noWishlist = $(`
+  if (wishlistId.length === 0) {
+    var noWishlist = $(`
       <h2>Uh Oh!<br> No games saved to your wishlists.</h2>
       <p>go back <a href="/members">Here</a> to save games</p>`)
-      $(".wishlist").append(noWishlist);
-      }else{
-  showWishlist()
-      }
+    $(".wishlist").append(noWishlist);
+  } else {
+    showWishlist()
+  }
 });
 console.log(wishlistId)
 
@@ -74,31 +74,31 @@ function showWishlist() {
 
       for (var i = 0; i < response.games.length; i++) {
         var gameCard = $(`  
-    <button class="wishlistItem">
-      <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
-    </button>
-    <div class="panel">
-    <div class="row">
-    <div class="col">
-    <h3>${response.games[i].name}</h3>
-    </div></div>
-    <div class="row">
-    <div class="col">
-        <img src = "${response.games[i].images.small}"></img>
-    </div>
-    <div class="col">
-        <ul class="card-text">
-            <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
-            <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
-            <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
-            <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
-            <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
-            <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
-            <br>
-        </ul>
-    </div>
-</div>
- `)
+          <button class="wishlistItem">
+            <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
+          </button>
+          <div class="panel">
+          <div class="row">
+            <div class="col">
+              <h3>${response.games[i].name}</h3>
+            </div></div>
+          <div class="row">
+            <div class="col">
+                <img src = "${response.games[i].images.small}"></img>
+            </div>
+            <div class="col">
+                <ul class="card-text">
+                    <li><i class="fas fa-star"></i> Avg User Rating:${(response.games[i].average_user_rating).toFixed(2)}</li>
+                    <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+                    <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+                    <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+                    <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
+                    <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
+                    <br>
+                </ul>
+            </div>
+          </div>
+        `)
 
         // Dynamically create a card for each game
         $(".wishlist").append(gameCard);
@@ -134,52 +134,31 @@ function showWishlist() {
         updateGame(chosenID, own)
       })
 
-        $(".deleteBtn").on("click", function (event) {
-          event.preventDefault();
-  
-          console.log("ButtonId is: " + this.id);
-          console.log("Game ID is: " + gameInfo[this.id])
-          var chosenID2 = gameInfo[this.id];
-          console.log(chosenID2)
-          deleteGame(chosenID2)
-       });
+      $(".deleteBtn").on("click", function (event) {
+        event.preventDefault();
 
-       var acc = document.getElementsByClassName("wishlistItem")
-         $(acc).on("click", function() {
-           console.log(this)
-           console.log("clicked")
-           this.classList.toggle("active");
-           var panel = this.nextElementSibling;
-           if (panel.style.display === "block") {
-             panel.style.display = "none";
-           } else {
-             panel.style.display = "block";
-           }
-         });
+        console.log("ButtonId is: " + this.id);
+        console.log("Game ID is: " + gameInfo[this.id])
+        var chosenID2 = gameInfo[this.id];
+        console.log(chosenID2)
+        deleteGame(chosenID2)
+      });
 
-      })
+      var acc = document.getElementsByClassName("wishlistItem")
+      $(acc).on("click", function () {
+        console.log(this)
+        console.log("clicked")
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+
+    })
 };
-
-
-// function updateGame(id, own){
-//   $.ajax("/api/mygames/" + id, {
-//     method: "PUT",
-//     data: own,
-// }).then(() => {
-//   window.location.replace("/wishlist");
-//   // If there's an error, handle it by throwing up a bootstrap alert
-//   })
-// }
-
-// function deleteGame(id){
-//   $.ajax("/api/wishlist/" + id, {
-//     method: "DELETE"
-//   }).then(() => {
-//     window.location.replace("/wishlist");
-//     // If there's an error, handle it by throwing up a bootstrap alert
-//     })
-// }
-
 
 function updateGame(id, own) {
   $.ajax({

@@ -1,14 +1,24 @@
+/* Main handlebars page and other IDs/classes that apply to more than one file */
+
+.hide {
+  display: none;
+}
+
 body {
   background-color: black;
   color: greenyellow;
   font-family: monospace;
 }
-form.signup,
-form.login {
+
+form.signup, form.login {
   margin-top: 50px;
 }
 
-.jumbotron{
+.member-name {
+  padding: 10px;
+}
+
+.jumbotron {
   background-image: url("../img/dicebackground2.jpg");
   text-align: center;
   padding-bottom: 1rem;
@@ -16,103 +26,120 @@ form.login {
   border-bottom-style: ridge;
   border-bottom-width: 1rem;
 }
+
 .filter-by {
   text-align: center;
   padding: 10px;
   background-position: 0% 0%
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
   display: flex;
   justify-content: center;
   border-radius: 10px;
 }
+
 .searchGames, .popGames {
   display: flex;
   flex-direction: row;
-  justify-content: center;  
+  justify-content: center;
   height: 500px;
 }
+
 .card {
   margin: 10px;
 }
+
 .card-title {
-text-align: center;
+  text-align: center;
 }
+
 .card-body {
   background-color: black;
   border-style: ridge;
 }
-a{
+
+a {
   color: greenyellow;
 }
-.btn{
-  color:black;
+
+.btn {
+  color: black;
   background-color: greenyellow;
 }
-.col-sm{
-  padding-top:2rem ;
+
+.col-sm {
+  padding-top: 2rem;
 }
-ul{
+
+ul {
   list-style-type: none;
 }
+
 .suggestions-container {
   margin-left: -30px;
 }
+
 .suggestions-drop {
   height: 65px;
   width: 100%;
   overflow: auto;
   overflow-y: scroll;
   white-space: nowrap;
-  display: inline-block; 
+  display: inline-block;
   text-align: left;
 }
+
 .autocompleteLi {
   background-color: rgba(0, 0, 0, 0.3);
 }
+
 .autocomplete:hover {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
   cursor: pointer;
 }
+
 .highlight {
   background-color: greenyellow;
   color: black;
 }
-.ownlistbox{
-  position:relative;
-  height: 600px;
 
+.ownlistbox {
+  position: relative;
+  height: 600px;
 }
-.accordion-button{
+
+.accordion-button {
   background-color: #3e4444;
-  color:greenyellow;
+  color: greenyellow;
   border-width: 5px;
   border-color: greenyellow;
   border: double;
 }
 
 /* headers on welcome page */
+
 .welcomeTitles {
   text-align: center;
   margin-top: 10px;
 }
 
-.hide {
-  display: none;
-}
 #topHomeBtn {
   background-color: transparent;
 }
+
 #searchBtn {
   border: transparent;
 }
+
 #searchBtn:hover {
   background-color: greenyellow;
   color: grey;
 }
 
 /*accordian buttons*/
+
 .wishlistItem {
   background-color: #3e4444;
   color: greenyellow;
@@ -124,17 +151,21 @@ ul{
   outline: none;
   transition: 0.4s;
 }
-.wishlistItem.active{
+
+.wishlistItem.active {
   background-color: black;
-  border-style:dotted;
+  border-style: dotted;
 }
+
 /* Add a background color to the button if it is clicked on */
+
 .active, .wishlistItem:hover {
-  background-color:rgba(183, 249, 86, 0.845);
+  background-color: rgba(183, 249, 86, 0.845);
   color: black;
 }
 
 /* Style the accordion panel. Note: hidden by default */
+
 .panel {
   padding: 0 18px;
   display: none;
@@ -142,11 +173,12 @@ ul{
   border-style: ridge;
 }
 
-.wishlistBtn{
-width: -webkit-fill-available;
+.wishlistBtn {
+  width: -webkit-fill-available;
 }
 
 /* filter input boxes */
+
 #maxPlayerInput, #minPlayerInput, #timeInput, #ageInput {
   background-color: transparent;
   border: none;
@@ -154,6 +186,7 @@ width: -webkit-fill-available;
 }
 
 /* login page */
+
 .loginCard {
   margin: 50px;
   padding: 10px;

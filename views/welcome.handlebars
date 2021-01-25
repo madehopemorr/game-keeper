@@ -10,9 +10,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      {{!-- <li class="nav-item active" id="topHomeBtn">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li> --}}
       <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a>
     </ul>
   </div>
@@ -24,58 +21,58 @@
   <p class="lead">Roll the dice and get board</p>
   <div class="col-4 offset-4 align-self-center">
     <div class="input-group mb-3">
-      <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
+      <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games"
+        aria-describedby="button-addon2">
       <button class="btn btn-outline-secondary" type="submit" id="searchBtn" id="button-addon2">Submit</button>
     </div>
     <div class="suggestions-container">
-    <div class="suggestions-drop">
-      <ul class="suggestions">
-      </ul>
-    </div>
+      <div class="suggestions-drop">
+        <ul class="suggestions">
+        </ul>
+      </div>
     </div>
   </div>
-  
+
   <div class="row container">
     <h3>Filter Search</h3>
     <hr>
     <div class="col-3">
       <div class="form-check form-switch">
-              <label for="playerMin" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
-              <input type="range" class="form-range" min="1" max="20" step="1" id="playerMin"
-                onchange="minPlayerInput(this.value)">
-            </div>
+        <label for="playerMin" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
+              value=""></span></label>
+        <input class="form-check-input" type="checkbox" name="checkboxMinPlayers" id="checkboxMinPlayers">
+        <input type="range" class="form-range" min="1" max="20" step="1" id="playerMin"
+          onchange="minPlayerInput(this.value)">
+      </div>
     </div>
     <div class="col-3">
       <div class="form-check form-switch">
-              <label for="playerMax" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
-              <input type="range" class="form-range" min="1" max="20" step="1" id="playerMax"
-                onchange="maxPlayerInput(this.value)">
-            </div>
+        <label for="playerMax" class="form-label">Maximum Players <span><input type="text" id="maxPlayerInput"
+              value=""></span></label>
+        <input class="form-check-input" type="checkbox" name="checkboxMaxPlayers" id="checkboxMaxPlayers">
+        <input type="range" class="form-range" min="1" max="20" step="1" id="playerMax"
+          onchange="maxPlayerInput(this.value)">
+      </div>
     </div>
     <div class="col-3">
       <div class="form-check form-switch">
-              <label for="gameTime" class="form-label">Max Game Time (minutes) <span><input type="text" id="timeInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
-              <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime"
-                onchange="updateTimeInput(this.value)">
-            </div>
+        <label for="gameTime" class="form-label">Max Game Time (minutes) <span><input type="text" id="timeInput"
+              value=""></span></label>
+        <input class="form-check-input" type="checkbox" name="checkboxTime" id="checkboxTime">
+        <input type="range" class="form-range" min="0" max="120" step="5" id="gameTime"
+          onchange="updateTimeInput(this.value)">
+      </div>
     </div>
     <div class="col-3">
       <div class="form-check form-switch">
-              <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput"
-                    value=""></span></label>
-              <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
-              <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
-                onchange="updateAgeInput(this.value)">
-            </div>
+        <label for="playerAge" class="form-label">Minimum Age <span><input type="text" id="ageInput"
+              value=""></span></label>
+        <input class="form-check-input" type="checkbox" name="checkboxAge" id="checkboxAge">
+        <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
+          onchange="updateAgeInput(this.value)">
+      </div>
     </div>
   </div>
-  {{!-- </form> --}}
 </div>
 
 <div class="container-fluid">
@@ -129,16 +126,16 @@
 
 <script>
   //filter logic
-      function maxPlayerInput(val) {
-        document.getElementById('maxPlayerInput').value = val;
-      }
-      function minPlayerInput(val) {
-        document.getElementById('minPlayerInput').value = val;
-      }
-      function updateTimeInput(val) {
-        document.getElementById('timeInput').value = val;
-      }
-      function updateAgeInput(val) {
-        document.getElementById('ageInput').value = val;
-      }
+  function maxPlayerInput(val) {
+    document.getElementById('maxPlayerInput').value = val;
+  }
+  function minPlayerInput(val) {
+    document.getElementById('minPlayerInput').value = val;
+  }
+  function updateTimeInput(val) {
+    document.getElementById('timeInput').value = val;
+  }
+  function updateAgeInput(val) {
+    document.getElementById('ageInput').value = val;
+  }
 </script>

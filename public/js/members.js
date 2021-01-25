@@ -25,9 +25,6 @@ $(document).ready(() => {
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
-  // $.get("/api/user_data").then(data => {
-  //   $(".member-name").text("Welcome " + data.firstName);
-  // });
   $.ajax({
     url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
     type: "GET",
@@ -172,8 +169,6 @@ $(document).ready(() => {
         // Console the values of the gameInfo obj (for debugging purpose)
         console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-        // As this point, this function shows in the console what button is clicked and the data value attached to it
-        // Will be modified...
         $(".heartBtn").on("click", function (event) {
           event.preventDefault();
 
@@ -230,9 +225,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -345,9 +337,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -395,9 +384,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -433,7 +419,6 @@ $(document).ready(() => {
         })
       });
   };
-
 
   function saveGame(game_ID, own, UserId) {
     $.ajax({

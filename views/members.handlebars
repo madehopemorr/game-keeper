@@ -7,10 +7,8 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="member-name"></div>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      {{!-- <li class="nav-item active" id="topHomeBtn">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-      </li> --}}
       <li class="nav-item login">
         <a class="nav-link" href="/logout" onclick="removeTokenFromSessionStorage()">Logout</a>
         <script>
@@ -22,7 +20,6 @@
       </li>
     </ul>
   </div>
-  <div class="member-name"></div>
 </nav>
 
 <div class="jumbotron jumbotron-fluid">
@@ -84,10 +81,6 @@
     </div>
   </div>
 </div>
-{{!-- <div class="suggestions-drop">
-  <ul class="suggestions">
-  </ul>
-</div> --}}
 
 <div class="row filter-by">
   <div class="col align-self-start">
