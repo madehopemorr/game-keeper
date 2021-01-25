@@ -1,9 +1,8 @@
 
 //button to show and hide side bar
-
 $("#menu-toggle").click(function (e) {
-
   e.preventDefault();
+
   $("#wrapper").toggleClass("toggled");
 });
 

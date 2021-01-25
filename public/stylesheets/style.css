@@ -201,14 +201,17 @@ ul {
   border: 4px solid #3e4444;
 }
 
-.heartBtn, .ownBtn {
+/* wishlist and my games */
+.heartBtn, .ownBtn, .deleteBtn {
   border: transparent;
   height: 50px;
+  width: 53px;
   margin: 5px;
   margin-top: 10px;
+  margin-bottom: 50px;
 }
 
-.heartBtn:hover, .ownBtn:hover {
+.heartBtn:hover, .ownBtn:hover, .deleteBtn:hover {
   background-color: greenyellow;
   color: gray;
 }
