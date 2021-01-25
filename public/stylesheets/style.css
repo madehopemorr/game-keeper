@@ -124,7 +124,7 @@ ul{
 
 .deleteBtn, .ownBtn, .heartBtn{
 width: -webkit-fill-available;
-
+}
 
 /* filter input boxes */
 #maxPlayerInput, #minPlayerInput, #timeInput, #ageInput {
