@@ -55,12 +55,17 @@ a{
 ul{
   list-style-type: none;
 }
+.suggestions-container {
+  margin-left: -30px;
+}
 .suggestions-drop {
   height: 65px;
+  width: 100%;
   overflow: auto;
   overflow-y: scroll;
   white-space: nowrap;
   display: inline-block; 
+  text-align: left;
 }
 .highlight {
   background-color: greenyellow;

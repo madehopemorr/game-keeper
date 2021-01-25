@@ -20,18 +20,24 @@
 </nav>
 
 <div class="jumbotron">
-  <h1 class="welcome">Welcome to Game Keeper.</h1>
-  <p class="lead">roll the dice and get board.</p>
+  <h1 class="welcome">Welcome to Game Keeper</h1>
+  <p class="lead">Roll the dice and get board</p>
   <div class="col-4 offset-4 align-self-center">
     <div class="input-group mb-3">
       <input type="text" id="search-word" class="form-control" placeholder="Search games" aria-label="Search games" aria-describedby="button-addon2">
       <button class="btn btn-outline-secondary" type="submit" id="searchBtn" id="button-addon2">Submit</button>
     </div>
+    <div class="suggestions-container">
+    <div class="suggestions-drop">
+      <ul class="suggestions">
+      </ul>
+    </div>
+    </div>
   </div>
-  <div class="suggestions-drop">
+  {{!-- <div class="suggestions-drop">
     <ul class="suggestions">
     </ul>
-  </div>
+  </div> --}}
   <div class="row container">
     <h3>Filter Search</h3>
     <hr>
