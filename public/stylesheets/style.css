@@ -215,3 +215,14 @@ ul {
   background-color: greenyellow;
   color: gray;
 }
+
+.wishlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.each-wish-card {
+  width: 21rem;
+  margin: 15px;
+}

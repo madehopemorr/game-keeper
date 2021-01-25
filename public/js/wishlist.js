@@ -81,7 +81,8 @@ function showWishlist() {
     console.log(response);
 
     for (let i = 0; i < response.games.length; i++) {
-      const gameCard = $(`  
+      const gameCard = $(`
+    <div class="each-wish-card">  
     <button class="wishlistItem">
       <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
     </button>
@@ -115,6 +116,7 @@ function showWishlist() {
             <br>
         </ul>
     </div>
+</div>
 </div>
  `);
 
