@@ -200,3 +200,15 @@ ul {
   background-color: black;
   border: 4px solid #3e4444;
 }
+
+.heartBtn, .ownBtn {
+  border: transparent;
+  height: 50px;
+  margin: 5px;
+  margin-top: 10px;
+}
+
+.heartBtn:hover, .ownBtn:hover {
+  background-color: greenyellow;
+  color: gray;
+}
