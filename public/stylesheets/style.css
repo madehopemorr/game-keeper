@@ -4,6 +4,13 @@
   display: none;
 }
 
+.popup {
+  border: transparent !important;
+  background-color: transparent !important;
+  color: gray !important;
+  font-size: 1em;
+}
+
 body {
   background-color: black;
   color: greenyellow;

@@ -31,16 +31,25 @@
       <div class="bg-dark border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Game Keeper</div>
         <div class="list-group list-group-flush">
-          <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText">Home</a>
-          <a href="/wishlist" class="list-group-item list-group-item-action bg-dark sidebarText">My Wishlist</a>
-          <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
-          <br>
-  
-          <img src="img/greendie.png" alt="green die" id="greendie">
-  <footer class="footer">Icon made by Delapouite.
-    <br>
-      https://game-icons.net
-  </footer>
+          <a href="/" class="list-group-item list-group-item-action bg-dark sidebarText"><button
+              class="popup btn btn-secondary">Home</button></a>
+
+          <a href="/wishlist" class=" hideLink list-group-item list-group-item-action bg-dark sidebarText">My
+            Wishlist</a>
+          <a class="list-group-item list-group-item-action bg-dark sidebarText"><button type="button"
+              class="popup hidePopup btn btn-secondary" data-bs-container="body" data-bs-toggle="popover"
+              data-bs-placement="right" data-bs-content="* Please log in to access your wishlist.">
+              My Wishlist</button></a>
+
+          <a href="/mygames" class=" hideLink list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
+          <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText"><a
+              class="list-group-item list-group-item-action bg-dark sidebarText"><button type="button"
+                class="popup hidePopup btn btn-secondary" data-bs-container="body" data-bs-toggle="popover"
+                data-bs-placement="right" data-bs-content="* Please log in to access your games.">
+                My Games</button></a>
+            <br>
+
+            <img src="img/greendie.png" alt="green die" id="greendie">
         </div>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -55,6 +64,10 @@
 
     </div>
 
+    <footer class="footer">Icon made by Delapouite.
+      <br>
+      https://game-icons.net
+    </footer>
 
     <script type="text/javascript" src="js/main.js"></script>
 
