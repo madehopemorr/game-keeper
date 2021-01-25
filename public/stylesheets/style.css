@@ -216,13 +216,13 @@ ul {
   color: gray;
 }
 
-.wishlist {
+.wishlist, .ownlist {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.each-wish-card {
-  width: 21rem;
+.each-wish-card, .each-own-card {
+  width: 24rem;
   margin: 15px;
 }
