@@ -1,6 +1,12 @@
 //animate the header on page load
 gsap.from(".welcome", {duration:1.5, opacity:0, scale:0.3, ease: "bounce"});
 
+// This variable is for autocomplete function
+var suggestions = document.querySelector(".suggestions");
+
+// This boolean var is used to control the appearance of suggestions dropdown list
+var hasBeenClicked = false;
+
 // Prevent menu button change to blue after toggle
 var menuBtn = document.querySelector("#menu-toggle");
 menuBtn.addEventListener("click", function(event) {
@@ -12,9 +18,6 @@ menuBtn.addEventListener("click", function(event) {
 });
 
 popularGame()
-
-// This boolean var is used to control the appearance of suggestions dropdown list
-var hasBeenClicked = false;
 
 $("#searchBtn").on("click", function (event) {
   event.preventDefault();
@@ -192,12 +195,26 @@ function autocomplete() {
 
         return `
         <li>
-          <span class="name">${highlighted}</span>
+          <div class="autocomplete">
+            <span class="name">${highlighted}</span>
+          </div>
         </li>
         `;
       }).join("");
 
-      var suggestions = document.querySelector(".suggestions");
+      // var searchInput = document.querySelector("#search-word");
+      // var eachName = document.querySelector(".name");
+      // for (var i = 0; i < liEl.length; i++) {
+      // var customAutoID = "autoBtn-" + String(i);
+      // liEl.attr("id", customAutoID);
+      // }
+      // eachName.addEventListener("click", function(event) {
+      //   event.preventDefault();
+
+      //   // searchInput.value = this.value;
+      //   console.log(this.value)
+      // });
+
       suggestions.innerHTML = liEl;
       // Only show suggestions list when the search box is not empty
       if (!this.value || hasBeenClicked) {
