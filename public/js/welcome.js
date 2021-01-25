@@ -1,5 +1,5 @@
 //animate the header on page load
-
+popularGame();
 gsap.from(".welcome", {
   duration: 1.5,
   opacity: 0,
@@ -20,12 +20,6 @@ menuBtn.addEventListener("click", event => {
   menuBtn.style.background = "rgb(173,255,47)";
   menuBtn.style.color = "rgb(0,0,0)";
 });
-
-popularGame();
-
-
-// This boolean var is used to control the appearance of suggestions dropdown list
-let hasBeenClicked = false;
 
 $("#searchBtn").on("click", event => {
   event.preventDefault();
@@ -195,10 +189,6 @@ function autocomplete() {
     "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
     "fuzzy_match=true" +
     "&client_id=3KZbL84alX";
-
-
-  var queryURL = "https://api.boardgameatlas.com/api/search?fuzzy_match=" +
-    "fuzzy_match=true" + "&client_id=3KZbL84alX";
 
   $.ajax({
     url: queryURL,
