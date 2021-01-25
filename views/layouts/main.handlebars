@@ -34,7 +34,7 @@
           <a href="/mygames" class="list-group-item list-group-item-action bg-dark sidebarText">My Games</a>
           {{!-- <a href="/login" class="list-group-item list-group-item-action bg-dark sidebarText">Login</a> --}}
           <br>
-          <div class="container"> Filter Search
+          {{!-- <div class="container"> Filter Search
             <hr>
             <div class="form-check form-switch">
               <label for="playerRange" class="form-label">Minimum Players <span><input type="text" id="minPlayerInput"
@@ -64,7 +64,7 @@
               <input type="range" class="form-range" min="1" max="18" step="1" id="playerAge"
                 onchange="updateAgeInput(this.value)">
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -114,6 +114,7 @@
       });
 
       //filter logic
+      /*
       function maxPlayerInput(val) {
         document.getElementById('maxPlayerInput').value = val;
       }
@@ -126,12 +127,13 @@
       function updateAgeInput(val) {
         document.getElementById('ageInput').value = val;
       }
-/*
+      */
+        /*
           function filterSubmit() {
             var filters = $(".filterForm").serializeArray()
             console.log(filters)
           }
-      */
+        */
 
 
     // to fill in login or logout link in nav bar

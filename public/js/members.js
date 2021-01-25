@@ -56,9 +56,39 @@ $(document).ready(() => {
     event.preventDefault();
     var searchWord = $("#search-word").val().trim()
     console.log(searchWord)
+
+    if ($("#checkboxMinPlayers").is(":checked")) {
+      var playerMin = $("#playerMin").val()
+      console.log("player min: " + playerMin)
+    } else {
+      var playerMin = ""
+    }
+    
+    if ($("#checkboxMaxPlayers").is(":checked")) {
+      var playerMax = $("#playerMax").val()
+      console.log("player Max: " + playerMax)
+    } else {
+      var playerMax = ""
+    }
+    
+    if ($("#checkboxTime").is(":checked")) {
+      var gameTime = $("#gameTime").val()
+      console.log("game time: " + gameTime)
+    } else {
+      var gameTime = ""
+    }
+    
+    if ($("#checkboxAge").is(":checked")) {
+      var playerAge = $("#playerAge").val()
+      console.log("player Age: " + playerAge)
+    } else {
+      var playerAge = ""
+    }
+    
+    console.log(`pMin: ${playerMin} | pMax: ${playerMax} | time: ${gameTime} | age: ${playerAge}`)
+
     runSearchBar(searchWord);
 
-    // autocomplete(searchWord);
     hasBeenClicked = true;
   })
   //runs search when user presses enter
@@ -69,7 +99,6 @@ $(document).ready(() => {
       var searchWord = $("#search-word").val().trim()
       runSearchBar(searchWord);
 
-      // autocomplete(searchWord);
       hasBeenClicked = true;
     }
   });
@@ -80,7 +109,7 @@ $(document).ready(() => {
     $(".searchGames").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
-      searchWord + "&client_id=3KZbL84alX";
+    searchWord + "&min_players=" + parseInt(playerMin.value) + "max_players=" + parseInt(playerMax.value) + "max_playtime=" + parseInt(gameTime.value) + "min_age=" + parseInt(playerAge.value) + "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
