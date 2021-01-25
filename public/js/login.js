@@ -22,23 +22,6 @@ $(document).ready(() => {
         passwordInput.val("");
     });
 
-    // Starter code
-    // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-    // function loginUser(email, password) {
-    //     $.post("/api/login", {
-    //         email: email,
-    //         password: password
-    //     })
-    //         .then(() => {
-    //             window.location.replace("/members");
-    //             // If there's an error, log the error
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         });
-    // }
-
-
     // This function is modified from the starter code provided
     // The token is sent from the server side to client side
     function loginUser(email, password) {
@@ -49,13 +32,11 @@ $(document).ready(() => {
             function (data, status) {
                 console.log('status: ' + status + " : data: " + JSON.stringify(data));
                 insertTokenIntoSessionStorage(data.token);
-                // sendReq();
             },
             'json'
         )
             .then(() => {
                 window.location.replace("/members");
-                // If there's an error, log the error
             })
             .catch(err => {
                 console.log(err);

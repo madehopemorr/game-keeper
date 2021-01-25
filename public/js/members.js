@@ -1,13 +1,4 @@
 $(document).ready(() => {
-  // Prevent menu button change to blue after toggle
-  var menuBtn = document.querySelector("#menu-toggle");
-  menuBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    menuBtn.style.background = "rgb(173,255,47)";
-    menuBtn.style.color = "rgb(0,0,0)";
-    // menuBtn.style.border = "rgba(255, 255, 255, .5)";
-  });
 
   // Create an obj to store game name data every time each button is clicked
   var gameInfo = {}
@@ -18,12 +9,22 @@ $(document).ready(() => {
   // This boolean var is used to control the appearance of suggestions dropdown list
   var hasBeenClicked = false;
 
+  // This variable is for autocomplete function
+  var suggestions = document.querySelector(".suggestions");
+
+  // Prevent menu button change to blue after toggle
+  var menuBtn = document.querySelector("#menu-toggle");
+  menuBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    menuBtn.style.background = "rgb(173,255,47)";
+    menuBtn.style.color = "rgb(0,0,0)";
+    // menuBtn.style.border = "rgba(255, 255, 255, .5)";
+  });
+
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
-  // $.get("/api/user_data").then(data => {
-  //   $(".member-name").text("Welcome " + data.firstName);
-  // });
   $.ajax({
     url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
     type: "GET",
@@ -63,28 +64,28 @@ $(document).ready(() => {
     } else {
       var playerMin = ""
     }
-    
+
     if ($("#checkboxMaxPlayers").is(":checked")) {
       var playerMax = $("#playerMax").val()
       console.log("player Max: " + playerMax)
     } else {
       var playerMax = ""
     }
-    
+
     if ($("#checkboxTime").is(":checked")) {
       var gameTime = $("#gameTime").val()
       console.log("game time: " + gameTime)
     } else {
       var gameTime = ""
     }
-    
+
     if ($("#checkboxAge").is(":checked")) {
       var playerAge = $("#playerAge").val()
       console.log("player Age: " + playerAge)
     } else {
       var playerAge = ""
     }
-    
+
     console.log(`pMin: ${playerMin} | pMax: ${playerMax} | time: ${gameTime} | age: ${playerAge}`)
 
     runSearchBar(searchWord);
@@ -109,7 +110,7 @@ $(document).ready(() => {
     $(".searchGames").empty();
     //search for game from board game geeks API.
     var queryURL = "https://api.boardgameatlas.com/api/search?name=" +
-    searchWord + "&min_players=" + parseInt(playerMin.value) + "max_players=" + parseInt(playerMax.value) + "max_playtime=" + parseInt(gameTime.value) + "min_age=" + parseInt(playerAge.value) + "&client_id=3KZbL84alX";
+      searchWord + "&min_players=" + parseInt(playerMin.value) + "max_players=" + parseInt(playerMax.value) + "max_playtime=" + parseInt(gameTime.value) + "min_age=" + parseInt(playerAge.value) + "&client_id=3KZbL84alX";
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -168,8 +169,6 @@ $(document).ready(() => {
         // Console the values of the gameInfo obj (for debugging purpose)
         console.log("KeyValue: " + JSON.stringify(gameInfo));
 
-        // As this point, this function shows in the console what button is clicked and the data value attached to it
-        // Will be modified...
         $(".heartBtn").on("click", function (event) {
           event.preventDefault();
 
@@ -226,9 +225,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -341,9 +337,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -391,9 +384,6 @@ $(document).ready(() => {
           $.ajax({
             url: `http://localhost:8080/api/user_data?secret_token=${sessionStorage.getItem("myToken")}`,
             type: "GET",
-            // headers: {
-            //   Authorization: `Bearer ${sessionStorage.getItem("myToken")}`
-            // },
             error: function (err) {
               switch (err.status) {
                 case "400":
@@ -429,7 +419,6 @@ $(document).ready(() => {
         })
       });
   };
-
 
   function saveGame(game_ID, own, UserId) {
     $.ajax({
@@ -501,13 +490,14 @@ $(document).ready(() => {
           const highlighted = games.name.replace(regex, `<span class="highlight">${this.value}</span>`);
 
           return `
-        <li>
-          <span class="name">${highlighted}</span>
-        </li>
+          <li class="autocompleteLi">
+            <div class="autocomplete">
+              <span class="name">${highlighted}</span>
+            </div>
+          </li>
         `;
         }).join("");
 
-        var suggestions = document.querySelector(".suggestions");
         suggestions.innerHTML = liEl;
         // Only show suggestions list when the search box is not empty
         if (!this.value || hasBeenClicked) {

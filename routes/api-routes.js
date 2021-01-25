@@ -15,15 +15,15 @@ module.exports = function (app) {
     app.post("/api/login", async (req, res, next) => {
 
         passport.authenticate(
-            "local", 
+            "local",
             async (err, user, info) => {
                 try {
                     if (err || !user) {
-                      const error = new Error('An error occurred.');
-                      console.log(err)
-                      return next(error);
+                        const error = new Error('An error occurred.');
+                        console.log(err)
+                        return next(error);
                     }
-                    
+
                     console.log(user)
                     // req.login(
                     //   user,
@@ -106,42 +106,7 @@ module.exports = function (app) {
         };
     });
 
-    app.get("/api/wishlist", passport.authenticate('jwt', { session: false }), (req, res) => {
-        db.Games.findAll({
-            where: {
-                own: false
-            }
-        }).then(function(dbGames) {
-            res.json(dbGames);
-          });
-       
-    });
-
-    app.put("/api/wishlist/:id", passport.authenticate('jwt', { session: true }), (req, res) => {
-        
-        db.Games.update(
-        {own: true},
-        {
-            where: {
-                game_ID: req.params.id
-            }
-        }).then(function(dbGames) {
-            res.json(dbGames);
-        });
-       
-    });
-
-    app.get("/api/mygames", passport.authenticate('jwt', { session: true }), (req, res) => {
-        db.Games.findAll({
-            where: {
-                own: true,
-                UserId: req.user.id 
-            }
-        }).then(function(dbGames) {
-            res.json(dbGames);
-        }); 
-    });
-
+    // Route for saving games to database after buttons clicked
     app.post("/api/members", passport.authenticate('jwt', { session: true }), function (req, res) {
         db.Games.create({
             game_ID: req.body.game_ID,
@@ -157,23 +122,64 @@ module.exports = function (app) {
             });
     });
 
-    app.delete("/api/wishlist/:id", function(req, res) {
-        db.Games.destroy({
-          where: {
-            game_ID: req.params.id
-          }
-        }).then(function(dbGames) {
-          res.json(dbGames);
+    // Route for displaying wishlist
+    app.get("/api/wishlist", passport.authenticate('jwt', { session: false }), (req, res) => {
+        db.Games.findAll({
+            where: {
+                own: false
+            }
+        }).then(function (dbGames) {
+            res.json(dbGames);
+        });
+
+    });
+
+    // Route for updating wishlist
+    app.put("/api/wishlist/:id", passport.authenticate('jwt', { session: true }), (req, res) => {
+
+        db.Games.update(
+            { own: true },
+            {
+                where: {
+                    game_ID: req.params.id
+                }
+            }).then(function (dbGames) {
+                res.json(dbGames);
+            });
+
+    });
+
+    // Route for displaying my games
+    app.get("/api/mygames", passport.authenticate('jwt', { session: true }), (req, res) => {
+        db.Games.findAll({
+            where: {
+                own: true,
+                UserId: req.user.id
+            }
+        }).then(function (dbGames) {
+            res.json(dbGames);
         });
     });
 
-    app.delete("/api/mygames/:id", function(req, res) {
+    // Route for deleting a game in wishlist
+    app.delete("/api/wishlist/:id", function (req, res) {
         db.Games.destroy({
-          where: {
-            game_ID: req.params.id
-          }
-        }).then(function(dbGames) {
-          res.json(dbGames);
+            where: {
+                game_ID: req.params.id
+            }
+        }).then(function (dbGames) {
+            res.json(dbGames);
+        });
+    });
+
+    // Route for deleting a game from my games
+    app.delete("/api/mygames/:id", function (req, res) {
+        db.Games.destroy({
+            where: {
+                game_ID: req.params.id
+            }
+        }).then(function (dbGames) {
+            res.json(dbGames);
         });
     });
 };
