@@ -78,84 +78,15 @@
       <!-- Page Content -->
       <div id="page-content-wrapper">
 
-        {{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-          <button class="btn btn-primary" id="menu-toggle">Menu</button>
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item active" id="topHomeBtn">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
-
-            </ul>
-          </div>
-          <div class="member-name"></div>
-        </nav> --}}
-
         {{{ body }}}
 
       </div>
       <!-- /#page-content-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
-    <!-- Bootstrap core JavaScript -->
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"></script>
 
 
     <script type="text/javascript" src="js/main.js"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-      $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-      });
-
-      //filter logic
-      /*
-      function maxPlayerInput(val) {
-        document.getElementById('maxPlayerInput').value = val;
-      }
-      function minPlayerInput(val) {
-        document.getElementById('minPlayerInput').value = val;
-      }
-      function updateTimeInput(val) {
-        document.getElementById('timeInput').value = val;
-      }
-      function updateAgeInput(val) {
-        document.getElementById('ageInput').value = val;
-      }
-      */
-        /*
-          function filterSubmit() {
-            var filters = $(".filterForm").serializeArray()
-            console.log(filters)
-          }
-        */
-
-
-    // to fill in login or logout link in nav bar
-    // doesn't work
-      /*
-      if (req.user) {
-        const logout = `<a class="nav-link" href="/logout">Logout</a>`
-        $(".login").append(logout)
-      } else {
-        const login = `<a href="/login" class="nav-link">Login</a>`
-        $(".login").append(login)
-      }
-      */
-    </script>
 
   </body>
 

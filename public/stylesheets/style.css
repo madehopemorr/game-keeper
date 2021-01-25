@@ -11,8 +11,8 @@ form.login {
 .jumbotron{
   background-image: url("../img/dicebackground2.jpg");
   text-align: center;
-  padding-bottom: 3rem;
-  padding-top: 2rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   border-bottom-style: ridge;
   border-bottom-width: 1rem;
 }
@@ -56,7 +56,7 @@ ul{
   list-style-type: none;
 }
 .suggestions-drop {
-  height: 100px;
+  height: 65px;
   overflow: auto;
   overflow-y: scroll;
   white-space: nowrap;
