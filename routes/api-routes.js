@@ -7,67 +7,64 @@ const jwt = require("jsonwebtoken");
 // Local storage from node-localstorage npm package
 // This is for server side (back end), not client side (front end)
 if (typeof localStorage === "undefined" || localStorage === null) {
-    const LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
+  const LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
 }
 
-module.exports = function (app) {
-    app.post("/api/login", async (req, res, next) => {
+module.exports = function(app) {
+  app.post("/api/login", async (req, res, next) => {
+    passport.authenticate("local", async (err, user, info) => {
+        try {
+        if (err || !user) {
+            const error = new Error("An error occurred.");
+            console.log(err);
+          return next(error);
+          }
 
-        passport.authenticate(
-            "local", 
-            async (err, user, info) => {
-                try {
-                    if (err || !user) {
-                      const error = new Error('An error occurred.');
-                      console.log(err)
-                      return next(error);
-                    }
-                    
-                    console.log(user)
-                    // req.login(
-                    //   user,
-                    //   { session: true },
-                    //   async (error) => {
-                    //     if (error){
-                    //       return next(error);
-                    //     } 
-                    //     const body = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
-                    //     const token = jwt.sign({ user: body }, 'TOP_SECRET');
-                    //     return res.json({ token });
-                    //   }
-                    // );
-                    req.login(
-                        user,
-                        { session: true },
-                        async (error) => {
-                            if (error) {
-                                return next(error);
-                            }
-                            const payload = {
-                                id: user.id,
-                                email: user.email,
-                                firstName: user.firstName,
-                                lastName: user.lastName
-                            }
-                            const options = {
-                                subject: `${user.id}`,
-                                expiresIn: 3600
-                            }
-                            const token = jwt.sign({ user: payload }, 'TOP_SECRET', options);
-                            return res.json({ token });
-                        }
-                    );
-                } catch (err) {
-                    return err;
-                }
+          console.log(user);
+        // req.login(
+          //   user,
+        //   { session: true },
+        //   async (error) => {
+        //     if (error){
+        //       return next(error);
+          //     } 
+        //     const body = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
+          //     const token = jwt.sign({ user: body }, 'TOP_SECRET');
+          //     return res.json({ token });
+          //   }
+        // );
+          req.login(
+            user,
+            { session: true },
+            async (error) => {
+          if (error) {
+            return next(error);
+          }
+          const payload = {
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
+              };
+          const options = {
+            subject: `${user.id}`,
+            expiresIn: 3600
+              };
+              const token = jwt.sign({ user: payload }, "TOP_SECRET", options);
+          return res.json({ token });
             }
-        )(req, res, next);
-    });
+          );
+        } catch (err) {
+          return err;
+        }
+      }
+    )(req, res, next);
+  });
 
-    // If the user is created successfully, proceed to log the user in
-    // Otherwise send back an error
-    app.post("/api/signup", function (req, res) {
+  // If the user is created successfully, proceed to log the user in
+  // Otherwise send back an error
+  app.post("/api/signup", (req, res) => {
         db.User.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -82,67 +79,69 @@ module.exports = function (app) {
             });
     });
 
-    // Route for logging the user out
-    app.get("/logout", (req, res) => {
-        localStorage.removeItem("myToken");
-        req.logout();
-        res.redirect("/");
-    });
+  // Route for logging the user out
+  app.get("/logout", (req, res) => {
+    localStorage.removeItem("myToken");
+    req.logout();
+    res.redirect("/");
+  });
 
-    // Route for getting some data about our user to be used client side
-    app.get("/api/user_data", passport.authenticate('jwt', { session: true }), (req, res) => {
-        if (!req.user) {
-            // If the user is not logged in, send back an empty object
-            res.json({});
-        } else {
-            // Otherwise send back the user's first name and id
-            // NOT sending back a password or even a hashed password
-            res.json({
-                id: req.user.id,
-                email: req.user.email,
-                firstName: req.user.firstName,
-                lastName: req.user.lastName
-            });
-        };
-    });
+  // Route for getting some data about our user to be used client side
+  app.get("/api/user_data", passport.authenticate("jwt", { session: true }), (req, res) => {
+      if (!req.user) {
+        // If the user is not logged in, send back an empty object
+      res.json({});
+    } else {
+        // Otherwise send back the user's first name and id
+        // NOT sending back a password or even a hashed password
+        res.json({
+          id: req.user.id,
+          email: req.user.email,
+          firstName: req.user.firstName,
+          lastName: req.user.lastName
+        });
+    };
+  }
+  );
 
-    app.get("/api/wishlist", passport.authenticate('jwt', { session: false }), (req, res) => {
-        db.Games.findAll({
-            where: {
-                own: false
-            }
-        }).then(function(dbGames) {
+  app.get("/api/wishlist", passport.authenticate("jwt", { session: false }), (req, res) => {
+    db.Games.findAll({
+        where: {
+          own: false
+        }
+      }).then((dbGames) => {
             res.json(dbGames);
           });
-       
-    });
+    }
+  });
 
-    app.put("/api/wishlist/:id", passport.authenticate('jwt', { session: true }), (req, res) => {
-        
-        db.Games.update(
-        {own: true},
-        {
-            where: {
-                game_ID: req.params.id
-            }
-        }).then(function(dbGames) {
+  app.put("/api/wishlist/:id", passport.authenticate("jwt", { session: true }), (req, res) => {
+      db.Games.update(
+      { own: true },
+      {
+        where: {
+            game_ID: req.params.id
+          }
+      }
+      ).then((dbGames) => {
             res.json(dbGames);
         });
-       
-    });
+    }
+  });
 
-    app.get("/api/mygames", passport.authenticate('jwt', { session: true }), (req, res) => {
-        db.Games.findAll({
-            where: {
-                own: true,
-                UserId: req.user.id 
-            }
-        }).then(function(dbGames) {
+  app.get("/api/mygames", passport.authenticate("jwt", { session: true }), (req, res) => {
+    db.Games.findAll({
+      where: {
+          own: true,
+        UserId: req.user.id 
+      }
+      }).then((dbGames) => {
             res.json(dbGames);
         }); 
-    });
+  }
+  );
 
-    app.post("/api/members", passport.authenticate('jwt', { session: true }), function (req, res) {
+  app.post("/api/members", passport.authenticate("jwt", { session: true }), (req, res) => {
         db.Games.create({
             game_ID: req.body.game_ID,
             own: req.body.own,
@@ -157,7 +156,7 @@ module.exports = function (app) {
             });
     });
 
-    app.delete("/api/wishlist/:id", function(req, res) {
+  app.delete("/api/wishlist/:id", (req, res) => {
         db.Games.destroy({
           where: {
             game_ID: req.params.id
@@ -167,7 +166,7 @@ module.exports = function (app) {
         });
     });
 
-    app.delete("/api/mygames/:id", function(req, res) {
+  app.delete("/api/mygames/:id", (req, res) => {
         db.Games.destroy({
           where: {
             game_ID: req.params.id
@@ -177,4 +176,3 @@ module.exports = function (app) {
         });
     });
 };
-
