@@ -116,28 +116,18 @@ function runSearchBar(searchWord) {
                 </div>
                 <div class="col">
                     <ul class="card-text">
-                        <li><i class="fas fa-star"></i> Avg User Rating:${game.average_user_rating.toFixed(
-    2
-  )}
-                        <li><i class="fas fa-users"></i> Players:${
-  game.min_players
-}-${game.max_players}</li>
-                        <li><i class="fas fa-hourglass-start"></i> Game Time: ${
-  game.min_playtime
-}-${game.max_playtime}</li>
-                        <li><i class="fas fa-child"></i> Age: ${
-  game.min_age
-} + </li>
-                        <li><i class="fas fa-dice-d20"></i> <a href=${
-  game.rules_url
-}>Rules</a></li>
+                        <li><i class="fas fa-star"></i> Avg User Rating:${game.average_user_rating.toFixed(2)}
+                        <li><i class="fas fa-users"></i> Players:${game.min_players}-${game.max_players}</li>
+                        <li><i class="fas fa-hourglass-start"></i> Game Time: ${game.min_playtime}-${game.max_playtime}</li>
+                        <li><i class="fas fa-child"></i> Age: ${game.min_age} + </li>
+                        <li><i class="fas fa-dice-d20"></i> <a href=${game.rules_url}>Rules</a></li>
                         <li><i class="fas fa-tag"></i>Price: ${game.price}</li>
                     </ul>
                 </div>
             </div>
         </div
     </div>`);
-      $(".searchGames").append(gameCard);
+    $(".searchGames").append(gameCard);
     });
   });
 }
