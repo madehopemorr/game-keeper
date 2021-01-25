@@ -60,3 +60,8 @@
 #greendie{
 width:150px;
 }
+footer {
+  position: absolute;
+  bottom: 0;
+  color: #999;
+}

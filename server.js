@@ -14,15 +14,17 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Set handlebars
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 app.use(
-    session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+
 );
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
 
 // Require routes
 require("./routes/html-routes.js")(app);
@@ -30,8 +32,11 @@ require("./routes/api-routes.js")(app);
 
 // Syncing database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
-    app.listen(PORT, () => {
-        console.log(
-            "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
-    });
+  app.listen(PORT, () => {
+    console.log(
+      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
+      PORT,
+      PORT
+    );
+  });
 });

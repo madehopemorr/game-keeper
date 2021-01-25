@@ -25,18 +25,7 @@ module.exports = function (app) {
                     }
 
                     console.log(user)
-                    // req.login(
-                    //   user,
-                    //   { session: true },
-                    //   async (error) => {
-                    //     if (error){
-                    //       return next(error);
-                    //     } 
-                    //     const body = { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email };
-                    //     const token = jwt.sign({ user: body }, 'TOP_SECRET');
-                    //     return res.json({ token });
-                    //   }
-                    // );
+                   
                     req.login(
                         user,
                         { session: true },
@@ -138,14 +127,15 @@ module.exports = function (app) {
     app.put("/api/wishlist/:id", passport.authenticate('jwt', { session: true }), (req, res) => {
 
         db.Games.update(
-            { own: true },
-            {
-                where: {
-                    game_ID: req.params.id
-                }
-            }).then(function (dbGames) {
-                res.json(dbGames);
-            });
+
+        {own: true},
+        {
+            where: {
+                game_ID: req.params.id
+            }
+        }).then(function(dbGames) {
+            res.json(dbGames);
+        });
 
     });
 
