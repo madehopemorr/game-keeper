@@ -1,3 +1,6 @@
+//animate the header on page load
+gsap.from(".welcome", {duration:1.5, opacity:0, scale:0.3, ease: "bounce"});
+
 // Prevent menu button change to blue after toggle
 var menuBtn = document.querySelector("#menu-toggle");
 menuBtn.addEventListener("click", function(event) {
