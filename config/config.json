@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "game_keeper3",
-    "host": "127.0.0.1",
+    "username": "d8ad1lan5z1ndbp8",
+    "password": "nyyk20bart6i2t0a",
+    "database": "bn2rw5guj8mrvd3e",
+    "host": "hwr4wkxs079mtb19.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
