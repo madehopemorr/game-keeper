@@ -86,6 +86,7 @@ function showOwnlist() {
 
     for (let i = 0; i < response.games.length; i++) {
       const gameCard = $(`
+      <div class="each-own-card">
         <button class="wishlistItem">
 
           <img src="${response.games[i].images.thumb}">  ${response.games[i].name}
@@ -111,6 +112,7 @@ function showOwnlist() {
             </ul>
           </div>
         </div>
+      </div>
       `)
 
         // Dynamically create a card for each game
