@@ -30,7 +30,7 @@ $(document).ready(() => {
   // and updates the HTML on the page
 
   $.ajax({
-    url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+    url: `/api/user_data?secret_token=${sessionStorage.getItem(
       "myToken"
     )}`,
     type: "GET",
@@ -218,7 +218,7 @@ $(document).ready(() => {
         const chosenID = gameInfo[this.id];
 
         $.ajax({
-          url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+          url: `/api/user_data?secret_token=${sessionStorage.getItem(
             "myToken"
           )}`,
           type: "GET",
@@ -267,7 +267,7 @@ $(document).ready(() => {
         console.log(chosenID2);
 
         $.ajax({
-          url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+          url: `/api/user_data?secret_token=${sessionStorage.getItem(
             "myToken"
           )}`,
           type: "GET",
@@ -398,7 +398,7 @@ $(document).ready(() => {
         const chosenID = gameInfo[this.id];
 
         $.ajax({
-          url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+          url: `/api/user_data?secret_token=${sessionStorage.getItem(
             "myToken"
           )}`,
           type: "GET",
@@ -448,7 +448,7 @@ $(document).ready(() => {
         console.log(chosenID2);
 
         $.ajax({
-          url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+          url: `/api/user_data?secret_token=${sessionStorage.getItem(
             "myToken"
           )}`,
           type: "GET",
@@ -493,7 +493,7 @@ $(document).ready(() => {
 
   function saveGame(game_ID, own, UserId) {
     $.ajax({
-      url: `https://game-keeper-heroku.herokuapp.com/api/members?secret_token=${sessionStorage.getItem(
+      url: `/api/members?secret_token=${sessionStorage.getItem(
         "myToken"
       )}`,
       type: "POST",

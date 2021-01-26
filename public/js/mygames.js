@@ -1,7 +1,8 @@
 const gameInfo = {};
 //gets token for current user, returns their name
 $.ajax({
-  url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+  url: `
+  /api/user_data?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
@@ -31,7 +32,8 @@ const ownListId = [];
 //checks the user then returns a list of their games they own by storing Game_IDs in our database then running an AJAX call to board game API, if they have no games stored, will load a message
 
 $.ajax({
-  url: `https://game-keeper-heroku.herokuapp.com/api/mygames?secret_token=${sessionStorage.getItem(
+  url: `
+  /api/mygames?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
@@ -156,7 +158,8 @@ function showOwnlist() {
 
 function deleteGame(id) {
   $.ajax({
-    url: `https://game-keeper-heroku.herokuapp.com/api/mygames/${id}?secret_token=${sessionStorage.getItem(
+    url: `
+    /api/mygames/${id}?secret_token=${sessionStorage.getItem(
       "myToken"
     )}`,
     type: "DELETE",

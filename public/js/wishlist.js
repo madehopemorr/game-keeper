@@ -2,7 +2,8 @@
 const gameInfo = {};
 console.log(sessionStorage.getItem("myToken"));
 $.ajax({
-  url: `https://game-keeper-heroku.herokuapp.com/api/user_data?secret_token=${sessionStorage.getItem(
+  url: `
+  /api/user_data?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
@@ -29,7 +30,8 @@ $.ajax({
 const wishlistId = [];
 //gets user then shows users stored wishlsit. If no games stored, loads message saying to add games.
 $.ajax({
-  url: `https://game-keeper-heroku.herokuapp.com/api/wishlist?secret_token=${sessionStorage.getItem(
+  url: `
+  /api/wishlist?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
@@ -185,7 +187,8 @@ function showWishlist() {
 //updates game in database from own false to own true which moves games from wishlist to own list
 function updateGame(id, own) {
   $.ajax({
-    url: `https://game-keeper-heroku.herokuapp.com/api/wishlist/${id}?secret_token=${sessionStorage.getItem(
+    url: `
+    /api/wishlist/${id}?secret_token=${sessionStorage.getItem(
       "myToken"
     )}`,
     type: "PUT",
@@ -214,7 +217,8 @@ function updateGame(id, own) {
 //deletes games from users lists of games
 function deleteGame(id) {
   $.ajax({
-    url: `https://game-keeper-heroku.herokuapp.com/api/wishlist/${id}?secret_token=${sessionStorage.getItem(
+    url: `
+    /api/wishlist/${id}?secret_token=${sessionStorage.getItem(
       "myToken"
     )}`,
     type: "DELETE",
