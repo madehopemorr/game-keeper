@@ -183,7 +183,7 @@ $(document).ready(() => {
 
         // Dynamically asign an id for each heart button and add to each game card
         const heartButton = $(
-          '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
+          '<button class = "heartBtn mainBtn btn btn-primary"><i class="far fa-heart"></i></button>'
         );
 
         heartButton.attr("data-games", response.games[i].id);
@@ -196,7 +196,7 @@ $(document).ready(() => {
 
         // Dynamically asign an id for each own button and add to each game card
         const ownButton = $(
-          '<button class = "ownBtn btn btn-primary">Own</button>'
+          '<button class = "ownBtn mainBtn2 btn btn-primary">Own</button>'
         );
         ownButton.attr("data-id", response.games[i].game_id);
         const customID2 = "ownBtn-" + String(i);
@@ -362,7 +362,7 @@ $(document).ready(() => {
 
         // Dynamically asign an id for each heart button and add to each game card
         const heartButton = $(
-          '<button class = "heartBtn btn btn-primary"><i class="far fa-heart"></i></button>'
+          '<button class = "heartBtn mainBtn btn btn-primary"><i class="far fa-heart"></i></button>'
         );
        
 
@@ -376,7 +376,7 @@ $(document).ready(() => {
 
         // Dynamically asign an id for each own button and add to each game card
         const ownButton = $(
-          '<button class = "ownBtn btn btn-primary">Own</button>'
+          '<button class = "ownBtn mainBtn2 btn btn-primary">Own</button>'
         );
         ownButton.attr("data-id", response.games[i].game_id);
         const customID2 = "ownBtn-" + String(i);
