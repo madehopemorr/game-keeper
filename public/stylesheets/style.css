@@ -55,6 +55,7 @@ form.signup, form.login {
 
 .card {
   margin: 10px;
+  background-color: transparent;
 }
 
 .card-title {
@@ -64,6 +65,8 @@ form.signup, form.login {
 .card-body {
   background-color: black;
   border-style: ridge;
+  border-radius: 1rem;
+  height: 260px;
 }
 
 a {
@@ -73,6 +76,16 @@ a {
 .btn {
   color: black;
   background-color: greenyellow;
+}
+.mainBtn{
+  position: relative;
+  top: 195px;
+  right: 150px;
+}
+.mainBtn2 {
+  position: relative;
+  top: 195px;
+  right: 145px;
 }
 
 .col-sm {
@@ -117,14 +130,6 @@ ul {
   height: 600px;
 }
 
-.accordion-button {
-  background-color: #3e4444;
-  color: greenyellow;
-  border-width: 5px;
-  border-color: greenyellow;
-  border: double;
-}
-
 /* headers on welcome page */
 
 .welcomeTitles {
@@ -145,8 +150,6 @@ ul {
   color: grey;
 }
 
-/*accordian buttons*/
-
 .wishlistItem {
   background-color: #3e4444;
   color: greenyellow;
@@ -157,11 +160,13 @@ ul {
   border: none;
   outline: none;
   transition: 0.4s;
+  border-style: ridge;
+  border-radius: 1rem;
+  
 }
 
 .wishlistItem.active {
   background-color: black;
-  border-style: dotted;
 }
 
 /* Add a background color to the button if it is clicked on */
@@ -178,12 +183,43 @@ ul {
   display: none;
   overflow: hidden;
   border-style: ridge;
+  border-radius: 1rem;
 }
 
-.wishlistBtn {
-  width: -webkit-fill-available;
+.wishlistBtn{
+  position: relative;
+    top: 15px;
+    right: 140px;
+}
+.mygamesBtn{
+  position: relative;
+  top: 11px;
+  right: 80px;
+}
+/* wishlist and my games */
+.heartBtn, .ownBtn, .deleteBtn {
+  border: transparent;
+  height: 50px;
+  width: 53px;
+  margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.heartBtn:hover, .ownBtn:hover, .deleteBtn:hover {
+  background-color: greenyellow;
+  color: gray;
 }
 
+/*.wishlist, .ownlist {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}*/
+
+.each-wish-card, .each-own-card {
+  width: 30rem;
+  margin: 5px;
+}
 /* filter input boxes */
 
 #maxPlayerInput, #minPlayerInput, #timeInput, #ageInput {
@@ -201,28 +237,10 @@ ul {
   border: 4px solid #3e4444;
 }
 
-/* wishlist and my games */
-.heartBtn, .ownBtn, .deleteBtn {
-  border: transparent;
-  height: 50px;
-  width: 53px;
-  margin: 5px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
 
-.heartBtn:hover, .ownBtn:hover, .deleteBtn:hover {
-  background-color: greenyellow;
-  color: gray;
-}
 
-.wishlist, .ownlist {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
 
-.each-wish-card, .each-own-card {
-  width: 24rem;
-  margin: 15px;
+/*for members page cards */
+@media only screen and (min-width: 1080px) {
+
 }
