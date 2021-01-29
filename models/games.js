@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
     game_ID: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: [1]
       }
@@ -14,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Games.associate = models => {
-    Games.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
+  Games.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    Games.belongsToMany(models.User, 
+      { through: "User_Games", 
       }
-    });
+    );
   };
 
   return Games;

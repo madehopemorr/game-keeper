@@ -35,7 +35,6 @@ $(document).ready(() => {
       (data, status) => {
         console.log("status: " + status + " : data: " + JSON.stringify(data));
         insertTokenIntoSessionStorage(data.token);
-        // sendReq();
       },
       "json"
     )
