@@ -10,6 +10,7 @@ gsap.from(".welcome", {
 var suggestions = document.querySelector(".suggestions");
 // This boolean var is used to control the appearance of suggestions dropdown list
 var hasBeenClicked = false;
+
 // Prevent menu button change to blue after toggle
 const menuBtn = document.querySelector("#menu-toggle");
 menuBtn.addEventListener("click", event => {

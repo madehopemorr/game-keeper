@@ -25,7 +25,7 @@ module.exports = function (app) {
                     }
 
                     console.log(user)
-                   
+
                     req.login(
                         user,
                         { session: true },
@@ -97,25 +97,31 @@ module.exports = function (app) {
 
     // Route for saving games to database after buttons clicked
     app.post("/api/members", passport.authenticate('jwt', { session: true }), function (req, res) {
+
         db.Games.create({
             game_ID: req.body.game_ID,
             own: req.body.own,
-            UserId: req.body.UserId,
         })
-            .then(() => {
-                res.status(200);
+        .then(game => {
+            console.log(game)
+            db.User.findOne({
+                where: {
+                    id: req.body.UserId
+                },
             })
-            .catch(err => {
-                console.log(err)
-                res.status(500).json(err);
-            });
+            .then(user => {
+                console.log(user)
+                game.addUser(user, { through: { game_ID: req.body.game_ID, own: req.body.own } })
+            })
+        })
     });
 
     // Route for displaying wishlist
     app.get("/api/wishlist", passport.authenticate('jwt', { session: false }), (req, res) => {
-        db.Games.findAll({
+        db.User_Games.findAll({
             where: {
-                own: false
+                own: false,
+                UserId: req.user.id
             }
         }).then(function (dbGames) {
             res.json(dbGames);
@@ -126,22 +132,21 @@ module.exports = function (app) {
     // Route for updating wishlist
     app.put("/api/wishlist/:id", passport.authenticate('jwt', { session: true }), (req, res) => {
 
-        db.Games.update(
-
-        {own: true},
-        {
-            where: {
-                game_ID: req.params.id
-            }
-        }).then(function(dbGames) {
-            res.json(dbGames);
-        });
+        db.User_Games.update(
+            { own: true },
+            {
+                where: {
+                    game_ID: req.params.id
+                }
+            }).then(function (dbGames) {
+                res.json(dbGames);
+            });
 
     });
 
     // Route for displaying my games
     app.get("/api/mygames", passport.authenticate('jwt', { session: true }), (req, res) => {
-        db.Games.findAll({
+        db.User_Games.findAll({
             where: {
                 own: true,
                 UserId: req.user.id
