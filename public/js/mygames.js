@@ -6,8 +6,8 @@ $.ajax({
     "myToken"
   )}`,
   type: "GET",
-  
-  error: function(err) {
+
+  error: function (err) {
 
     switch (err.status) {
       case "400":
@@ -38,7 +38,7 @@ $.ajax({
   )}`,
   type: "GET",
 
-  error: function(err) {
+  error: function (err) {
 
     switch (err.status) {
       case "400":
@@ -73,6 +73,7 @@ $.ajax({
 
 });
 console.log(ownListId);
+
 function showOwnlist() {
   $(".ownlist").empty();
   //search for game from board game geeks API.
@@ -117,8 +118,8 @@ function showOwnlist() {
       </div>
       `)
 
-        // Dynamically create a card for each game
-        $(".ownlist").append(gameCard);
+      // Dynamically create a card for each game
+      $(".ownlist").append(gameCard);
 
         //creates a delete button to remove from list and take out of database
         var deleteButton = $('<button class = "deleteBtn mygamesBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
@@ -130,7 +131,7 @@ function showOwnlist() {
       }
 
 
-    $(".deleteBtn").on("click", function(event) {
+    $(".deleteBtn").on("click", function (event) {
       event.preventDefault();
 
 
@@ -141,7 +142,7 @@ function showOwnlist() {
       deleteGame(chosenID2);
     });
     const acc = document.getElementsByClassName("wishlistItem");
-    $(acc).on("click", function() {
+    $(acc).on("click", function () {
       console.log(this);
       console.log("clicked");
       this.classList.toggle("active");
@@ -164,7 +165,7 @@ function deleteGame(id) {
     )}`,
     type: "DELETE",
 
-    error: function(err) {
+    error: function (err) {
       switch (err.status) {
         case "400":
           // bad request
