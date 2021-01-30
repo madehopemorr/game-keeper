@@ -99,21 +99,10 @@ function showWishlist() {
     </div>
     <div class="col">
         <ul class="card-text">
-            <li><i class="fas fa-star"></i> Avg User Rating:${response.games[
-              i
-            ].average_user_rating.toFixed(2)}</li>
-            <li><i class="fas fa-users"></i> Players:${
-              response.games[i].min_players
-            }-${response.games[i].max_players}</li>
-            <li><i class="fas fa-hourglass-start"></i> Game Time: ${
-              response.games[i].min_playtime
-            }-${response.games[i].max_playtime}</li>
-            <li><i class="fas fa-child"></i> Age: ${
-              response.games[i].min_age
-            } + </li>
-            <li><i class="fas fa-dice-d20"></i> <a href=${
-              response.games[i].rules_url
-            }>Rules</a></li>
+            <li><i class="fas fa-users"></i> Players:${response.games[i].min_players}-${response.games[i].max_players}</li>
+            <li><i class="fas fa-hourglass-start"></i> Game Time: ${response.games[i].min_playtime}-${response.games[i].max_playtime}</li>
+            <li><i class="fas fa-child"></i> Age: ${response.games[i].min_age} + </li>
+            <li><i class="fas fa-dice-d20"></i> <a href=${response.games[i].rules_url}>Rules</a></li>
             <li><i class="fas fa-tag"></i>Price: ${response.games[i].price}</li>
             <br>
         </ul>

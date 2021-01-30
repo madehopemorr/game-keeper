@@ -24,7 +24,7 @@ gsap.to("#greendie", {
   scrollTrigger: "#greendie", // start the animation when ".box" enters the viewport (once)
   duration: 2,
   rotation: 360,
-  y: 500,
+  y: 400,
   ease: "bounce"
 });
 
