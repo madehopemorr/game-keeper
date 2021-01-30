@@ -62,7 +62,7 @@ form.signup, form.login {
 }
 
 .card-body {
-  background-color:#3e4444;
+  background-color: #3e4444;
   border-style: ridge;
   border-radius: 1rem;
   height: 260px;
@@ -76,11 +76,13 @@ a {
   color: black;
   background-color: greenyellow;
 }
-.mainBtn{
+
+.mainBtn {
   position: relative;
   top: 195px;
   right: 150px;
 }
+
 .mainBtn2 {
   position: relative;
   top: 195px;
@@ -160,7 +162,6 @@ ul {
   transition: 0.4s;
   border-style: ridge;
   border-radius: 1rem;
-  
 }
 
 .wishlistItem.active {
@@ -183,29 +184,31 @@ ul {
   overflow: hidden;
   border-style: ridge;
   border-radius: 1rem;
-  height:220px;
-  background-color:#3e4444;
+  height: 220px;
+  background-color: #3e4444;
 }
 
-.wishlistBtn{
-     position: relative;
-    bottom: 80px;
-    left: 340px;
+.wishlistBtn {
+  position: relative;
+  bottom: 80px;
+  left: 340px;
 }
 
-.mygamesBtn{
+.mygamesBtn {
   position: relative;
   bottom: 80px;
   left: 400px;
 }
 
 /* wishlist and my games */
+
 .heartBtn, .ownBtn, .deleteBtn {
   border: transparent;
   height: 53px;
   width: 53px;
   margin: 3px;
 }
+
 .heartBtn:hover, .ownBtn:hover, .deleteBtn:hover {
   background-color: greenyellow;
   color: gray;
@@ -215,6 +218,7 @@ ul {
   width: 30rem;
   margin: 5px;
 }
+
 /* filter input boxes */
 
 #maxPlayerInput, #minPlayerInput, #timeInput, #ageInput {

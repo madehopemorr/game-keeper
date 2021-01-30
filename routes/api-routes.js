@@ -20,11 +20,9 @@ module.exports = function (app) {
                 try {
                     if (err || !user) {
                         const error = new Error('An error occurred.');
-                        console.log(err)
+                        
                         return next(error);
                     }
-
-                    console.log(user)
 
                     req.login(
                         user,
@@ -102,18 +100,16 @@ module.exports = function (app) {
             game_ID: req.body.game_ID,
             own: req.body.own,
         })
-        .then(game => {
-            console.log(game)
-            db.User.findOne({
-                where: {
-                    id: req.body.UserId
-                },
+            .then(game => {
+                db.User.findOne({
+                    where: {
+                        id: req.body.UserId
+                    },
+                })
+                    .then(user => {
+                        game.addUser(user, { through: { game_ID: req.body.game_ID, own: req.body.own } })
+                    })
             })
-            .then(user => {
-                console.log(user)
-                game.addUser(user, { through: { game_ID: req.body.game_ID, own: req.body.own } })
-            })
-        })
     });
 
     // Route for displaying wishlist
@@ -141,7 +137,6 @@ module.exports = function (app) {
             }).then(function (dbGames) {
                 res.json(dbGames);
             });
-
     });
 
     // Route for displaying my games
@@ -178,4 +173,3 @@ module.exports = function (app) {
         });
     });
 };
-

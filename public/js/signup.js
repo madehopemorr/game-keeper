@@ -47,7 +47,6 @@ $(document).ready(() => {
       lastName: lastName
     },
       (data, status) => {
-        console.log("status: " + status + " : data: " + JSON.stringify(data));
         insertTokenIntoSessionStorage(data.token);
       },
       "json"
@@ -66,7 +65,6 @@ $(document).ready(() => {
 
   // The token is stored in local storage on client side
   function insertTokenIntoSessionStorage(token) {
-    console.log("inside of new method token: " + token);
     sessionStorage.setItem("myToken", token);
   }
 });

@@ -1,13 +1,13 @@
 // Create an obj to store game name data every time each button is clicked
 const gameInfo = {};
-console.log(sessionStorage.getItem("myToken"));
+
 $.ajax({
   url: `
   /api/user_data?secret_token=${sessionStorage.getItem(
     "myToken"
   )}`,
   type: "GET",
-  error: function(err) {
+  error: function (err) {
     switch (err.status) {
       case "400":
         // bad request
@@ -35,7 +35,7 @@ $.ajax({
     "myToken"
   )}`,
   type: "GET",
-  error: function(err) {
+  error: function (err) {
     switch (err.status) {
       case "400":
         // bad request
@@ -53,7 +53,6 @@ $.ajax({
   }
 }).then(data => {
 
-  console.log(data);
   for (let i = 0; i < data.length; i++) {
     wishlistId.push(data[i].game_ID);
   }
@@ -67,7 +66,6 @@ $.ajax({
 
   }
 });
-console.log(wishlistId);
 
 function showWishlist() {
   $(".wishlist").empty();
@@ -80,7 +78,6 @@ function showWishlist() {
     url: queryURL,
     method: "GET"
   }).then(response => {
-    console.log(response);
 
     for (let i = 0; i < response.games.length; i++) {
       const gameCard = $(`
@@ -137,31 +134,25 @@ function showWishlist() {
       gameInfo[customID2] = response.games[i].id;
     }
 
-    $(".ownBtn").on("click", function(event) {
+    $(".ownBtn").on("click", function (event) {
       event.preventDefault();
 
-      console.log("ButtonId is: " + this.id);
-      console.log("Game ID is: " + gameInfo[this.id]);
       const chosenID = gameInfo[this.id];
       const own = { own: true };
-      console.log(chosenID);
+
       updateGame(chosenID, own);
     });
 
-    $(".deleteBtn").on("click", function(event) {
+    $(".deleteBtn").on("click", function (event) {
       event.preventDefault();
 
-      console.log("ButtonId is: " + this.id);
-      console.log("Game ID is: " + gameInfo[this.id]);
       const chosenID2 = gameInfo[this.id];
-      console.log(chosenID2);
+
       deleteGame(chosenID2);
     });
     //toggles buttons for each game to show or hide thier card
     const acc = document.getElementsByClassName("wishlistItem");
-    $(acc).on("click", function() {
-      console.log(this);
-      console.log("clicked");
+    $(acc).on("click", function () {
       this.classList.toggle("active");
       const panel = this.nextElementSibling;
       if (panel.style.display === "block") {
@@ -182,7 +173,7 @@ function updateGame(id, own) {
     )}`,
     type: "PUT",
     data: own,
-    error: function(err) {
+    error: function (err) {
       switch (err.status) {
         case "400":
           // bad request
@@ -212,7 +203,7 @@ function deleteGame(id) {
     )}`,
     type: "DELETE",
 
-    error: function(err) {
+    error: function (err) {
       switch (err.status) {
         case "400":
           // bad request

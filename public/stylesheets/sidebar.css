@@ -1,5 +1,5 @@
 #wrapper {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 #sidebar-wrapper {
@@ -42,24 +42,25 @@
   #sidebar-wrapper {
     margin-left: 0;
   }
-
   #page-content-wrapper {
     min-width: 0;
     width: 100%;
   }
-
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
 }
+
 /* font color on sidebar links */
+
 .sidebarText {
   color: #999;
+}
 
+#greendie {
+  width: 150px;
 }
-#greendie{
-width:150px;
-}
+
 footer {
   position: absolute;
   bottom: 0;

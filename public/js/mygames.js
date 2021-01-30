@@ -8,7 +8,6 @@ $.ajax({
   type: "GET",
 
   error: function (err) {
-
     switch (err.status) {
       case "400":
         // bad request
@@ -29,8 +28,8 @@ $.ajax({
 });
 
 const ownListId = [];
-//checks the user then returns a list of their games they own by storing Game_IDs in our database then running an AJAX call to board game API, if they have no games stored, will load a message
 
+//checks the user then returns a list of their games they own by storing Game_IDs in our database then running an AJAX call to board game API, if they have no games stored, will load a message
 $.ajax({
   url: `
   /api/mygames?secret_token=${sessionStorage.getItem(
@@ -72,7 +71,6 @@ $.ajax({
   }
 
 });
-console.log(ownListId);
 
 function showOwnlist() {
   $(".ownlist").empty();
@@ -85,7 +83,6 @@ function showOwnlist() {
     url: queryURL,
     method: "GET"
   }).then(response => {
-    console.log(response);
 
     for (let i = 0; i < response.games.length; i++) {
       const gameCard = $(`
@@ -119,30 +116,25 @@ function showOwnlist() {
       // Dynamically create a card for each game
       $(".ownlist").append(gameCard);
 
-        //creates a delete button to remove from list and take out of database
-        var deleteButton = $('<button class = "deleteBtn mygamesBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
-        deleteButton.attr("data-id", response.games[i].game_id);
-        var customID2 = "deleteBtn-" + String(i);
-        deleteButton.attr("id", customID2);
-        $(".ownlist").append(deleteButton);
-        gameInfo[customID2] = response.games[i].id;
-      }
+      //creates a delete button to remove from list and take out of database
+      var deleteButton = $('<button class = "deleteBtn mygamesBtn btn btn-primary"><i class="far fa-trash-alt"></i></button>');
+      deleteButton.attr("data-id", response.games[i].game_id);
+      var customID2 = "deleteBtn-" + String(i);
+      deleteButton.attr("id", customID2);
+      $(".ownlist").append(deleteButton);
+      gameInfo[customID2] = response.games[i].id;
+    }
 
 
     $(".deleteBtn").on("click", function (event) {
       event.preventDefault();
 
-
-      console.log("ButtonId is: " + this.id);
-      console.log("Game ID is: " + gameInfo[this.id]);
       const chosenID2 = gameInfo[this.id];
-      console.log(chosenID2);
+
       deleteGame(chosenID2);
     });
     const acc = document.getElementsByClassName("wishlistItem");
     $(acc).on("click", function () {
-      console.log(this);
-      console.log("clicked");
       this.classList.toggle("active");
       const panel = this.nextElementSibling;
       if (panel.style.display === "block") {
@@ -153,7 +145,6 @@ function showOwnlist() {
     });
   });
 }
-
 
 function deleteGame(id) {
   $.ajax({
