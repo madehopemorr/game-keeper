@@ -6,6 +6,7 @@ gsap.from(".welcome", {
   scale: 0.3,
   ease: "bounce"
 });
+
 // This variable is for autocomplete function
 var suggestions = document.querySelector(".suggestions");
 // This boolean var is used to control the appearance of suggestions dropdown list
@@ -14,8 +15,6 @@ var hasBeenClicked = false;
 // Prevent menu button change to blue after toggle
 const menuBtn = document.querySelector("#menu-toggle");
 menuBtn.addEventListener("click", event => {
-
-
   event.preventDefault();
 
   menuBtn.style.background = "rgb(173,255,47)";
@@ -28,42 +27,34 @@ $("#searchBtn").on("click", event => {
     .val()
     .trim();
 
-
   if ($("#checkboxMinPlayers").is(":checked")) {
     var playerMin = $("#playerMin").val();
-    console.log("player min: " + playerMin);
   } else {
     var playerMin = "";
   }
 
   if ($("#checkboxMaxPlayers").is(":checked")) {
     var playerMax = $("#playerMax").val();
-    console.log("player Max: " + playerMax);
   } else {
     var playerMax = "";
   }
 
   if ($("#checkboxTime").is(":checked")) {
     var gameTime = $("#gameTime").val();
-    console.log("game time: " + gameTime);
   } else {
     var gameTime = "";
   }
 
   if ($("#checkboxAge").is(":checked")) {
     var playerAge = $("#playerAge").val();
-    console.log("player Age: " + playerAge);
   } else {
     var playerAge = "";
   }
 
-  console.log(
-    `pMin: ${playerMin} | pMax: ${playerMax} | time: ${gameTime} | age: ${playerAge}`
-  );
-
   runSearchBar(searchWord);
   hasBeenClicked = true;
 });
+
 //runs search when user presses enter
 $("#search-word").keypress(event => {
   const keycode = event.keyCode ? event.keyCode : event.which;
@@ -82,11 +73,8 @@ function runSearchBar(searchWord) {
   $(".searchGame").removeClass("hide");
   $(".popularGame").addClass("hide");
   $(".searchGames").empty();
+
   //search for game from board game geeks API.
-
-
-  console.log("search word is a " + typeof searchWord);
-
   const queryURL =
     "https://api.boardgameatlas.com/api/search?name=" +
     searchWord +
@@ -104,7 +92,6 @@ function runSearchBar(searchWord) {
     url: queryURL,
     method: "GET"
   }).then(response => {
-    console.log(response);
     response.games.forEach(game => {
       //template to automatically generate card styling for each game in search
       const gameCard = $(`    
@@ -128,7 +115,7 @@ function runSearchBar(searchWord) {
             </div>
         </div
     </div>`);
-    $(".searchGames").append(gameCard);
+      $(".searchGames").append(gameCard);
     });
   });
 }
@@ -144,7 +131,7 @@ function popularGame() {
     method: "GET"
   })
     .then(function (response) {
-      //console.log(response)
+
       const popGames = response.games
       popGames.forEach(function (popGame) {
         //template to automatically generate card styling for each game in search
@@ -185,12 +172,10 @@ function autocomplete() {
     url: queryURL,
     method: "GET"
   }).then(response => {
-    console.log(response);
 
     // Response is an object
     // We need to convert it into an array
     const responseArr = response.games;
-    console.log(responseArr);
 
     function findMatches(wordToMatch, responseArr) {
       return responseArr.filter(games => {
@@ -201,9 +186,8 @@ function autocomplete() {
     }
 
     function displayMatches() {
-      console.log(this.value);
+
       const matchArr = findMatches(this.value, responseArr);
-      console.log(matchArr);
 
       const liEl = matchArr
         .map(games => {
@@ -216,13 +200,13 @@ function autocomplete() {
             `<span class="highlight">${this.value}</span>`
           );
 
-        return `
-        <li class="autocompleteLi">
-          <div class="autocomplete">
-            <span class="name">${highlighted}</span>
-          </div>
-        </li>
-        `;
+          return `
+          <li class="autocompleteLi">
+            <div class="autocomplete">
+              <span class="name">${highlighted}</span>
+            </div>
+          </li>
+          `;
         })
         .join("");
 

@@ -13,11 +13,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  Games.associate = function(models) {
+  Games.associate = function (models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
-    Games.belongsToMany(models.User, 
-      { through: "User_Games", 
+    Games.belongsToMany(models.User,
+      {
+        through: "User_Games"
       }
     );
   };
