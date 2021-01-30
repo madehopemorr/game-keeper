@@ -567,14 +567,14 @@ $(document).ready(() => {
             );
 
             return `
-        <li>
-          <span class="name">${highlighted}</span>
-        </li>
-
-        `;
+            <li class="autocompleteLi">
+              <div class="autocomplete">
+                <span class="name">${highlighted}</span>
+              </div>
+            </li>
+            `;
           })
           .join("");
-
 
         suggestions.innerHTML = liEl;
         // Only show suggestions list when the search box is not empty

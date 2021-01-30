@@ -216,7 +216,6 @@ function autocomplete() {
             `<span class="highlight">${this.value}</span>`
           );
 
-
         return `
         <li class="autocompleteLi">
           <div class="autocomplete">
@@ -237,7 +236,6 @@ function autocomplete() {
       }
 
     }
-
 
     $("#search-word").on("keyup", displayMatches);
     $("#search-word").on("change", displayMatches);
