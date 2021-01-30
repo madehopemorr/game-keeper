@@ -31,7 +31,6 @@ form.signup, form.login {
   padding-bottom: 1rem;
   padding-top: 1rem;
   border-bottom-style: ridge;
-  border-bottom-width: 1rem;
 }
 
 .filter-by {
@@ -63,7 +62,7 @@ form.signup, form.login {
 }
 
 .card-body {
-  background-color: black;
+  background-color:#3e4444;
   border-style: ridge;
   border-radius: 1rem;
   height: 260px;
@@ -121,13 +120,13 @@ ul {
 }
 
 .highlight {
-  background-color: greenyellow;
+  background-color: rgba(172, 255, 47, 0.666);
   color: black;
 }
 
-.ownlistbox {
+.ownlist, .wishlist {
   position: relative;
-  height: 600px;
+  height: 700px;
 }
 
 /* headers on welcome page */
@@ -146,8 +145,7 @@ ul {
 }
 
 #searchBtn:hover {
-  background-color: greenyellow;
-  color: grey;
+  background-color: rgba(172, 255, 47, 0.666);
 }
 
 .wishlistItem {
@@ -172,8 +170,9 @@ ul {
 /* Add a background color to the button if it is clicked on */
 
 .active, .wishlistItem:hover {
-  background-color: rgba(183, 249, 86, 0.845);
+  background-color: rgba(172, 255, 47, 0.666);
   color: black;
+  outline: none;
 }
 
 /* Style the accordion panel. Note: hidden by default */
@@ -184,37 +183,33 @@ ul {
   overflow: hidden;
   border-style: ridge;
   border-radius: 1rem;
+  height:220px;
+  background-color:#3e4444;
 }
 
 .wishlistBtn{
-  position: relative;
-    top: 15px;
-    right: 140px;
+     position: relative;
+    bottom: 80px;
+    left: 340px;
 }
+
 .mygamesBtn{
   position: relative;
-  top: 11px;
-  right: 80px;
+  bottom: 80px;
+  left: 400px;
 }
+
 /* wishlist and my games */
 .heartBtn, .ownBtn, .deleteBtn {
   border: transparent;
-  height: 50px;
+  height: 53px;
   width: 53px;
-  margin: 5px;
-  margin-top: 10px;
-  margin-bottom: 50px;
+  margin: 3px;
 }
 .heartBtn:hover, .ownBtn:hover, .deleteBtn:hover {
   background-color: greenyellow;
   color: gray;
 }
-
-/*.wishlist, .ownlist {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}*/
 
 .each-wish-card, .each-own-card {
   width: 30rem;
@@ -235,12 +230,4 @@ ul {
   padding: 10px;
   background-color: black;
   border: 4px solid #3e4444;
-}
-
-
-
-
-/*for members page cards */
-@media only screen and (min-width: 1080px) {
-
 }
