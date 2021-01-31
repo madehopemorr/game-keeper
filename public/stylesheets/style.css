@@ -235,3 +235,35 @@ ul {
   background-color: black;
   border: 4px solid #3e4444;
 }
+
+@media screen and (max-width: 480px) {
+  .searchbar, .filter, .signup-col, .popularGame, .searchGame, .each-wish-card, .each-own-card {
+    width:100%;
+  }
+  .mainBtn {
+    position: relative;
+    top: -78px;
+    right: -88px;
+  }
+  .mainBtn2 {
+    position: relative;
+    top: -78px;
+    right: -89px;
+  }
+  .wishlistBtn {
+    position: relative;
+    bottom: 75px;
+    left: 200px
+  }
+  .mygamesBtn {
+    position: relative;
+    bottom: 75px;
+    left: 250px;
+  }
+  .panel{
+    height: 260px;
+  }
+  footer{
+    display:none;
+  }
+}
